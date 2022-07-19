@@ -1,0 +1,22 @@
+.list-control {
+	background-size: contain;
+	background-repeat: no-repeat;
+	width: 1.7em;
+	height: 1.7em;
+	border: none;
+}
+.add {
+	background-image: url(/img/add.svg);
+}
+.delete {
+	background-image: url(/img/delete.svg);
+}
+.up {
+	background-image: url(/img/up.svg);
+}
+.down {
+	background-image: url(/img/down.svg);
+}
+.duplicate {
+	background-image: url(/img/duplicate.svg);
+}

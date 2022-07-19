@@ -1,0 +1,88 @@
+<style global lang="scss">
+	form.svelte-schema-form {
+		font-family: 'Montserrat', sans-serif;
+
+		input {
+			font-family: 'Montserrat', sans-serif;
+		}
+
+		.list-control {
+			background-size: contain;
+			background-repeat: no-repeat;
+			width: 1.1em;
+			height: 1.1em;
+			border: none;
+			cursor: pointer;
+		}
+		.add {
+			background-image: url(../img/add.svg);
+			width: 1.7em;
+			height: 1.7em;
+		}
+		.delete {
+			background-image: url(../img/delete.svg);
+		}
+		.up {
+			background-image: url(../img/up.svg);
+		}
+		.down {
+			background-image: url(../img/down.svg);
+		}
+		.duplicate {
+			background-image: url(../img/duplicate.svg);
+		}
+		.info {
+			background-size: contain;
+			background-repeat: no-repeat;
+			width: 0.6em;
+			height: 0.6em;
+			display: inline-block;
+			background-image: url(../img/info.svg);
+			background-size: 90% 90%;
+			cursor: pointer;
+		}
+
+		
+		label, legend {
+			color: #777;
+		}
+
+		input, select {
+			border: 1px solid #aaa;
+    		border-radius: 2px;
+			padding: 3px;
+			color: #777;
+		}
+
+		.error {
+			position: relative;
+			top: -0.5em;
+			color: red;
+		}
+
+		.button-container {
+			display: flex;
+			justify-content: center;
+
+			.submit-button {
+				border: 1px solid #ccc;
+				padding: 4px 8px;
+				cursor: pointer;
+				color: #aaa;
+			}
+			button:hover {
+				background-color: #f8f4f4;
+			}
+
+			button {
+				border: 2px solid #aaa;
+				color: #777;
+			}
+		}
+
+		&.dirty .submit-button {
+			border: 2px solid #aaa;
+			color: #777;
+		}
+	}
+</style>

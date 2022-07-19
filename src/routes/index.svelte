@@ -1,9 +1,10 @@
 <script lang="ts">
-	import SubmitForm from "svelte-schema-form/SubmitForm.svelte";
+	import { SubmitForm, Layout as FormLayout } from "svelte-schema-form";
+
 	const schema = {
 		type: "object",
 		properties: {
-			something: { type: "string", maxLength: 5 },
+			something: { type: "string", maxLength: 5, description: "description for something" },
 			amount: { type: "number" },
 			choose: { type: "string", enum: [ "a", "b", "c" ] },
 			checkThis: { type: "boolean" },
@@ -23,7 +24,8 @@
 					}
 				}
 			}
-		}
+		},
+		required: [ "amount" ]
 	}
 	const value = { something: "abc" };
 
@@ -32,7 +34,5 @@
 	};
 </script>
 
-<svelte:head>
-	<link rel="stylesheet" href="/css/layout.css"/>
-</svelte:head>
+<FormLayout />
 <SubmitForm {schema} {value} on:submit={submit} />

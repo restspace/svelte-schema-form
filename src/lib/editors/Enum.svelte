@@ -3,16 +3,15 @@
 	export let params: CommonComponentParameters;
 	export let schema: any;
 	export let value: any;
-	let { components, pathChanged, path } = params;
 	let { enum: enumVals } = schema as { enum: string[] };
 </script>
 
 <!-- event which calls pathChanged should be after all bindings so 'value' will have been updated -->
-<svelte:component this={components['fieldWrapper']} {params} {schema} {value}>
-	<select id={path.join('.')}
-		name={path.join('.')}
+<svelte:component this={params.components['fieldWrapper']} {params} {schema}>
+	<select id={params.path.join('.')}
+		name={params.path.join('.')}
 		value={value} 
-		on:change={ev => pathChanged(path, ev.currentTarget.value || undefined)}>
+		on:change={ev => params.pathChanged(params.path, ev.currentTarget.value || undefined)}>
 		<option></option>
 		{#each enumVals as enumVal (enumVal)}
 		<option>{enumVal}</option>

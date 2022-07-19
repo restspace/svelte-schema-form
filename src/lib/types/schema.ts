@@ -34,3 +34,26 @@ export function emptyValue(schema: any): any {
 export function schemaLabel(schema: any, path: string[]): string {
     return schema.title || camelToTitle(path.slice(-1)?.[0] || '');
 }
+
+export function jsonPointerToPath(pointer: string) {
+    if (pointer.startsWith('/')) {
+        pointer = pointer.substring(1);
+    } else if (pointer.startsWith('#/')) {
+        pointer = pointer.substring(2);
+    } else if (pointer.startsWith('http')) {
+        pointer = pointer.split('#/')?.[1] || '';
+    }
+
+    const pathEls = [] as string[];
+    pointer.split('/').forEach(el => {
+        const int = parseInt(el);
+        if (isNaN(int)) {
+            pathEls.push(`.${el}`);
+        } else {
+            pathEls.push(`[${el}]`);
+        }
+    });
+    let path = pathEls.join('');
+    if (path.startsWith('.')) path = path.substring(1);
+    return path;
+}

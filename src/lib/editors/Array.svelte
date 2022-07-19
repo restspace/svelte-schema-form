@@ -5,10 +5,9 @@
 	export let params: CommonComponentParameters;
 	export let schema: any;
 	export let value: any[];
-	let { path } = params;
 
 	const onAdd = () => {
-		params.pathChanged(path,
+		params.pathChanged(params.path,
 		[
 			...(value || []),
 			emptyValue(schema.items)
@@ -16,7 +15,7 @@
 	}
 
 	const onDelete = (idx: number) => () => {
-		params.pathChanged(path,
+		params.pathChanged(params.path,
 		[
 			...value.slice(0, idx),
 			...value.slice(idx + 1)
@@ -24,7 +23,7 @@
 	};
 
 	const onDuplicate = (idx: number) => () => {
-		params.pathChanged(path,
+		params.pathChanged(params.path,
 		[
 			...value.slice(0, idx),
 			value[idx],
@@ -35,7 +34,7 @@
 
 	const onUp = (idx: number) => () => {
 		if (idx > 0) {
-			params.pathChanged(path,
+			params.pathChanged(params.path,
 			[
 				...value.slice(0, idx-1),
 				value[idx],
@@ -47,7 +46,7 @@
 
 	const onDown = (idx: number) => () => {
 		if (idx < value.length - 1) {
-			params.pathChanged(path,
+			params.pathChanged(params.path,
 			[
 				...value.slice(0, idx),
 				value[idx+1],
@@ -58,8 +57,8 @@
 	};
 </script>
 
-<fieldset name={path.join('.')} class="array depth-{path.length}">
-	<legend>{schemaLabel(schema, path)}</legend>
+<fieldset name={params.path.join('.')} class="array depth-{params.path.length}">
+	<legend>{schemaLabel(schema, params.path)}</legend>
 {#each value || [] as item, idx (idx)}
 	<svelte:component this={SubSchemaForm}
 		params={{
@@ -71,45 +70,15 @@
 		bind:schema={schema.items}
 	/>
 	<div class="list-controls">
-		<button type="button" class="list-control delete" on:click={onDelete(idx)}></button>
-		<button type="button" class="list-control duplicate" on:click={onDuplicate(idx)}></button>
+		<button type="button" class="list-control delete" title="delete" on:click={onDelete(idx)}></button>
+		<button type="button" class="list-control duplicate" title="duplicate" on:click={onDuplicate(idx)}></button>
 		{#if idx > 0}
-			<button type="button" class="list-control up" on:click={onUp(idx)}></button>
+			<button type="button" class="list-control up" title="move up" on:click={onUp(idx)}></button>
 		{/if}
 		{#if idx < (value || []).length - 1}
-			<button type="button" class="list-control down" on:click={onDown(idx)}></button>
+			<button type="button" class="list-control down" title="move down" on:click={onDown(idx)}></button>
 		{/if}
 	</div>
 {/each}
-<button type="button" class="list-control add" on:click={onAdd}></button>
+<button type="button" class="list-control add" title="add item" on:click={onAdd}></button>
 </fieldset>
-
-<style>
-	.list-control {
-		background-size: contain;
-		background-repeat: no-repeat;
-		width: 1.7em;
-		height: 1.7em;
-		border: none;
-	}
-	.add {
-		background-image: url(/img/add.svg);
-	}
-	.delete {
-		background-image: url(/img/delete.svg);
-	}
-	.up {
-		background-image: url(/img/up.svg);
-	}
-	.down {
-		background-image: url(/img/down.svg);
-	}
-	.duplicate {
-		background-image: url(/img/duplicate.svg);
-	}
-
-	.list-item {
-		display: flex;
-	}
-
-</style>

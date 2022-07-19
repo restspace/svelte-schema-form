@@ -11,6 +11,7 @@
 	const dispatch = createEventDispatcher();
 
 	let currentErrors = {} as ValidationErrors;
+	let showErrors = false;
 
 	const change = (e: CustomEvent) => {
 		currentErrors = e.detail.errors;
@@ -21,12 +22,13 @@
 			dispatch('submit', { value });
 			dirty = false;
 		}
+		showErrors = true;
 	};
 </script>
 
-<form class='svelte-schema-form' {action}>
-	<SchemaForm bind:schema {value} on:value={change} bind:dirty />
-	<div class="sf-button-container">
-		<button type={action ? "submit" : "button"} on:click={submit} class:dirty={dirty}>Submit</button>
+<form class='svelte-schema-form' {action} class:dirty>
+	<SchemaForm bind:schema {value} on:value={change} bind:dirty {showErrors} />
+	<div class="button-container">
+		<button type={action ? "submit" : "button"} class="submit-button" on:click={submit} class:dirty={dirty}>Submit</button>
 	</div>
 </form>

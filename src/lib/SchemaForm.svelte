@@ -6,51 +6,36 @@
 	import ObjectEditor from "./editors/Object.svelte";
 	import set from "lodash-es/set";
 	import get from "lodash-es/get";
-	import { Validator } from "jsonschema";
-	import type { CommonComponentParameters } from './types/CommonComponentParameters';
+	import { validator } from "@exodus/schemasafe";
+	import type { CommonComponentParameters, ValidationErrors } from './types/CommonComponentParameters';
 	import Enum from './editors/Enum.svelte';
 	import Array from './editors/Array.svelte';
-	import { nullOptionalsAllowed } from './utilities';
+	import { incr, nullOptionalsAllowed } from './utilities';
 	import Boolean from './editors/Boolean.svelte';
 	import Number from './editors/Number.svelte';
+	import { errorMapper } from "./errorMapper";
 
 	export let schema: any;
 	export let value: any;
 	export let dirty: boolean = false;
+	export let showErrors: boolean = true;
 
 	const dispatch = createEventDispatcher();
 
-	const pathChanged = (path: string[], val: any) => {
-		const curr = get(params.value, path);
-		if (val === curr) return;
+	let validationErrors = {} as ValidationErrors;
 
-		dirty = true;
+	const revalidate = () => {
+		const validate = validator(nullOptionalsAllowed(schema), { includeErrors: true });
+		const validatorResult = validate(value);
+		validationErrors = Object.fromEntries(
+			(validate.errors || []).map(ve => errorMapper(schema, value, ve.keywordLocation, ve.instanceLocation))
+		);
+	}
 
-		console.log(`CH path: ${path.join('.')} val: ${JSON.stringify(val)} curr: ${JSON.stringify(curr)}`);
+	revalidate();
 
-		if (val === undefined && path.length > 0) {
-			const pathFront = path.slice(0, -1);
-			const parent = pathFront.length ? get(params.value, path.slice(0, -1)) : params.value;
-			delete parent[path[path.length - 1]];
-		} else {
-			set(params.value, path, val);
-		}
-
-		const v = new Validator();
-		const validatorResult = v.validate(params.value, nullOptionalsAllowed(schema));
-		params.validationErrors = Object.fromEntries(validatorResult.errors.map(err => [ err.path.join('.'), err.message ]));
-
-		dispatch('value', {
-			path, value: val, errors: params.validationErrors
-		});
-
-		console.log(params.validationErrors);
-		params = { ...params };
-		value = params.value;
-		return val;
-	};
-
-	let params: CommonComponentParameters = {
+	let params: CommonComponentParameters;
+	$: params = {
 		value,
 		path: [],
 		components: {
@@ -63,13 +48,39 @@
 			enum: Enum
 		},
 		pathChanged,
-		validationErrors: {},
-		containerParent: "none"
-	}
+		validationErrors,
+		containerParent: "none",
+		showErrors,
+		idx: incr()
+	};
+
+	const pathChanged = (path: string[], val: any) => {
+		const curr = get(params.value, path);
+		if (val === curr) return;
+
+		dirty = true;
+
+		if (val === undefined && path.length > 0) {
+			const pathFront = path.slice(0, -1);
+			const parent = pathFront.length ? get(params.value, path.slice(0, -1)) : params.value;
+			delete parent[path[path.length - 1]];
+		} else {
+			set(params.value, path, val);
+		}
+
+		revalidate();
+
+		dispatch('value', {
+			path, value: val, errors: validationErrors
+		});
+
+		console.log(`dispatch value path: ${path.join('.')} val: ${val}, errors: ${JSON.stringify(validationErrors)}`);
+		value = params.value;
+		return val;
+	};
 </script>
 
 <SubSchemaForm {params} {value} bind:schema />
-params: {JSON.stringify(params)}
 
 <style lang="scss">
 	:global {

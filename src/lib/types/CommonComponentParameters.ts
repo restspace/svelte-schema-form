@@ -1,6 +1,3 @@
-import type { ValidatorResult } from "jsonschema";
-import type { Writable } from "svelte/store";
-
 export type ValidationErrors = Record<string, string>;
 
 export interface CommonComponentParameters {
@@ -10,7 +7,9 @@ export interface CommonComponentParameters {
 	value: any,
 	validationErrors: ValidationErrors,
 	required?: boolean,
-	containerParent: "none" | "array" | "object"
+	containerParent: "none" | "array" | "object",
+	showErrors: boolean,
+	idx: number
 }
 
 export const childComponentParameters = (params: CommonComponentParameters, propName: string) => {

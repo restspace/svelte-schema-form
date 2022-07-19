@@ -34,3 +34,7 @@ form.svelte-schema-form fieldset {
 .svelte-schema-form fieldset.array > fieldset.object {
 	margin-left: -1em;
 }
+
+.svelte-schema-form .list-item {
+	display: flex;
+}

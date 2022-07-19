@@ -5,14 +5,13 @@
 	export let params: CommonComponentParameters;
 	export let schema: any;
 	export let value: any;
-	let { components, path } = params;
 
 	let propNames = Object.keys(schema.properties);
 </script>
 
-<fieldset name={path.join('.')} class="object depth-{path.length}">
+<fieldset name={params.path.join('.')} class="object depth-{params.path.length}">
 {#each propNames as propName (propName)}
-	<svelte:component this={SubSchemaForm}
+	<SubSchemaForm
 		params={{
 			...params,
 			path: [ ...params.path, propName ],
