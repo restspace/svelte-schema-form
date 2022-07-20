@@ -1,0 +1,56 @@
+form.svelte-schema-form {
+	fieldset {
+		display: grid;
+		grid-template-rows: auto;
+		grid-gap: 1em;
+		align-items: flex-start;
+		padding-left: 1em;
+		box-sizing: border-box;
+	}
+
+	fieldset.depth-0 {
+		padding-left: 0;
+	}
+
+	fieldset.object {
+		grid-template-columns: max-content 1fr;
+		border-left: 1px solid #999;
+		grid-column: span 2;
+	}
+	fieldset.array > fieldset.object {
+		grid-column: span 1;
+	}
+
+	fieldset.object.depth-0 {
+		border-left: none;
+	}
+
+	fieldset.array {
+		grid-column: span 2;
+		grid-template-columns: 1fr max-content;
+	}
+
+	fieldset > legend {
+		margin-bottom: 1em;
+	}
+	fieldset.array > legend {
+		margin-left: -1em;
+	}
+
+
+	fieldset.array > fieldset.object {
+		margin-left: -1em;
+	}
+
+	.list-item {
+		display: flex;
+	}
+
+	input[type="checkbox"] {
+		justify-self: start;
+	}
+
+	.error {
+		grid-column: 1 / span 2;
+	}
+}
