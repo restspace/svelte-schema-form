@@ -14,8 +14,8 @@ Use in a component
 
 	<script>
 	  import { SubmitForm } from '@restspace/svelte-schema-form';
-	  import '@restspace/svelte-schema-form/css/layout.scss';
-	  import '@restspace/svelte-schema-form/css/basic-skin.scss';
+	  import '@restspace/svelte-schema-form/css/layout.css';
+	  import '@restspace/svelte-schema-form/css/basic-skin.css';
 
 	  let schema = {
 		  type: "object",
@@ -32,7 +32,7 @@ Use in a component
 
 	<SubmitForm {schema} {value} on:submit={submit} />
 
-Note, you'll need to install a Sass processor into your Svelte setup for this to work. The `layout.scss` file creates a standard form layout. `basic-skin.scss` adds a very simple skin with fonts, colours etc on top of that.
+The `layout.css` file creates a standard form layout. `basic-skin.css` adds a very simple skin with fonts, colours etc on top of that.
 
 The `SubmitForm` component manages validation of the entered data using the full JSON Schema spec and renders any error messages beside the relevant components. Standard behaviour is that errors are not shown until the Submit button has been clicked at least once.
 

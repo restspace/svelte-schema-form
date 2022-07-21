@@ -82,19 +82,3 @@
 </script>
 
 <SubSchemaForm {params} {value} bind:schema />
-
-<style lang="scss">
-	:global {
-		.svelte-schema-form {
-			fieldset {
-				border: none;
-				padding: 0;
-				margin: 0;
-			}
-
-			button {
-				background-color: transparent;
-			}
-		}
-	}
-</style>
