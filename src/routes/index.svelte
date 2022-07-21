@@ -44,7 +44,6 @@
 
 	const schemaUpdate = (ev: any) => {
 		const newSchema = ev.currentTarget.value;
-		alert(newSchema);
 		try {
 			schema = JSON.parse(newSchema);
 			jsonInvalid = false;
@@ -60,7 +59,7 @@
 
 <div class="container">
 	<div class="schema" class:jsonInvalid>
-		<textarea id="schema" on:change={schemaUpdate}>{JSON.stringify(schema, undefined, 2)}</textarea>
+		<textarea id="schema" on:keyup={schemaUpdate}>{JSON.stringify(schema, undefined, 2)}</textarea>
 	</div>
 	<div class="form">
 		<SubmitForm {schema} {value} on:submit={submit} />

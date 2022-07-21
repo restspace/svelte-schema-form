@@ -19,6 +19,7 @@
 	export let value: any;
 	export let dirty: boolean = false;
 	export let showErrors: boolean = true;
+	export let components: Record<string, new (...args: any[]) => any> = {};
 
 	const dispatch = createEventDispatcher();
 
@@ -38,7 +39,7 @@
 	$: params = {
 		value,
 		path: [],
-		components: {
+		components: Object.assign({
 			string: String,
 			number: Number,
 			boolean: Boolean,
@@ -46,7 +47,7 @@
 			object: ObjectEditor,
 			array: Array,
 			enum: Enum
-		},
+		}, components),
 		pathChanged,
 		validationErrors,
 		containerParent: "none",
