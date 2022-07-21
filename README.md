@@ -1,6 +1,8 @@
 # Svelte Schema Form
 
-This is a Svelte implementation of a form generator from JSON Schema.
+This is a Svelte implementation of a form generator from JSON Schema. It supports subforms, lists with reordering of items, custom renderer components, and customisable CSS skinning separating layout and look-and-feel.
+
+JSON Schema is a powerful validation/type definition language for JSON data. See this for more information on [JSON Schema](https://cswr.github.io/JsonSchema/spec/introduction/)
 
 ## How to use
 
@@ -31,6 +33,8 @@ Use in a component
 	<SubmitForm {schema} {value} on:submit={submit} />
 
 Note, you'll need to install a Sass processor into your Svelte setup for this to work. The `layout.scss` file creates a standard form layout. `basic-skin.scss` adds a very simple skin with fonts, colours etc on top of that.
+
+The `SubmitForm` component manages validation of the entered data using the full JSON Schema spec and renders any error messages beside the relevant components. Standard behaviour is that errors are not shown until the Submit button has been clicked at least once.
 
 ## JSON Schema support
 
