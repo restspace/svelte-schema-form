@@ -1,6 +1,23 @@
 {
 	"name": "@restspace/svelte-schema-form",
-	"version": "0.0.6",
+	"version": "0.0.8",
+	"description": "JSON Schema based form generator in Svelte",
+	"author": "James Ellis-Jones",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/restspace/svelte-schema-form.git"
+	},
+	"keywords": [
+		"svelte",
+		"form generator",
+		"form builder",
+		"json schema"
+	],
+	"bugs": {
+		"url": "https://github.com/restspace/svelte-schema-form/issues"
+	},
+	"homepage": "https://github.com/restspace/svelte-schema-form#readme",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",

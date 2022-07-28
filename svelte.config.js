@@ -7,15 +7,6 @@ const config = {
 	// Consult https://github.com/sveltejs/svelte-preprocess
 	// for more information about preprocessors
 	preprocess: preprocess({
-		postcss: {
-			plugins: [
-				url({
-					url: "inline",
-					maxSize: 100,
-					fallback: "copy"
-				})
-			]
-		}
 	}),
 
 	kit: {

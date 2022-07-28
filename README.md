@@ -32,7 +32,7 @@ Use in a component
 
 	<SubmitForm {schema} {value} on:submit={submit} />
 
-The `layout.css` file creates a standard form layout. `basic-skin.css` adds a very simple skin with fonts, colours etc on top of that.
+The `layout.css` file creates a standard form layout. `basic-skin.css` adds a very simple skin with fonts, colours etc on top of that. Note, you'll likely need to configure your bundler to interpret importing css to make this work.
 
 The `SubmitForm` component manages validation of the entered data using the full JSON Schema spec and renders any error messages beside the relevant components. Standard behaviour is that errors are not shown until the Submit button has been clicked at least once.
 
