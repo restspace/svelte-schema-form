@@ -52,7 +52,53 @@ The `SubmitForm` component manages validation of the entered data using the full
 |type="object"|Every object is rendered within an HTML Fieldset element with a form field for each property|
 |required|Object fields named in the `required` list have to have a value entered to be valid. Required fields have the `required` class added to their labels to enable this to be displayed.
 |type="array"|Every array is rendered within an HTML Fieldset element with controls for adding, deleting, moving and duplicating array items (based on the `items` property)|
+|editor|Custom property that lets you pick a custom editor for a schema.|
 |||
+
+## Components
+
+### SchemaForm
+A group of based on a schema, no submit functionality
+
+    import {SchemaForm} from "@restspace/svelte-schema-form";
+
+	<SchemaForm
+	  schema // REQUIRED: JSON schema as an object
+	  value // REQUIRED: JSON value to initialise the form with, for an empty form use {}
+	  uploadFiles // Map with keys as property paths to upload editors, values as File objects in those editors
+	  dirty // Whether the form is dirty i.e. the user has changed it from its initial value
+	  showErrors // Whether the form should show errors
+	  components // Map with keys as editor names (value of editor property in schema), values as constructors of editor components
+	/>
+
+### SubmitForm
+An HTML form with a submit button and a submit flow
+
+    import {SubmitForm} from "@restspace/svelte-schema-form";
+
+	<SubmitForm
+	  schema // REQUIRED: JSON schema as an object
+	  value // REQUIRED: JSON value to initialise the form with, for an empty form use {}
+	  uploadFiles // Map with keys as property paths to upload editors, values as File objects in those editors
+	  uploadBaseUrl // A base URL to which uploaded files are PUT on submit. Subpaths are chosen to be unique.
+	  uploadNamePattern // A substition pattern for the unique name of this record, e.g. this might be '${email}' for a person's details with a property/field named `email`
+	  dirty // Whether the form is dirty i.e. the user has changed it from its initial value
+	  components // Map with keys as editor names (value of editor property in schema), values as constructors of editor components
+	/>
+
+## Custom editors
+
+### Upload
+
+Setting `editor="upload"` on a `type="string"` subschema means that this property will be rendered as a file uploader. This component requies a `SubmitForm`. The file uploader allows files to be dragged onto it, or to be clicked to open a file dialog. Files are sent on submit via a PUT request to a path composed:
+
+    <uploadBaseUrl>/<uploadName>/<path>/<filename of file>
+
+- `uploadBaseUrl` is the prop on `SubmitForm`
+- `uploadName` is the `uploadNamePattern` with form field value(s) substituted in for `${<property path>}` codes so as to create a name that will be unique for each stored record
+- `path` is the property path of the upload control with dot separators and array poitions just being an index with no square brackets e.g. `profilePics.3.image`
+  
+After successful submit, the property value for the editor is set to the url where the file was uploaded. The uploader has a button at the right bottom to switch modes to show a text input field with the url of the stored file.
 
 ## Custom rendering components
 
