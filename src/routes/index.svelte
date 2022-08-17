@@ -33,9 +33,14 @@
 						"type": "string"
 					}
 				}
+			},
+			"aFile": {
+				"type": "string",
+				"editor": "upload"
 			}
 		},
-		required: [ "amount" ]
+		required: [ "amount" ],
+		pathPattern: "item_${amount}"
 	};
 	let jsonInvalid = false;
 
@@ -62,7 +67,7 @@
 		<textarea id="schema" on:keyup={schemaUpdate}>{JSON.stringify(schema, undefined, 2)}</textarea>
 	</div>
 	<div class="form">
-		<SubmitForm {schema} {value} on:submit={submit} />
+		<SubmitForm {schema} {value} on:submit={submit} uploadBaseUrl="https://restspace.local:3131/files" />
 	</div>
 	<div class="output">
 		<pre>

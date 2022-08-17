@@ -96,4 +96,51 @@ form.svelte-schema-form {
 		border: 2px solid #aaa;
 		color: #777;
 	}
+
+	.sf-drop-area {
+		height: 4em;
+		border: 1px solid #aaa;
+		padding-right: 16px;
+		position: relative;
+		box-sizing: border-box;
+
+		&.highlight {
+			background-color: #eee;
+		}
+
+		.sf-upload-caption {
+			font-weight: bold;
+			font-size: 1.1em;
+			color: #ccc;
+		}
+
+		.sf-upload-controls {
+			.sf-upload-deleter {
+				background-image: url(../img/delete.svg);
+				background-repeat: no-repeat;
+				background-size: contain;
+			}
+
+			.sf-upload-to-uploader {
+				background-image: url(../img/upload.svg);
+				background-repeat: no-repeat;
+				background-size: contain;
+			}
+			.sf-upload-to-link {
+				background-image: url(../img/link.svg);
+				background-repeat: no-repeat;
+				background-size: contain;
+			}
+		}
+	}
+
+	.sf-progress-bars .sf-progress-bar {
+		border: 1px solid #aaa;
+		padding: 3px;
+		font-size: 1em;
+
+		.sf-progress-done {
+			background-color: #80808050;
+		}
+	}
 }

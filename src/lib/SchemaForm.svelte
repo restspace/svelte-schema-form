@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { createEventDispatcher } from "svelte";
+	import { createEventDispatcher, onMount } from "svelte";
 	import SubSchemaForm from "./SubSchemaForm.svelte";
 	import String from "./editors/String.svelte";
 	import FieldWrapper from './editors/FieldWrapper.svelte';
@@ -7,16 +7,18 @@
 	import set from "lodash-es/set";
 	import get from "lodash-es/get";
 	import { validator } from "@exodus/schemasafe";
-	import type { CommonComponentParameters, ValidationErrors } from './types/CommonComponentParameters';
+	import { FileNone, type CommonComponentParameters, type ValidationErrors } from './types/CommonComponentParameters';
 	import Enum from './editors/Enum.svelte';
 	import Array from './editors/Array.svelte';
 	import { incr, nullOptionalsAllowed } from './utilities';
 	import Boolean from './editors/Boolean.svelte';
 	import Number from './editors/Number.svelte';
 	import { errorMapper } from "./errorMapper";
+	import Upload from "./editors/Upload.svelte";
 
 	export let schema: any;
 	export let value: any;
+	export let uploadFiles: Record<string, FileList> = {};
 	export let dirty: boolean = false;
 	export let showErrors: boolean = true;
 	export let components: Record<string, new (...args: any[]) => any> = {};
@@ -26,18 +28,27 @@
 	let validationErrors = {} as ValidationErrors;
 
 	const revalidate = () => {
-		const validate = validator(nullOptionalsAllowed(schema), { includeErrors: true });
+		const validate = validator(nullOptionalsAllowed(schema), { includeErrors: true, allErrors: true, allowUnusedKeywords: true });
 		const validatorResult = validate(value);
 		validationErrors = Object.fromEntries(
 			(validate.errors || []).map(ve => errorMapper(schema, value, ve.keywordLocation, ve.instanceLocation))
 		);
 	}
 
-	revalidate();
+	onMount(() => {
+		revalidate();
+		if (Object.keys(validationErrors).length > 0) {
+			// set initial errors
+			dispatch('value', {
+				path: [], value, errors: validationErrors
+			});
+		}
+	});
 
 	let params: CommonComponentParameters;
 	$: params = {
 		value,
+		files: uploadFiles,
 		path: [],
 		components: Object.assign({
 			string: String,
@@ -46,7 +57,8 @@
 			fieldWrapper: FieldWrapper,
 			object: ObjectEditor,
 			array: Array,
-			enum: Enum
+			enum: Enum,
+			upload: Upload
 		}, components),
 		pathChanged,
 		validationErrors,
@@ -56,6 +68,16 @@
 	};
 
 	const pathChanged = (path: string[], val: any) => {
+		if (val instanceof FileList) {
+			uploadFiles[path.join('.')] = val;
+			dirty = true;
+			return val;
+		} else if (val === FileNone) {
+			delete uploadFiles[path.join('.')];
+			dirty = true;
+			return val;
+		}
+
 		const curr = get(params.value, path);
 		if (val === curr) return;
 

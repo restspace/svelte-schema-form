@@ -1,5 +1,8 @@
 export type ValidationErrors = Record<string, string>;
 
+export const FileNone = Symbol();
+export const ProgressContext = Symbol();
+
 export interface CommonComponentParameters {
 	path: string[];
 	pathChanged: (path: string[], val: any) => boolean,
