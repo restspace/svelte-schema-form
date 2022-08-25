@@ -49,6 +49,7 @@ The `SubmitForm` component manages validation of the entered data using the full
 |minimum, maximum|Supported in validation|
 |exclusiveMinimum, exclusiveMaximum|Supported in validation|
 |enum|A field with the enum property is instead rendered as a Select element with all the enum options given|
+|enumText|Custom property to supply display labels for the Select element as an array of strings, one for each enum value|
 |type="object"|Every object is rendered within an HTML Fieldset element with a form field for each property|
 |required|Object fields named in the `required` list have to have a value entered to be valid. Required fields have the `required` class added to their labels to enable this to be displayed.
 |type="array"|Every array is rendered within an HTML Fieldset element with controls for adding, deleting, moving and duplicating array items (based on the `items` property)|
