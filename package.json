@@ -1,6 +1,6 @@
 {
 	"name": "@restspace/svelte-schema-form",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"description": "JSON Schema based form generator in Svelte",
 	"author": "James Ellis-Jones",
 	"license": "MIT",
