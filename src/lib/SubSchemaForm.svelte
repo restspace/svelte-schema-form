@@ -7,8 +7,9 @@
 	let { components } = params;
 
 	let typeComponent: any;
-	const slotName = editorForSchema(schema);
-	const component = components[slotName];
+	
+	let component: new (...args: any[]) => any;
+	$: component = components[editorForSchema(schema)];
 </script>
 
 <svelte:component this={component} {params} {value} bind:schema />
