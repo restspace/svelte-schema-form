@@ -70,6 +70,7 @@ A group of based on a schema, no submit functionality
 	  dirty // Whether the form is dirty i.e. the user has changed it from its initial value
 	  showErrors // Whether the form should show errors
 	  components // Map with keys as editor names (value of editor property in schema), values as constructors of editor components
+	  collapsible // Whether objects and arrays are shown with collapsers which can hide them (default = false)
 	/>
 
 ### SubmitForm
@@ -85,6 +86,7 @@ An HTML form with a submit button and a submit flow
 	  uploadNamePattern // A substition pattern for the unique name of this record, e.g. this might be '${email}' for a person's details with a property/field named `email`
 	  dirty // Whether the form is dirty i.e. the user has changed it from its initial value
 	  components // Map with keys as editor names (value of editor property in schema), values as constructors of editor components
+	  collapsible // Whether objects and arrays are shown with collapsers which can hide them (default = false)
 	/>
 
 ## Custom editors

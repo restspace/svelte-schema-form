@@ -21,6 +21,7 @@
 	export let uploadFiles: Record<string, FileList> = {};
 	export let dirty: boolean = false;
 	export let showErrors: boolean = true;
+	export let collapsible: boolean = false;
 	export let components: Record<string, new (...args: any[]) => any> = {};
 
 	const dispatch = createEventDispatcher();
@@ -64,8 +65,9 @@
 		validationErrors,
 		containerParent: "none",
 		showErrors,
+		collapsible,
 		idx: incr()
-	};
+	} as CommonComponentParameters;
 
 	const pathChanged = (path: string[], val: any) => {
 		if (val instanceof FileList) {

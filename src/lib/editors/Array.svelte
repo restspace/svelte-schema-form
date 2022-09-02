@@ -6,6 +6,12 @@
 	export let schema: any;
 	export let value: any[];
 
+	let collapserOpenState: "open" | "closed" = params.path.length === 0 ? "open" : "closed";
+
+	const toggle = () => {
+		collapserOpenState = collapserOpenState === "open" ? "closed" : "open";
+	}
+
 	const onAdd = () => {
 		params.pathChanged(params.path,
 		[
@@ -57,28 +63,36 @@
 	};
 </script>
 
-<fieldset name={params.path.join('.')} class="array depth-{params.path.length}">
-	<legend>{schemaLabel(schema, params.path)}</legend>
-{#each value || [] as item, idx (idx)}
-	<svelte:component this={SubSchemaForm}
-		params={{
-			...params,
-			path: [ ...params.path, idx.toString() ],
-			containerParent: "array"
-		}}
-		value={item}
-		bind:schema={schema.items}
-	/>
-	<div class="list-controls">
-		<button type="button" class="list-control delete" title="delete" on:click={onDelete(idx)}></button>
-		<button type="button" class="list-control duplicate" title="duplicate" on:click={onDuplicate(idx)}></button>
-		{#if idx > 0}
-			<button type="button" class="list-control up" title="move up" on:click={onUp(idx)}></button>
+<fieldset name={params.path.join('.')} class="subset array depth-{params.path.length}">
+	<legend class="subset-label array-label">
+		{#if params.collapsible }
+		<span class="collapser {collapserOpenState}" on:click={toggle}></span>
 		{/if}
-		{#if idx < (value || []).length - 1}
-			<button type="button" class="list-control down" title="move down" on:click={onDown(idx)}></button>
-		{/if}
-	</div>
-{/each}
-<button type="button" class="list-control add" title="add item" on:click={onAdd}></button>
+		{schemaLabel(schema, params.path)}
+	</legend>
+
+	{#if collapserOpenState === "open"}
+		{#each value || [] as item, idx (idx)}
+		<svelte:component this={SubSchemaForm}
+			params={{
+				...params,
+				path: [ ...params.path, idx.toString() ],
+				containerParent: "array"
+			}}
+			value={item}
+			bind:schema={schema.items}
+		/>
+		<div class="list-controls">
+			<button type="button" class="list-control delete" title="delete" on:click={onDelete(idx)}></button>
+			<button type="button" class="list-control duplicate" title="duplicate" on:click={onDuplicate(idx)}></button>
+			{#if idx > 0}
+				<button type="button" class="list-control up" title="move up" on:click={onUp(idx)}></button>
+			{/if}
+			{#if idx < (value || []).length - 1}
+				<button type="button" class="list-control down" title="move down" on:click={onDown(idx)}></button>
+			{/if}
+		</div>
+		{/each}
+	<button type="button" class="list-control add" title="add item" on:click={onAdd}></button>
+	{/if}
 </fieldset>

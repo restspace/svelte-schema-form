@@ -1,5 +1,5 @@
 form.svelte-schema-form {
-	fieldset {
+	.subset {
 		display: grid;
 		grid-template-rows: auto;
 		grid-gap: 1em;
@@ -9,37 +9,37 @@ form.svelte-schema-form {
 		border: none;
 	}
 
-	fieldset.depth-0 {
+	.depth-0 {
 		padding-left: 0;
 	}
 
-	fieldset.object {
+	.object {
 		grid-template-columns: max-content 1fr;
 		border-left: 1px solid #999;
 		grid-column: span 2;
 	}
-	fieldset.array > fieldset.object {
+	.array > .object {
 		grid-column: span 1;
 	}
 
-	fieldset.object.depth-0 {
+	.object.depth-0 {
 		border-left: none;
 	}
 
-	fieldset.array {
+	.array {
 		grid-column: span 2;
 		grid-template-columns: 1fr max-content;
 	}
 
-	fieldset > legend {
+	.subset > .subset-label {
 		margin-bottom: 1em;
 	}
-	fieldset.array > legend {
+	.array > legend {
 		margin-left: -1em;
 	}
 
 
-	fieldset.array > fieldset.object {
+	.array > .object {
 		margin-left: -1em;
 	}
 
