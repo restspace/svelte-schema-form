@@ -26,6 +26,9 @@ import String from "./editors/String.svelte";
 
 	const change = (e: CustomEvent) => {
 		currentErrors = e.detail.errors;
+		dispatch('value', {
+			path: e.detail.path, value: e.detail.value, errors: e.detail.errors
+		});
 	};
 
 	const progress = (path: string, name: string, percent: number) => {

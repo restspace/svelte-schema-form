@@ -15,7 +15,8 @@
 	import Number from './editors/Number.svelte';
 	import { errorMapper } from "./errorMapper";
 	import Upload from "./editors/Upload.svelte";
-import TextArea from "./editors/TextArea.svelte";
+	import TextArea from "./editors/TextArea.svelte";
+	import ArrayBlocks from "./editors/ArrayBlocks.svelte";
 
 	export let schema: any;
 	export let value: any;
@@ -61,7 +62,8 @@ import TextArea from "./editors/TextArea.svelte";
 			array: Array,
 			enum: Enum,
 			upload: Upload,
-			textarea: TextArea
+			textarea: TextArea,
+			blocks: ArrayBlocks
 		}, components),
 		pathChanged,
 		validationErrors,

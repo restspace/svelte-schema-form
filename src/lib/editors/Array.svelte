@@ -6,7 +6,7 @@
 	export let schema: any;
 	export let value: any[];
 
-	let collapserOpenState: "open" | "closed" = params.path.length === 0 ? "open" : "closed";
+	let collapserOpenState: "open" | "closed" = params.path.length === 0 || !params.collapsible ? "open" : "closed";
 
 	const toggle = () => {
 		collapserOpenState = collapserOpenState === "open" ? "closed" : "open";

@@ -2,7 +2,7 @@
 
 	import type { CommonComponentParameters } from "../types/CommonComponentParameters";
 	import SubSchemaForm from "../SubSchemaForm.svelte";
-import { schemaLabel } from "$lib/types/schema";
+	import { schemaLabel } from "$lib/types/schema";
 	export let params: CommonComponentParameters;
 	export let schema: any;
 	export let value: any;
@@ -10,7 +10,7 @@ import { schemaLabel } from "$lib/types/schema";
 	let propnames: string[];
 	$: propNames = Object.keys(schema.properties);
 	let collapserOpenState: "open" | "closed" =
-		params.path.length === 0 || params.containerParent === "array"
+		params.path.length === 0 || params.containerParent === "array" || !params.collapsible
 		? "open"
 		: "closed";
 
