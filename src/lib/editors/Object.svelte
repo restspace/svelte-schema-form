@@ -2,7 +2,7 @@
 
 	import type { CommonComponentParameters } from "../types/CommonComponentParameters";
 	import SubSchemaForm from "../SubSchemaForm.svelte";
-	import { schemaLabel } from "$lib/types/schema";
+	import { schemaLabel } from "../types/schema";
 	export let params: CommonComponentParameters;
 	export let schema: any;
 	export let value: any;
@@ -17,9 +17,13 @@
 	const toggle = () => {
 		collapserOpenState = collapserOpenState === "open" ? "closed" : "open";
 	}
+
+	$: legendText = schemaLabel(schema, params.path);
+	$: showLegend = params.collapsible || (params.containerParent !== 'array' && !!legendText);
 </script>
 
 <fieldset name={params.path.join('.')} class="subset object depth-{params.path.length}">
+	{#if showLegend }
 	<legend class="subset-label object-label">
 		{#if params.collapsible }
 		<span class="collapser {collapserOpenState}" on:click={toggle}></span>
@@ -28,6 +32,7 @@
 		{schemaLabel(schema, params.path)}
 		{/if}
 	</legend>
+	{/if}
 
 	{#if collapserOpenState === "open"}
 	{#each propNames as propName (propName)}

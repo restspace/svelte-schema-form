@@ -7,6 +7,7 @@ export interface CommonComponentParameters {
 	path: string[];
 	pathChanged: (path: string[], val: any) => boolean,
 	components: Record<string, new (...args: any[]) => any>,
+	componentContext?: Record<string, unknown>,
 	value: any,
 	validationErrors: ValidationErrors,
 	required?: boolean,

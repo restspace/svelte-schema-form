@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { schemaLabel } from "$lib/types/schema";
+	import { schemaLabel } from "../types/schema";
 	import type { CommonComponentParameters } from "../types/CommonComponentParameters";
 	import { camelToTitle } from "../utilities";
 

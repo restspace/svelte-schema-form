@@ -1,5 +1,5 @@
 <script lang="ts">
-import { after, afterLast } from "$lib/utilities";
+import { after, afterLast } from "../utilities";
 
 	import { entries, keys } from "lodash-es";
 	import { getContext } from "svelte";
@@ -37,7 +37,6 @@ import { after, afterLast } from "$lib/utilities";
 	$: {
 		// run this to remove any local file thumbnails stored in a FileList once upload is done
 		if (value && (value.startsWith('http') || value.startsWith('/')) && renderedThumbnails.length > 0) {
-			console.log('val ch: ' + value);
 			renderedThumbnails.forEach(rt => rt.remove());
 			renderedThumbnails = [];
 		}
@@ -50,7 +49,9 @@ import { after, afterLast } from "$lib/utilities";
 				inp.files = null;
 				return;
 			}
-			const file = inp.files!.item(0)!;
+			const file = inp.files?.item(0);
+			if (!file) return;
+			
 			if (schema.warningKb && file.size > schema.warningKb * 1024) {
 				alert(`The file is larger than the recommended maximum size of ${schema.warningKb}KB - consider compressing it`);
 			}
@@ -73,14 +74,12 @@ import { after, afterLast } from "$lib/utilities";
 	};
 
 	const dragEnter = (ev: DragEvent) => {
-		console.log('de: ' + ev.dataTransfer?.types[0]);
 		if (ev.dataTransfer?.types[0] !== "Files") return;
 		highlight = true;
 		ev.preventDefault();
 	}
 
 	const dragOver = (ev: DragEvent) => {
-		console.log('do: ' + ev.dataTransfer?.types[0]);
 		if (ev.dataTransfer?.types[0] !== "Files") return;
 		ev.preventDefault();
 	}

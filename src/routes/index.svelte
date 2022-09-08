@@ -18,11 +18,13 @@
 			},
 			complicatedThings: {
 				type: "array",
+				editor: "blocks",
+				effectiveUrl: "/abc",
 				items: {
 					type: "object",
 					properties: {
-						p1: { type: "string" },
-						p2: { type: "string" }
+						name: { type: "string" },
+						thumbnail: { type: "string", editor: "upload" }
 					}
 				}
 			},

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { CommonComponentParameters } from "../types/CommonComponentParameters";
-	import { emptyValue, schemaLabel } from "../types/schema";
+	import { emptyValue } from "../types/schema";
 	import SubSchemaForm from "../SubSchemaForm.svelte";
 	import _ from "lodash-es";
 
@@ -16,6 +16,7 @@
 	}
 	
 	let adding = false;
+	let hovering: number | boolean = false;
 
 	const onAdd = () => {
 		params.pathChanged(params.path,
@@ -31,6 +32,12 @@
 		const newPath = [ ...params.path, idx.toString() ];
 		params.pathChanged(newPath, value[idx]);
 		adding = false;
+
+		// upload any files on the add form
+		const doUploads = params.componentContext?.['doUploads'] as (pathPrefix: string) => Promise<void>;
+		if (doUploads) {
+			doUploads(newPath.join('.'));
+		}
 	};
 
 	const onDelete = (idx: number) => () => {
@@ -75,6 +82,37 @@
 		}
 	};
 
+	const onDragstart = (i: number) => (ev: DragEvent) => {
+		ev.dataTransfer!.effectAllowed = 'move';
+		ev.dataTransfer!.dropEffect = 'move';
+		ev.dataTransfer!.setData('text/plain', i.toString());
+	}
+
+	const onDrop = (i: number) => (ev: DragEvent) => {
+		ev.dataTransfer!.dropEffect = 'move'; 
+		const start = parseInt(ev.dataTransfer!.getData("text/plain"));
+
+		if (start < i) {
+			params.pathChanged(params.path,
+			[
+				...value.slice(0, start),
+				...value.slice(start + 1, i),
+				value[start],
+				...value.slice(i)
+			]);
+		} else if (i < start) {
+			params.pathChanged(params.path,
+			[
+				...value.slice(0, i),
+				value[start],
+				...value.slice(i, start),
+				...value.slice(start + 1)
+			]);
+		}
+
+		hovering = false
+	}
+
 	let currentUrl = schema.effectiveUrl || location.href;
 	if (currentUrl.includes('#')) currentUrl = currentUrl.split('#')[0];
 	if (currentUrl.includes('?')) currentUrl = currentUrl.split('?')[0];
@@ -102,22 +140,40 @@
 			required: schema.items.required?.filter((prop: string) => Object.keys(nonArrayProperties).includes(prop)) || []
 		};
 	}
+	$: lastIdx = (value || []).length;
 </script>
 
 <div name={params.path.join('.')} class="subset array-blocks depth-{params.path.length}">
 	<ol>
-		{#each value || [] as item, idx (idx)}
-		<li class="array-block">
+		{#each value || [] as item, idx (item)}
+		<li class="array-block"
+			style:background-image={item.thumbnail ? `url('${item.thumbnail}')`: ''}
+			draggable={true} 
+			on:dragstart={onDragstart(idx)}
+			on:drop|preventDefault={onDrop(idx)}
+			on:dragover|preventDefault={() => false}
+			on:dragenter|preventDefault={() => hovering = idx}
+			on:dragleave={() => hovering = false}
+			class:drag-over={hovering === idx}>
 			<a href={getUrl(item, idx)}>
 				<h2>
-					{item.name || item.title}
+					{item.name || item.title || ''}
 				</h2>
 			</a>
+			<div class="actions">
+				<span class="duplicate" on:click={onDuplicate(idx)} title="Duplicate this"></span>
+				<span class="delete" on:click={onDelete(idx)} title="Delete this"></span>
+			</div>
 		</li>
 		{/each}
 
 		{#if !adding}
-		<li class="array-block add" on:click={onAdd}>
+		<li class="array-block add" on:click={onAdd}
+			on:drop|preventDefault={onDrop(lastIdx)}
+			on:dragover|preventDefault={() => false}
+			on:dragenter|preventDefault={() => hovering = lastIdx}
+			on:dragleave={() => hovering = false}
+			class:drag-over={hovering === lastIdx}>
 		</li>
 		{/if}
 	</ol>

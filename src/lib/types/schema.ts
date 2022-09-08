@@ -1,4 +1,4 @@
-import { camelToTitle } from "$lib/utilities";
+import { camelToTitle } from "../utilities";
 
 export function editorForSchema(schema: any): string {
 	let type = schema['type'];

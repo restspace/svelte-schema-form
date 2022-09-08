@@ -5,7 +5,6 @@
 	import { substituteProperties } from "./utilities";
 	import { writable } from "svelte/store";
 	import set from "lodash-es/set";
-import String from "./editors/String.svelte";
 
 	export let schema: any;
 	export let value: any;
@@ -26,9 +25,8 @@ import String from "./editors/String.svelte";
 
 	const change = (e: CustomEvent) => {
 		currentErrors = e.detail.errors;
-		dispatch('value', {
-			path: e.detail.path, value: e.detail.value, errors: e.detail.errors
-		});
+		dispatch('value', e.detail);
+		value = e.detail.value;
 	};
 
 	const progress = (path: string, name: string, percent: number) => {
@@ -42,17 +40,18 @@ import String from "./editors/String.svelte";
 		$pathProgress = { ...$pathProgress, [path]: newVal };
 	};
 
-	const submit = async () => {
-		if (dirty && Object.keys(currentErrors).length === 0) {
-			if (Object.keys(uploadFiles).length > 0 && uploadBaseUrl) {
-				const itemNamePattern = uploadNamePattern || schema.pathPattern;
-				if (!itemNamePattern) {
-					alert('No uploadNamePattern given or pathPattern property on schema to determine file save url base');
-					return;
-				}
-				const itemName = substituteProperties(itemNamePattern, value);
+	const doUploads = async (pathPrefix: string = "") => {
+		if (Object.keys(uploadFiles).length > 0 && uploadBaseUrl) {
+			const itemNamePattern = uploadNamePattern || schema.pathPattern;
+			if (!itemNamePattern) {
+				alert('No uploadNamePattern given or pathPattern property on schema to determine file save url base');
+				return;
+			}
+			const itemName = substituteProperties(itemNamePattern, value);
 
-				const uploadPromises = Object.entries(uploadFiles).flatMap(([path, files]) => {
+			const uploadPromises = Object.entries(uploadFiles)
+				.filter(([path]) => path.startsWith(pathPrefix))
+				.flatMap(([path, files]) => {
 					const pathPromises = [] as Promise<void>[];
 					for (let i = 0; i < files.length; i++) {
 						const file = files[i];
@@ -61,6 +60,7 @@ import String from "./editors/String.svelte";
 							+ itemName + '/'
 							+ path + '/'
 							+ file.name;
+						console.log(`Uploading to ${destinationUrl}`);
 						
 						const itemPromise = new Promise<[string, string]>((resolve, reject) => {
 							try {
@@ -79,7 +79,7 @@ import String from "./editors/String.svelte";
 						}).then(([ path, destinationUrl ]) => {
 							// update the state to remove the upload file
 							set(value, path.split('.'), destinationUrl);
-							value = { ...value };
+							value = value; // temp solution, inefficient
 							delete uploadFiles[path];
 						});;
 						pathPromises.push(itemPromise);
@@ -87,17 +87,24 @@ import String from "./editors/String.svelte";
 					return pathPromises;
 				});
 
-				await Promise.all(uploadPromises);
-			}
+			await Promise.all(uploadPromises);
+		}
+	};
+
+	const submit = async () => {
+		if (dirty && Object.keys(currentErrors).length === 0) {
+			await doUploads();
 			dispatch('submit', { value });
 			dirty = false;
 		}
 		showErrors = true;
 	};
+
+	const componentContext = { doUploads };
 </script>
 
 <form class='svelte-schema-form' {action} class:dirty>
-	<SchemaForm bind:schema {value} on:value={change} bind:dirty bind:uploadFiles {showErrors} {components} {collapsible} />
+	<SchemaForm bind:schema {value} on:value={change} bind:dirty bind:uploadFiles {showErrors} {components} {collapsible} {componentContext} />
 	<div class="button-container">
 		<button type={action ? "submit" : "button"} class="submit-button" on:click={submit} class:dirty={dirty}>Submit</button>
 	</div>

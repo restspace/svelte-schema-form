@@ -61,15 +61,19 @@
 			]);
 		}
 	};
+
+	$: legendText = schemaLabel(schema, params.path);
 </script>
 
 <fieldset name={params.path.join('.')} class="subset array depth-{params.path.length}">
+	{#if params.collapsible || legendText}
 	<legend class="subset-label array-label">
 		{#if params.collapsible }
 		<span class="collapser {collapserOpenState}" on:click={toggle}></span>
 		{/if}
-		{schemaLabel(schema, params.path)}
+		{legendText}
 	</legend>
+	{/if}
 
 	{#if collapserOpenState === "open"}
 		{#each value || [] as item, idx (idx)}

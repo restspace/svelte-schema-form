@@ -25,6 +25,7 @@
 	export let showErrors: boolean = true;
 	export let collapsible: boolean = false;
 	export let components: Record<string, new (...args: any[]) => any> = {};
+	export let componentContext: Record<string, unknown> = {};
 
 	const dispatch = createEventDispatcher();
 
@@ -65,6 +66,7 @@
 			textarea: TextArea,
 			blocks: ArrayBlocks
 		}, components),
+		componentContext,
 		pathChanged,
 		validationErrors,
 		containerParent: "none",
@@ -100,10 +102,10 @@
 		revalidate();
 
 		dispatch('value', {
-			path, value: val, errors: validationErrors
+			path, pathValue: val, value: params.value, errors: validationErrors
 		});
 
-		console.log(`dispatch value path: ${path.join('.')} val: ${val}, errors: ${JSON.stringify(validationErrors)}`);
+		console.log(`dispatch value path: ${path.join('.')} val: ${JSON.stringify(val)}, errors: ${JSON.stringify(validationErrors)}`);
 		value = params.value;
 		return val;
 	};
