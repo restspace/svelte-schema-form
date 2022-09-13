@@ -78,7 +78,11 @@
 							}
 						}).then(([ path, destinationUrl ]) => {
 							// update the state to remove the upload file
-							set(value, path.split('.'), destinationUrl);
+							if (path === '') {
+								value = destinationUrl;
+							} else {
+								set(value, path.split('.'), destinationUrl);
+							}
 							value = value; // temp solution, inefficient
 							delete uploadFiles[path];
 						});;

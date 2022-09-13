@@ -86,7 +86,7 @@
 			return val;
 		}
 
-		const curr = get(params.value, path);
+		const curr = path.length === 0 ? params.value : get(params.value, path);
 		if (val === curr) return;
 
 		dirty = true;
@@ -96,7 +96,11 @@
 			const parent = pathFront.length ? get(params.value, path.slice(0, -1)) : params.value;
 			delete parent[path[path.length - 1]];
 		} else {
-			set(params.value, path, val);
+			if (path.length === 0) {
+				params.value = val;
+			} else {
+				set(params.value, path, val);
+			}
 		}
 
 		revalidate();

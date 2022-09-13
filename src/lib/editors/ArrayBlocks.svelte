@@ -122,7 +122,7 @@
 			// we're at the top level, so the schema should have a pathPattern which gives us the next url
 			if (!schema.pathPattern) throw new Error('An ArrayBlocks filter on a directory (ending /) needs the schema to have a pathPattern property');
 			const pathPattern = schema.pathPattern as string;
-			return pathPattern.replace(/\$\{([^}]*)\}/gi, (_substring, p1) => _.get(item, p1.split('.')) || '');
+			return pathPattern.replace(/\$\{([^}]*)\}/gi, (_substring, p1) => (p1 === '' ? item :  _.get(item, p1.split('.'))) || '');
 		} else {
 			// we're at a lower level, so we use a fragment indicating the . separated path
 			return currentUrl + '.' + idx.toString();

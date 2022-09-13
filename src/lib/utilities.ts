@@ -131,7 +131,7 @@ export const substituteProperties = (subsPattern: string, value: any) => {
     for (let part of parts) {
         if (part.includes('}')) {
             const path = upTo(part, '}');
-            const subsVal = get(value, path) || '';
+            const subsVal = (path === '' ? value : get(value, path)) || '';
             partsOut.push(`${subsVal}${after(part, '}')}`);
         }
     }
