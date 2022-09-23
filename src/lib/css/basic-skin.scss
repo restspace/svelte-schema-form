@@ -1,3 +1,8 @@
+:root {
+	--input-padding: 3px;
+	--input-border: 1px solid #aaa;
+}
+
 form.svelte-schema-form {
 	font-family: 'Montserrat', sans-serif;
 
@@ -59,6 +64,10 @@ form.svelte-schema-form {
 	}
 	.subset-label {
 		font-weight: bold;
+
+		.subset-label-description {
+			font-size: 0.8em;
+		}
 	}
 
 	.depth-0 > .subset-label {
@@ -66,10 +75,10 @@ form.svelte-schema-form {
 		text-decoration: underline;
 	}
 
-	input, select {
-		border: 1px solid #aaa;
+	input, select, .input {
+		border: var(--input-border);
 		border-radius: 2px;
-		padding: 3px;
+		padding: var(--input-padding);
 		color: #777;
 	}
 
@@ -111,7 +120,7 @@ form.svelte-schema-form {
 
 	.sf-drop-area {
 		height: 4em;
-		border: 1px solid #aaa;
+		border: var(--input-border);
 		padding-right: 16px;
 		position: relative;
 		box-sizing: border-box;
@@ -147,12 +156,48 @@ form.svelte-schema-form {
 	}
 
 	.sf-progress-bars .sf-progress-bar {
-		border: 1px solid #aaa;
-		padding: 3px;
+		border: var(--input-border);
+		padding: var(--input-padding);
 		font-size: 1em;
 
 		.sf-progress-done {
 			background-color: #80808050;
+		}
+	}
+
+	.sf-autocomplete {
+		.sf-items {
+			background-color: #f8f8f8;
+		}
+
+		.sf-items, .sf-selected-item {
+			img {
+				max-height: 3em;
+				max-width: 5em;
+				margin-right: 1em;
+			}
+		}
+
+		.sf-items > div {
+			border: var(--input-border);
+			border-top: none;
+			font-size: .8em;
+			padding: 6px;
+		}
+
+		.sf-selected-item {
+			min-height: 22px;
+			padding: 0;
+			padding-left: var(--input-padding);
+			font-size: .8em;
+
+			input {
+				border: none;
+				padding: var(--input-padding);
+				margin: 0;
+				margin-left: -3px;
+				width: 100%;
+			}
 		}
 	}
 }

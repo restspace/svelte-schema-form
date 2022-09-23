@@ -44,6 +44,11 @@
 		required: [ "amount" ],
 		pathPattern: "item_${amount}"
 	};
+	let storedSchema = undefined;
+	if (typeof window !== 'undefined') {
+		storedSchema = window.localStorage.getItem('schema');
+		if (storedSchema) schema = JSON.parse(storedSchema);
+	}
 	let jsonInvalid = false;
 
 	let value = { };
@@ -55,6 +60,9 @@
 		try {
 			schema = JSON.parse(newSchema);
 			jsonInvalid = false;
+			if (typeof window !== 'undefined') {
+				window.localStorage.setItem('schema', newSchema);
+			}
 		} catch {
 			jsonInvalid = true;
 		}

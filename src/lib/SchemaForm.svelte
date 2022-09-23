@@ -17,6 +17,7 @@
 	import Upload from "./editors/Upload.svelte";
 	import TextArea from "./editors/TextArea.svelte";
 	import ArrayBlocks from "./editors/ArrayBlocks.svelte";
+    import Autocomplete from "./editors/Autocomplete.svelte";
 
 	export let schema: any;
 	export let value: any;
@@ -64,7 +65,8 @@
 			enum: Enum,
 			upload: Upload,
 			textarea: TextArea,
-			blocks: ArrayBlocks
+			blocks: ArrayBlocks,
+			autocomplete: Autocomplete
 		}, components),
 		componentContext,
 		pathChanged,

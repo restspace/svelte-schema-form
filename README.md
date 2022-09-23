@@ -103,6 +103,35 @@ Setting `editor="upload"` on a `type="string"` subschema means that this propert
   
 After successful submit, the property value for the editor is set to the url where the file was uploaded. The uploader has a button at the right bottom to switch modes to show a text input field with the url of the stored file.
 
+### Autocomplete
+
+Setting `editor="autocomplete"` on a `type="string"` subschema means this property will be rendered as an autocomplete dropdown. The autocomplete component is a text box which on each keystroke sends the entered text to a remote url to get a list of matching items which are then shown as a dropdown. The user can choose one of the displayed items at any point.
+
+The schema needs an additional property `url` set to the base url for remote querying. Example subschema:
+
+    {
+		"type": "string",
+		"editor": "autocomplete",
+		"url": "https://mysite.com/autocompletes"
+	}
+
+
+To this url is added the query string item `match=xyz` where xyz is the current text in the search box to match on. A `GET` request is made to the result. The url should respond with an `application/json` body which can either be
+
+    [ "dropdown item 1", "dropdown item 2", ... ]
+
+or
+
+    [
+		{
+			"id": "1234",
+			"text": "An item title",
+			"image": "https://images.com/an-image.jpg"
+		}, ...
+	]
+
+In the latter case, the `id` field is returned as the value of the editor, the `text` field determines the text shown in the field, and the optional `image` url gives an image to display alongside the text.
+
 ## Custom rendering components
 
 Svelte Schema Form can override or add rendering components at any level by supplying a map of component type names and component classes.

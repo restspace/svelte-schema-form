@@ -28,8 +28,11 @@
 		{#if params.collapsible }
 		<span class="collapser {collapserOpenState}" on:click={toggle}></span>
 		{/if}
-		{#if params.containerParent !== "array"}
-		{schemaLabel(schema, params.path)}
+		{#if params.containerParent !== "array" || schema.title}
+		<span class="subset-label-title object-label-title">{schemaLabel(schema, params.path)}</span>
+			{#if schema.description}
+			<span class="subset-label-description object-label-description">{schema.description}</span>
+			{/if}
 		{/if}
 	</legend>
 	{/if}

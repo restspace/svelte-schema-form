@@ -137,3 +137,47 @@ export const substituteProperties = (subsPattern: string, value: any) => {
     }
     return partsOut.join('');
 }
+
+export function slashTrim(s: string): string {
+    let start = 0;
+    let end = s.length;
+    if (s[start] === '/') start++;
+    if (s[end - 1] === '/') end--;
+    if (end <= start) return '';
+    return s.substring(start, end);
+}
+
+export function slashTrimLeft(s: string): string {
+    return s.startsWith('/') ? s.substr(1) : s;
+}
+
+export function pathToArray(path: string) {
+    return slashTrim(path).split('/').filter(s => !!s);
+}
+
+export function getExtension(s: string): string {
+    let extStart = s.lastIndexOf('.');
+    return extStart < 0 ? '' : s.substr(extStart + 1);
+}
+
+export function getFirstLine(s: string): string {
+    let lineEnd = s.indexOf('\n');
+    if (lineEnd < 0) return s;
+    if (lineEnd > 0 && s[lineEnd - 1] === '\r') lineEnd--;
+    return s.substring(0, lineEnd);
+}
+
+export function getTailLines(s: string): string {
+    return s.substring(s.indexOf('\n') + 1);
+}
+
+export function pathCombine(...args: string[]): string {
+    const stripped = args.filter(a => !!a);
+    if (stripped.length === 0) return '';
+    const startSlash = stripped[0].startsWith('/');
+    const endSlash = stripped[stripped.length - 1].endsWith('/');
+    let joined = stripped.map(a => slashTrim(a)).filter(a => !!a).join('/');
+    if (startSlash) joined = '/' + joined;
+    if (endSlash && joined !== '/') joined += '/';
+    return joined;
+}

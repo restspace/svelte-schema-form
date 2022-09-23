@@ -71,7 +71,10 @@
 		{#if params.collapsible }
 		<span class="collapser {collapserOpenState}" on:click={toggle}></span>
 		{/if}
-		{legendText}
+		<span class="subset-label-title object-label-title">{legendText}</span>
+		{#if schema.description}
+		<span class="subset-label-description object-label-description">{schema.description}</span>
+		{/if}
 	</legend>
 	{/if}
 

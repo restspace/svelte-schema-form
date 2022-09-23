@@ -33,6 +33,10 @@ form.svelte-schema-form {
 
 	.subset > .subset-label {
 		margin-bottom: 1em;
+
+		.subset-label-title {
+			display: block;
+		}
 	}
 	.array > legend {
 		margin-left: -1em;
@@ -138,5 +142,28 @@ form.svelte-schema-form {
 				bottom: 0;
 			}
 		}
+	}
+
+	.sf-autocomplete {
+		width: 100%;
+		position: relative;
+		
+		.sf-items {
+			z-index: 1;
+			position: absolute;
+			right: 0;
+			left: 0;
+			max-height: 12em;
+			overflow-y: auto;
+			overflow-x: hidden;
+		}
+
+		.sf-items > div,
+		.sf-selected-item {
+			display: flex;
+			align-items: center;
+		}
+
+
 	}
 }
