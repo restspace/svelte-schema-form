@@ -2,6 +2,7 @@
 	import type { CommonComponentParameters } from "../types/CommonComponentParameters";
 	import { emptyValue, schemaLabel } from "../types/schema";
 	import SubSchemaForm from "../SubSchemaForm.svelte";
+    import ArrayBlocks from "./ArrayBlocks.svelte";
 	export let params: CommonComponentParameters;
 	export let schema: any;
 	export let value: any[];
@@ -90,6 +91,7 @@
 			bind:schema={schema.items}
 		/>
 		<div class="list-controls">
+			{#if !schema.readOnly}
 			<button type="button" class="list-control delete" title="delete" on:click={onDelete(idx)}></button>
 			<button type="button" class="list-control duplicate" title="duplicate" on:click={onDuplicate(idx)}></button>
 			{#if idx > 0}
@@ -98,8 +100,12 @@
 			{#if idx < (value || []).length - 1}
 				<button type="button" class="list-control down" title="move down" on:click={onDown(idx)}></button>
 			{/if}
+			{/if}
 		</div>
+
 		{/each}
+	{#if !schema.readOnly}
 	<button type="button" class="list-control add" title="add item" on:click={onAdd}></button>
+	{/if}
 	{/if}
 </fieldset>

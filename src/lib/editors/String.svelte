@@ -7,5 +7,8 @@
 
 <!-- event which calls pathChanged should be after all bindings so 'value' will have been updated -->
 <svelte:component this={params.components['fieldWrapper']} {params} {schema}>
-	<input id={params.path.join('.')} name={params.path.join('.')} type="text" value={value || ''} on:input={ev => params.pathChanged(params.path, ev.currentTarget.value || undefined)} />
+	<input id={params.path.join('.')} name={params.path.join('.')}
+		type="text" value={value || ''}
+		disabled={schema.readOnly}
+		on:input={ev => params.pathChanged(params.path, ev.currentTarget.value || undefined)} />
 </svelte:component>

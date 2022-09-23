@@ -9,6 +9,7 @@
 <svelte:component this={params.components['fieldWrapper']} {params} {schema}>
 	<input id={params.path.join('.')} name={params.path.join('.')}
 		type="number" value={value || ''}
+		disabled={schema.readOnly}
 		on:input={ev => {
 			let val = parseFloat(ev.currentTarget.value);
 			params.pathChanged(params.path, isNaN(val) ? undefined : val);

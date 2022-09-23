@@ -74,17 +74,18 @@ import { after, afterLast } from "../utilities";
 	};
 
 	const dragEnter = (ev: DragEvent) => {
-		if (ev.dataTransfer?.types[0] !== "Files") return;
+		if (schema.readOnly || ev.dataTransfer?.types[0] !== "Files") return;
 		highlight = true;
 		ev.preventDefault();
 	}
 
 	const dragOver = (ev: DragEvent) => {
-		if (ev.dataTransfer?.types[0] !== "Files") return;
+		if (schema.readOnly || ev.dataTransfer?.types[0] !== "Files") return;
 		ev.preventDefault();
 	}
 
 	const dragLeave = (ev: any) => {
+		if (schema.readOnly) return;
 		highlight = false;
 	}
 
@@ -109,6 +110,7 @@ import { after, afterLast } from "../utilities";
 	}
 
 	const drop = (ev: DragEvent) => {
+		if (schema.readOnly) return;
 		ev.preventDefault();
 		highlight = false;
 		if (!ev.dataTransfer) return;
@@ -134,6 +136,7 @@ import { after, afterLast } from "../utilities";
 	}
 
 	const openFile = () => {
+		if (schema.readOnly) return;
 		inp.click();
 	}
 
@@ -143,7 +146,11 @@ import { after, afterLast } from "../utilities";
 </script>
 
 <svelte:component this={params.components['fieldWrapper']} {params} {schema}>
-	<input bind:this={inp} id={params.path.join('.')} name={params.path.join('.')} type="file" on:input={onInput} style="display: none" />
+	<input bind:this={inp} id={params.path.join('.')} name={params.path.join('.')}
+		type="file"
+		readonly={schema.readOnly}
+		on:input={onInput}
+		style="display: none" />
 	<div class="sf-drop-area {mode}"
 		class:highlight
 		tabIndex="0"
@@ -153,7 +160,7 @@ import { after, afterLast } from "../utilities";
 		on:drop={drop}
 		on:click={openFile}
 		bind:this={dropArea}>
-		{#if mode === "uploader"}
+		{#if mode === "uploader" && !(schema.readOnly)}
 			<div class="sf-upload-caption">
 				Drop files or click to upload
 			</div>
@@ -168,13 +175,16 @@ import { after, afterLast } from "../utilities";
 			<input type="text"
 				id={params.path.join('.')}
 				name={params.path.join('.')}
+				disabled={schema.readOnly}
 				class="sf-upload-input"
 				value={value || ''}
 				on:click|stopPropagation={() => {}}
 				on:input={ev => params.pathChanged(params.path, ev.currentTarget.value || undefined)} />
 		{/if}
 		<div class="sf-upload-controls">
-			<button type="button" class="sf-upload-deleter" on:click={deleteUploads}></button>
+			{#if !(schema.readOnly)}
+				<button type="button" class="sf-upload-deleter" on:click={deleteUploads}></button>
+			{/if}
 			<button type="button"
 				class:sf-upload-to-link={mode === "uploader"}
 				class:sf-upload-to-uploader={mode === "link"}

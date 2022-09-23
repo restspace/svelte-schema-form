@@ -42,6 +42,7 @@ The `SubmitForm` component manages validation of the entered data using the full
 |---|---|
 |title|This property is used to label a field or fieldset, if it's absent a conversion from camel case (myFieldName) to proper case (My Field Name) is done.|
 |description|This property is shown beside the label as a tooltip using the HTML title attribute|
+|readOnly|This property if present and set to `true` will disable the editor for this field, only using it for display|
 |type="string"|By default, renders as an input element with type="text"|
 |minLength, maxLength|Supported in validation|
 |pattern|Supported in validation|
@@ -149,6 +150,7 @@ For example components, look in the /src/lib/editors directory. As an illustrati
 	<svelte:component this={params.components['fieldWrapper']} {params} {schema}>
 		<input id={params.path.join('.')} name={params.path.join('.')}
 			type="number" value={value || ''}
+			disabled={schema.readOnly}
 			on:input={ev => {
 				let val = parseFloat(ev.currentTarget.value);
 				params.pathChanged(params.path, isNaN(val) ? undefined : val);
@@ -157,6 +159,8 @@ For example components, look in the /src/lib/editors directory. As an illustrati
 	</svelte:component>
 
 The component needs to have the 3 props shown in this component. `schema` and `value` are the local parts of the full schema and value which need to be rendered by this component. `params` contains a number of constant values defining the component including `params.pathChanged` which is a function that needs to be called with the property path to the value the component is rendering (this is `params.path`) and the new value when the value of the form field is changed.
+
+Note how the editor supports the `readOnly` attribute by disabling the editor if set.
 
 The `<svelte:component>` component wrapping the markup renders the default FieldWrapper.svelte component around the actual editor: this adds the field's standard label and error message.
 
