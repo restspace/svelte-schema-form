@@ -18,6 +18,7 @@
 	import TextArea from "./editors/TextArea.svelte";
 	import ArrayBlocks from "./editors/ArrayBlocks.svelte";
     import Autocomplete from "./editors/Autocomplete.svelte";
+	import Hidden from "./editors/Hidden.svelte";
 
 	export let schema: any;
 	export let value: any;
@@ -65,6 +66,7 @@
 			enum: Enum,
 			upload: Upload,
 			textarea: TextArea,
+			hidden: Hidden,
 			blocks: ArrayBlocks,
 			autocomplete: Autocomplete
 		}, components),

@@ -29,7 +29,7 @@
 			if (timerHandle) {
 				clearTimeout(timerHandle);
 			}
-			const urlWithMatch = new URL(url);
+			const urlWithMatch = new URL(url, location.href);
 			if (match) urlWithMatch.searchParams.append("match", match);
 			timerHandle = setTimeout(() => fetch(urlWithMatch.toString(), { credentials: 'include' })
 				.then(resp => resp.json())
