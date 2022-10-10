@@ -12,6 +12,7 @@ export interface CommonComponentParameters {
 	validationErrors: ValidationErrors,
 	required?: boolean,
 	containerParent: "none" | "array" | "object",
+	containerReadOnly: boolean,
 	showErrors: boolean,
 	collapsible: boolean,
 	idx: number

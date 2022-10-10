@@ -74,6 +74,7 @@
 		pathChanged,
 		validationErrors,
 		containerParent: "none",
+		containerReadOnly: schema.readOnly || false,
 		showErrors,
 		collapsible,
 		idx: incr()

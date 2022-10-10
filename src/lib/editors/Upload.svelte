@@ -41,6 +41,7 @@ import { after, afterLast } from "../utilities";
 			renderedThumbnails = [];
 		}
 	}
+	$: readOnly = schema.readOnly || params.containerReadOnly || false;
 
 	const chooseFile = () => {
 		if (!isMultiple) {
@@ -74,18 +75,18 @@ import { after, afterLast } from "../utilities";
 	};
 
 	const dragEnter = (ev: DragEvent) => {
-		if (schema.readOnly || ev.dataTransfer?.types[0] !== "Files") return;
+		if (readOnly || ev.dataTransfer?.types[0] !== "Files") return;
 		highlight = true;
 		ev.preventDefault();
 	}
 
 	const dragOver = (ev: DragEvent) => {
-		if (schema.readOnly || ev.dataTransfer?.types[0] !== "Files") return;
+		if (readOnly || ev.dataTransfer?.types[0] !== "Files") return;
 		ev.preventDefault();
 	}
 
 	const dragLeave = (ev: any) => {
-		if (schema.readOnly) return;
+		if (readOnly) return;
 		highlight = false;
 	}
 
@@ -136,7 +137,7 @@ import { after, afterLast } from "../utilities";
 	}
 
 	const openFile = () => {
-		if (schema.readOnly) return;
+		if (readOnly) return;
 		inp.click();
 	}
 
@@ -148,7 +149,7 @@ import { after, afterLast } from "../utilities";
 <svelte:component this={params.components['fieldWrapper']} {params} {schema}>
 	<input bind:this={inp} id={params.path.join('.')} name={params.path.join('.')}
 		type="file"
-		readonly={schema.readOnly}
+		readonly={readOnly}
 		on:input={onInput}
 		style="display: none" />
 	<div class="sf-drop-area {mode}"
@@ -160,7 +161,7 @@ import { after, afterLast } from "../utilities";
 		on:drop={drop}
 		on:click={openFile}
 		bind:this={dropArea}>
-		{#if mode === "uploader" && !(schema.readOnly)}
+		{#if mode === "uploader" && !readOnly}
 			<div class="sf-upload-caption">
 				Drop files or click to upload
 			</div>
@@ -175,14 +176,14 @@ import { after, afterLast } from "../utilities";
 			<input type="text"
 				id={params.path.join('.')}
 				name={params.path.join('.')}
-				disabled={schema.readOnly}
+				disabled={readOnly}
 				class="sf-upload-input"
 				value={value || ''}
 				on:click|stopPropagation={() => {}}
 				on:input={ev => params.pathChanged(params.path, ev.currentTarget.value || undefined)} />
 		{/if}
 		<div class="sf-upload-controls">
-			{#if !(schema.readOnly)}
+			{#if !(readOnly)}
 				<button type="button" class="sf-upload-deleter" on:click={deleteUploads}></button>
 			{/if}
 			<button type="button"

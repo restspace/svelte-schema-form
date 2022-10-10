@@ -42,7 +42,7 @@ The `SubmitForm` component manages validation of the entered data using the full
 |---|---|
 |title|This property is used to label a field or fieldset, if it's absent a conversion from camel case (myFieldName) to proper case (My Field Name) is done.|
 |description|This property is shown beside the label as a tooltip using the HTML title attribute|
-|readOnly|This property if present and set to `true` will disable the editor for this field, only using it for display|
+|readOnly|This property if present and set to `true` will disable the editor for this field, only using it for display. All children of this field will also be read only|
 |type="string"|By default, renders as an input element with type="text"|
 |minLength, maxLength|Supported in validation|
 |pattern|Supported in validation|

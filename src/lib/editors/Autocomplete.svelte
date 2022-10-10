@@ -21,6 +21,7 @@
 	let timerHandle: any = null;
 
 	$: url = schema['url'] || '';
+	$: readOnly = params.containerReadOnly || schema.readOnly || false;
 
 	let input: HTMLInputElement;
 
@@ -55,7 +56,7 @@
 	};
 
 	const handleSelect = (item: OptionVal) => () => {
-		if (schema.readOnly) return;
+		if (readOnly) return;
 		value = item.id;
 		params.pathChanged(params.path, item.id);
 		inputState = "showing-value";
@@ -72,7 +73,7 @@
 
 <!-- event which calls pathChanged should be after all bindings so 'value' will have been updated -->
 <svelte:component this={params.components['fieldWrapper']} {params} {schema}>
-	<div class="sf-autocomplete" class:readonly={schema.readOnly}>
+	<div class="sf-autocomplete" class:readonly={readOnly}>
 		<div class="sf-selected-item input" on:click={toggleDropDown}>
 			{#if inputState === "searching"}
 				<input type="text" bind:value={match} on:keyup={keyup} bind:this={input}/>

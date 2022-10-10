@@ -9,6 +9,6 @@
 <svelte:component this={params.components['fieldWrapper']} {params} {schema}>
 	<input id={params.path.join('.')} name={params.path.join('.')}
 		type="text" value={value || ''}
-		disabled={schema.readOnly}
+		disabled={schema.readOnly || params.containerReadOnly}
 		on:input={ev => params.pathChanged(params.path, ev.currentTarget.value || undefined)} />
 </svelte:component>

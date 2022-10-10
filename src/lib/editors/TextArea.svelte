@@ -10,7 +10,7 @@
 	<textarea
         id={params.path.join('.')}
         name={params.path.join('.')}
-        disabled={schema.readOnly}
+        disabled={schema.readOnly || params.containerReadOnly}
         on:input={ev => params.pathChanged(params.path, ev.currentTarget.value || undefined)}
     >{value || ''}</textarea>
 </svelte:component>

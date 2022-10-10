@@ -67,6 +67,7 @@
 	$: legendText = schemaLabel(schema, params.path);
 	$: showWrapper = (value && value.length > 0) || schema.emptyDisplay !== false;
 	$: emptyText = (!value || value.length === 0) && typeof schema.emptyDisplay === 'string' && schema.emptyDisplay;
+	$: readOnly = params.containerReadOnly || schema.readOnly || false;
 </script>
 
 {#if showWrapper}
@@ -83,36 +84,39 @@
 	</legend>
 	{/if}
 
-	{#if collapserOpenState === "open" && !emptyText}
-		{#each value || [] as item, idx (idx)}
-		<svelte:component this={SubSchemaForm}
-			params={{
-				...params,
-				path: [ ...params.path, idx.toString() ],
-				containerParent: "array"
-			}}
-			value={item}
-			bind:schema={schema.items}
-		/>
-		<div class="list-controls">
-			{#if !schema.readOnly}
-			<button type="button" class="list-control delete" title="delete" on:click={onDelete(idx)}></button>
-			<button type="button" class="list-control duplicate" title="duplicate" on:click={onDuplicate(idx)}></button>
-			{#if idx > 0}
-				<button type="button" class="list-control up" title="move up" on:click={onUp(idx)}></button>
-			{/if}
-			{#if idx < (value || []).length - 1}
-				<button type="button" class="list-control down" title="move down" on:click={onDown(idx)}></button>
-			{/if}
-			{/if}
-		</div>
+	{#if collapserOpenState === "open"}
+		{#if !emptyText}
+			{#each value || [] as item, idx (idx)}
+			<svelte:component this={SubSchemaForm}
+				params={{
+					...params,
+					path: [ ...params.path, idx.toString() ],
+					containerParent: "array",
+					containerReadOnly: params.containerReadOnly || schema.readOnly || false
+				}}
+				value={item}
+				bind:schema={schema.items}
+			/>
+			<div class="list-controls">
+				{#if !readOnly}
+				<button type="button" class="list-control delete" title="delete" on:click={onDelete(idx)}></button>
+				<button type="button" class="list-control duplicate" title="duplicate" on:click={onDuplicate(idx)}></button>
+				{#if idx > 0}
+					<button type="button" class="list-control up" title="move up" on:click={onUp(idx)}></button>
+				{/if}
+				{#if idx < (value || []).length - 1}
+					<button type="button" class="list-control down" title="move down" on:click={onDown(idx)}></button>
+				{/if}
+				{/if}
+			</div>
 
-		{/each}
-		{#if !schema.readOnly}
+			{/each}
+		{:else}
+			<div class="emptyText">{emptyText}</div>
+		{/if}
+		{#if !readOnly}
 		<button type="button" class="list-control add" title="add item" on:click={onAdd}></button>
 		{/if}
-	{:else}
-		<div class="emptyText">{emptyText}</div>
 	{/if}
 </fieldset>
 {/if}

@@ -9,7 +9,7 @@
 <svelte:component this={params.components['fieldWrapper']} {params} {schema}>
 	<input id={params.path.join('.')} name={params.path.join('.')}
 		type="checkbox" checked={value || false}
-		disabled={schema.readOnly}
+		disabled={schema.readOnly || params.containerReadOnly}
 		on:change={ev => params.pathChanged(params.path, ev.currentTarget.checked)}
 	/>
 </svelte:component>

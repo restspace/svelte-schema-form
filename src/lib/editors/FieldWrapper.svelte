@@ -11,7 +11,7 @@
 </script>
 
 {#if params.containerParent !== "array"}
-	<label for={params.path.join('.')} class:required={params.required} class:readonly={schema.readOnly}>
+	<label for={params.path.join('.')} class:required={params.required} class:readonly={schema.readOnly || params.containerReadOnly}>
 		{title}
 		{#if schema.description}
 			<span class="info" title={schema.description}></span>

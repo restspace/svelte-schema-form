@@ -14,7 +14,7 @@
 	<select id={params.path.join('.')}
 		name={params.path.join('.')}
 		value={value} 
-		disabled={schema.readOnly}
+		disabled={schema.readOnly || params.containerReadOnly}
 		on:change={ev => params.pathChanged(params.path, ev.currentTarget.value || undefined)}>
 		<option></option>
 		{#each enumVals as enumVal, idx}

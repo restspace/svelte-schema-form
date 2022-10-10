@@ -44,7 +44,8 @@
 			...params,
 			path: [ ...params.path, propName ],
 			required: (schema?.required || []).includes(propName),
-			containerParent: "object"
+			containerParent: "object",
+			containerReadOnly: params.containerReadOnly || schema.readOnly || false,
 		}}
 		value={value?.[propName]}
 		bind:schema={schema.properties[propName]}
