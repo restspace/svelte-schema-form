@@ -40,8 +40,8 @@ The `SubmitForm` component manages validation of the entered data using the full
 
 | Feature | Support |
 |---|---|
-|title|This property is used to label a field or fieldset, if it's absent a conversion from camel case (myFieldName) to proper case (My Field Name) is done.|
-|description|This property is shown beside the label as a tooltip using the HTML title attribute|
+|title|This property is used to label a field or fieldset, if it's absent a conversion from camel case (myFieldName) to proper case (My Field Name) is done. Newlines in the string are converted to br tags in HTML|
+|description|This property is shown beside the label as a tooltip using the HTML title attribute or as a subheading for arrays/objects.|
 |readOnly|This property if present and set to `true` will disable the editor for this field, only using it for display. All children of this field will also be read only|
 |type="string"|By default, renders as an input element with type="text"|
 |minLength, maxLength|Supported in validation|
@@ -55,6 +55,7 @@ The `SubmitForm` component manages validation of the entered data using the full
 |required|Object fields named in the `required` list have to have a value entered to be valid. Required fields have the `required` class added to their labels to enable this to be displayed.
 |type="array"|Every array is rendered within an HTML Fieldset element with controls for adding, deleting, moving and duplicating array items (based on the `items` property)|
 |emptyDisplay|Custom property which determines how the array displays if it has no items. `false` means don't show a header or wrapper. `true` means show the header and wrapper with no items. A string value means display this message in the wrapper.
+|controls|Custom property which is a comma separated list of controls including `delete`, `duplicate`, `reorder`, `add`. Default is all these. A readOnly array has no controls.| 
 |editor|Custom property that lets you pick a custom editor for a schema.|
 |||
 
@@ -89,6 +90,7 @@ An HTML form with a submit button and a submit flow
 	  dirty // Whether the form is dirty i.e. the user has changed it from its initial value
 	  components // Map with keys as editor names (value of editor property in schema), values as constructors of editor components
 	  collapsible // Whether objects and arrays are shown with collapsers which can hide them (default = false)
+	  submitText // Text shown in the submit button (defaults to 'Submit')
 	/>
 
 ## Custom editors

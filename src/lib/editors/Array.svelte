@@ -2,8 +2,7 @@
 	import type { CommonComponentParameters } from "../types/CommonComponentParameters";
 	import { emptyValue, schemaLabel } from "../types/schema";
 	import SubSchemaForm from "../SubSchemaForm.svelte";
-    import ArrayBlocks from "./ArrayBlocks.svelte";
-    import { empty } from "svelte/internal";
+    import { stringToHtml } from "../utilities";
 	export let params: CommonComponentParameters;
 	export let schema: any;
 	export let value: any[];
@@ -68,6 +67,7 @@
 	$: showWrapper = (value && value.length > 0) || schema.emptyDisplay !== false;
 	$: emptyText = (!value || value.length === 0) && typeof schema.emptyDisplay === 'string' && schema.emptyDisplay;
 	$: readOnly = params.containerReadOnly || schema.readOnly || false;
+	$: controls = schema.controls === undefined ? (readOnly ? '' : 'add, reorder, delete, duplicate') : schema.controls;
 </script>
 
 {#if showWrapper}
@@ -77,9 +77,9 @@
 		{#if params.collapsible }
 		<span class="collapser {collapserOpenState}" on:click={toggle}></span>
 		{/if}
-		<span class="subset-label-title object-label-title">{legendText}</span>
+		<span class="subset-label-title object-label-title">{@html stringToHtml(legendText)}</span>
 		{#if schema.description}
-		<span class="subset-label-description object-label-description">{schema.description}</span>
+		<span class="subset-label-description object-label-description">{@html stringToHtml(schema.description)}</span>
 		{/if}
 	</legend>
 	{/if}
@@ -98,15 +98,17 @@
 				bind:schema={schema.items}
 			/>
 			<div class="list-controls">
-				{#if !readOnly}
+				{#if controls.includes('delete')}
 				<button type="button" class="list-control delete" title="delete" on:click={onDelete(idx)}></button>
+				{/if}
+				{#if controls.includes('duplicate')}
 				<button type="button" class="list-control duplicate" title="duplicate" on:click={onDuplicate(idx)}></button>
-				{#if idx > 0}
+				{/if}
+				{#if controls.includes('reorder') && idx > 0}
 					<button type="button" class="list-control up" title="move up" on:click={onUp(idx)}></button>
 				{/if}
-				{#if idx < (value || []).length - 1}
+				{#if controls.includes('reorder') && idx < (value || []).length - 1}
 					<button type="button" class="list-control down" title="move down" on:click={onDown(idx)}></button>
-				{/if}
 				{/if}
 			</div>
 
@@ -114,7 +116,7 @@
 		{:else}
 			<div class="emptyText">{emptyText}</div>
 		{/if}
-		{#if !readOnly}
+		{#if controls.includes('add')}
 		<button type="button" class="list-control add" title="add item" on:click={onAdd}></button>
 		{/if}
 	{/if}

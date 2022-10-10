@@ -3,6 +3,7 @@
 	import type { CommonComponentParameters } from "../types/CommonComponentParameters";
 	import SubSchemaForm from "../SubSchemaForm.svelte";
 	import { schemaLabel } from "../types/schema";
+    import { stringToHtml } from "../utilities";
 	export let params: CommonComponentParameters;
 	export let schema: any;
 	export let value: any;
@@ -29,9 +30,9 @@
 		<span class="collapser {collapserOpenState}" on:click={toggle}></span>
 		{/if}
 		{#if params.containerParent !== "array" || schema.title}
-		<span class="subset-label-title object-label-title">{schemaLabel(schema, params.path)}</span>
+		<span class="subset-label-title object-label-title">{@html stringToHtml(schemaLabel(schema, params.path))}</span>
 			{#if schema.description}
-			<span class="subset-label-description object-label-description">{schema.description}</span>
+			<span class="subset-label-description object-label-description">{@html stringToHtml(schema.description)}</span>
 			{/if}
 		{/if}
 	</legend>

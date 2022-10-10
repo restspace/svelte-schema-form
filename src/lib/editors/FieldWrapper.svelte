@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { schemaLabel } from "../types/schema";
 	import type { CommonComponentParameters } from "../types/CommonComponentParameters";
-	import { camelToTitle } from "../utilities";
+	import { stringToHtml } from "../utilities";
 
 	export let params: CommonComponentParameters;
 	export let schema: any;
@@ -12,7 +12,7 @@
 
 {#if params.containerParent !== "array"}
 	<label for={params.path.join('.')} class:required={params.required} class:readonly={schema.readOnly || params.containerReadOnly}>
-		{title}
+		{@html stringToHtml(title)}
 		{#if schema.description}
 			<span class="info" title={schema.description}></span>
 		{/if}

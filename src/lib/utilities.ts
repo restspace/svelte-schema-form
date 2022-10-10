@@ -181,3 +181,7 @@ export function pathCombine(...args: string[]): string {
     if (endSlash && joined !== '/') joined += '/';
     return joined;
 }
+
+export function stringToHtml(s: string) {
+    return s.replace("\n", "<br/>");
+}
