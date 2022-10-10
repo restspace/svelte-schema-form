@@ -3,6 +3,7 @@
 	import { emptyValue, schemaLabel } from "../types/schema";
 	import SubSchemaForm from "../SubSchemaForm.svelte";
     import ArrayBlocks from "./ArrayBlocks.svelte";
+    import { empty } from "svelte/internal";
 	export let params: CommonComponentParameters;
 	export let schema: any;
 	export let value: any[];
@@ -64,8 +65,11 @@
 	};
 
 	$: legendText = schemaLabel(schema, params.path);
+	$: showWrapper = (value && value.length > 0) || schema.emptyDisplay !== false;
+	$: emptyText = (!value || value.length === 0) && typeof schema.emptyDisplay === 'string' && schema.emptyDisplay;
 </script>
 
+{#if showWrapper}
 <fieldset name={params.path.join('.')} class="subset array depth-{params.path.length}">
 	{#if params.collapsible || legendText}
 	<legend class="subset-label array-label">
@@ -79,7 +83,7 @@
 	</legend>
 	{/if}
 
-	{#if collapserOpenState === "open"}
+	{#if collapserOpenState === "open" && !emptyText}
 		{#each value || [] as item, idx (idx)}
 		<svelte:component this={SubSchemaForm}
 			params={{
@@ -104,8 +108,11 @@
 		</div>
 
 		{/each}
-	{#if !schema.readOnly}
-	<button type="button" class="list-control add" title="add item" on:click={onAdd}></button>
-	{/if}
+		{#if !schema.readOnly}
+		<button type="button" class="list-control add" title="add item" on:click={onAdd}></button>
+		{/if}
+	{:else}
+		<div class="emptyText">{emptyText}</div>
 	{/if}
 </fieldset>
+{/if}

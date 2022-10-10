@@ -54,6 +54,7 @@ The `SubmitForm` component manages validation of the entered data using the full
 |type="object"|Every object is rendered within an HTML Fieldset element with a form field for each property|
 |required|Object fields named in the `required` list have to have a value entered to be valid. Required fields have the `required` class added to their labels to enable this to be displayed.
 |type="array"|Every array is rendered within an HTML Fieldset element with controls for adding, deleting, moving and duplicating array items (based on the `items` property)|
+|emptyDisplay|Custom property which determines how the array displays if it has no items. `false` means don't show a header or wrapper. `true` means show the header and wrapper with no items. A string value means display this message in the wrapper.
 |editor|Custom property that lets you pick a custom editor for a schema.|
 |||
 
