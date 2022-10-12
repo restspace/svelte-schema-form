@@ -58,6 +58,11 @@
 		path: [],
 		components: Object.assign({
 			string: String,
+			password: String,
+			email: String,
+			time: String,
+			"date-time": String,
+			date: String,
 			number: Number,
 			boolean: Boolean,
 			fieldWrapper: FieldWrapper,

@@ -46,6 +46,7 @@ The `SubmitForm` component manages validation of the entered data using the full
 |type="string"|By default, renders as an input element with type="text"|
 |minLength, maxLength|Supported in validation|
 |pattern|Supported in validation|
+|format|Support for `password`, `email`, `date`, `time` and `date-time` via HTML input type|
 |type="number"|By default, renders as an input element with type="number"|
 |minimum, maximum|Supported in validation|
 |exclusiveMinimum, exclusiveMaximum|Supported in validation|
