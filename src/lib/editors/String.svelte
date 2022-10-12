@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { editorForSchema } from "$lib/types/schema";
+    import { editorForSchema } from "../types/schema";
 	import type { CommonComponentParameters } from "../types/CommonComponentParameters";
 	export let params: CommonComponentParameters;
 	export let schema: any;
