@@ -92,6 +92,7 @@ An HTML form with a submit button and a submit flow
 	  components // Map with keys as editor names (value of editor property in schema), values as constructors of editor components
 	  collapsible // Whether objects and arrays are shown with collapsers which can hide them (default = false)
 	  submitText // Text shown in the submit button (defaults to 'Submit')
+	  submitRequiresDirty // Whether the submit button requires the form to be dirty to submit (default = true)
 	/>
 
 ## Custom editors

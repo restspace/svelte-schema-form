@@ -16,6 +16,7 @@
 	export let components: Record<string, new (...args: any[]) => any> = {};
 	export let collapsible: boolean = false;
 	export let submitText = "Submit";
+	export let submitRequiresDirty = true;
 
 	const dispatch = createEventDispatcher();
 	let pathProgress = writable({} as Record<string, Record<string, number>>);
@@ -97,7 +98,7 @@
 	};
 
 	const submit = async () => {
-		if (dirty && Object.keys(currentErrors).length === 0) {
+		if ((dirty || !submitRequiresDirty) && Object.keys(currentErrors).length === 0) {
 			await doUploads();
 			dispatch('submit', { value });
 			dirty = false;
