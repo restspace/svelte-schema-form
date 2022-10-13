@@ -200,4 +200,95 @@ form.svelte-schema-form {
 			}
 		}
 	}
+
+	.list-detail {
+		margin: 1em 0;
+  
+		.array-label {
+			border: none;
+		}
+		
+		.table-container {
+			padding: 1em;
+			border: 1px solid black;
+		}
+		
+		.heading {
+			text-align: center;
+			font-weight: bold;
+		}
+		.heading,
+		.heading + .buttons-header {
+			border-bottom: 1px solid #777;
+		}
+		
+		.row-wrapper {
+			display: contents;
+		}
+		
+		.item {
+			align-items: center;
+			justify-content:center;
+		}
+		.item,
+		.row-wrapper + .array-buttons {
+			border-bottom: 1px solid #ccc;
+		}
+		.row-wrapper:hover div,
+		.row-wrapper:hover + .sf-array-buttons {
+			background-color: #f8f8f8;
+		}
+		
+		.row-wrapper.selected div,
+		.row-wrapper.selected + .sf-array-buttons {
+			background-color: #eef;
+		}
+		.table-container > .element {
+			padding: 5px 13px;
+		}
+		
+		.control-button {
+			width: 18px;
+			height: 18px;
+			margin-top: 0;
+		}
+		
+		.row-buttons {
+			padding: 5px 0 1px 0;
+		}
+		
+		.add-button-container {
+			justify-self: center;
+			padding-top: 10px;
+		}
+		
+		.add-button {
+			width: 30px;
+			height: 30px;
+		}
+
+		.element > .subset {
+			border-left :none;
+		}
+
+		.to-list {
+			border: none;
+			position: relative;
+			left: 10px;
+			cursor: pointer;
+			top: -7px;
+
+			&:before {
+				content: " ";
+				background-image: url(../img/left-arrow.svg);
+				height: 20px;
+				width: 20px;
+				background-size: contain;
+				display: block;
+				position: absolute;
+				left: -19px;
+				top: -2px;
+			}
+		}
+	}
 }

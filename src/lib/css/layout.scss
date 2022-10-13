@@ -163,7 +163,29 @@ form.svelte-schema-form {
 			display: flex;
 			align-items: center;
 		}
+	}
 
-
+	.list-detail {
+		width: 100%;
+		
+		.table-container {
+			display: grid;
+		}
+		
+		.row-wrapper {
+			display: contents;
+		}
+		
+		.item {
+			display: flex;
+		}
+		
+		.table-container > .element {
+			grid-column: span 3;
+		}
+		
+		.add-button-container {
+			grid-column: span 3;
+		}
 	}
 }

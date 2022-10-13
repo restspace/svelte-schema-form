@@ -3,6 +3,7 @@
 	import { emptyValue, schemaLabel } from "../types/schema";
 	import SubSchemaForm from "../SubSchemaForm.svelte";
     import { stringToHtml } from "../utilities";
+    import { arrayDelete, arrayAdd, arrayUp, arrayDown, arrayDuplicate } from "../arrayOps";
 	export let params: CommonComponentParameters;
 	export let schema: any;
 	export let value: any[];
@@ -12,56 +13,6 @@
 	const toggle = () => {
 		collapserOpenState = collapserOpenState === "open" ? "closed" : "open";
 	}
-
-	const onAdd = () => {
-		params.pathChanged(params.path,
-		[
-			...(value || []),
-			emptyValue(schema.items)
-		]);
-	}
-
-	const onDelete = (idx: number) => () => {
-		params.pathChanged(params.path,
-		[
-			...value.slice(0, idx),
-			...value.slice(idx + 1)
-		]);
-	};
-
-	const onDuplicate = (idx: number) => () => {
-		params.pathChanged(params.path,
-		[
-			...value.slice(0, idx),
-			value[idx],
-			JSON.parse(JSON.stringify(value[idx])),
-			...value.slice(idx + 1)
-		]);
-	};
-
-	const onUp = (idx: number) => () => {
-		if (idx > 0) {
-			params.pathChanged(params.path,
-			[
-				...value.slice(0, idx-1),
-				value[idx],
-				value[idx-1],
-				...value.slice(idx + 1)
-			]);
-		}
-	};
-
-	const onDown = (idx: number) => () => {
-		if (idx < value.length - 1) {
-			params.pathChanged(params.path,
-			[
-				...value.slice(0, idx),
-				value[idx+1],
-				value[idx],
-				...value.slice(idx + 2)
-			]);
-		}
-	};
 
 	$: legendText = schemaLabel(schema, params.path);
 	$: showWrapper = (value && value.length > 0) || schema.emptyDisplay !== false;
@@ -99,16 +50,16 @@
 			/>
 			<div class="list-controls">
 				{#if controls.includes('delete')}
-				<button type="button" class="list-control delete" title="delete" on:click={onDelete(idx)}></button>
+				<button type="button" class="list-control delete" title="delete" on:click={arrayDelete(idx, params, value)}></button>
 				{/if}
 				{#if controls.includes('duplicate')}
-				<button type="button" class="list-control duplicate" title="duplicate" on:click={onDuplicate(idx)}></button>
+				<button type="button" class="list-control duplicate" title="duplicate" on:click={arrayDuplicate(idx, params, value)}></button>
 				{/if}
 				{#if controls.includes('reorder') && idx > 0}
-					<button type="button" class="list-control up" title="move up" on:click={onUp(idx)}></button>
+					<button type="button" class="list-control up" title="move up" on:click={arrayUp(idx, params, value)}></button>
 				{/if}
 				{#if controls.includes('reorder') && idx < (value || []).length - 1}
-					<button type="button" class="list-control down" title="move down" on:click={onDown(idx)}></button>
+					<button type="button" class="list-control down" title="move down" on:click={arrayDown(idx, params, value)}></button>
 				{/if}
 			</div>
 
@@ -117,7 +68,7 @@
 			<div class="emptyText">{emptyText}</div>
 		{/if}
 		{#if controls.includes('add')}
-		<button type="button" class="list-control add" title="add item" on:click={onAdd}></button>
+		<button type="button" class="list-control add" title="add item" on:click={arrayAdd(schema, params, value)}></button>
 		{/if}
 	{/if}
 </fieldset>

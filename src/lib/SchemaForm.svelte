@@ -19,6 +19,7 @@
 	import ArrayBlocks from "./editors/ArrayBlocks.svelte";
     import Autocomplete from "./editors/Autocomplete.svelte";
 	import Hidden from "./editors/Hidden.svelte";
+    import ListDetail from "./editors/ListDetail.svelte";
 
 	export let schema: any;
 	export let value: any;
@@ -73,7 +74,8 @@
 			textarea: TextArea,
 			hidden: Hidden,
 			blocks: ArrayBlocks,
-			autocomplete: Autocomplete
+			autocomplete: Autocomplete,
+			"list-detail": ListDetail
 		}, components),
 		componentContext,
 		pathChanged,
