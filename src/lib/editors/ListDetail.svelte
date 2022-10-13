@@ -4,18 +4,32 @@
 	import SubSchemaForm from "../SubSchemaForm.svelte";
     import { stringToHtml } from "../utilities";
     import { arrayDelete, arrayAdd, arrayUp, arrayDown, arrayDuplicate } from "../arrayOps";
+    import { values } from "lodash-es";
+    import { tick } from "svelte";
 	export let params: CommonComponentParameters;
 	export let schema: any;
 	export let value: any[];
 
+	interface SortSpec {
+		field: string;
+		direction: "asc" | "desc";
+	}
+
 	$: value = value || [];
 	$: itemSchema = schema.items || {};
-	$: listFields = Object.entries(itemSchema.properties).map(([propName, propSchema]) =>
-        schemaLabel(propSchema as object, [...params.path, "0", propName]));
+	$: listProps = ((Array.isArray(itemSchema.headings) && typeof itemSchema.headings[0] === 'string' && itemSchema.headings)
+				    || Object.keys(itemSchema.properties)) as string[];
+	$: listFields = listProps.map(prop =>
+        schemaLabel(itemSchema.properties[prop] as object, [...params.path, "0", prop]));
+	$: sort = itemSchema.defaultSort || null as SortSpec | null;
 
 	let collapserOpenState: "open" | "closed" = params.path.length === 0 || !params.collapsible ? "open" : "closed";
 	let selectedIdx = -1;
 	let mode: "list" | "detail" = "list";
+	let rowView: any[] = [];
+	let toListButton: HTMLButtonElement | null;
+	let ignoreKeyUp = false;
+	let selectedValue: any = null;
 
 	//check schema
 	if (schema.type !== "array" || schema.items.type !== "object") {
@@ -24,11 +38,79 @@
 
 	const toggle = () => {
 		collapserOpenState = collapserOpenState === "open" ? "closed" : "open";
+	};
+
+	const onSelect = (idx: number) => async () => {
+		mode = "detail";
+		selectedIdx = value.findIndex(v => v === rowView[idx]);
+		selectedValue = value[selectedIdx];
+		await tick();
+		toListButton?.focus();
+	};
+
+	const onSort = (fieldName: string) => () => {
+		if (sort?.field === fieldName && sort.direction === "desc") {
+			sort = null;
+		} else {
+			sort = {
+				field: fieldName,
+				direction: sort?.field === fieldName ? "desc" : "asc"
+			};
+		}
+	};
+	const onSortKey = (fieldName: string) => (ev: KeyboardEvent) => {
+		if (ev.key === "Enter") {
+			if (sort?.field === fieldName  && sort.direction === "desc") {
+				sort = null;
+			} else {
+				sort = {
+					field: fieldName,
+					direction: sort?.field === fieldName ? "desc" : "asc"
+				};
+			}
+		}
+	};
+
+	const onKey = async (ev: KeyboardEvent) => {
+		if (mode === "list" && !ignoreKeyUp) {
+			const targ = ev.target as HTMLDivElement;
+			console.log(`key ${ev.key} selectedIdx ${selectedIdx} len ${value.length}`);
+			if (ev.key === "ArrowDown" && selectedIdx + 1 < value.length) {
+				selectedIdx += 1;
+				await tick();
+			} else if (ev.key === "ArrowUp" && selectedIdx > 0) {
+				selectedIdx -= 1;
+			} else if (ev.key === "Enter") {
+				onSelect(selectedIdx)();
+			}
+		}
+		ignoreKeyUp = false;
+	};
+
+	const onClick = (ev: MouseEvent) => {
+		if (mode === "list") {
+			(ev.currentTarget as HTMLElement).focus();
+		}
 	}
 
-	const onSelect = (idx: number) => () => {
-		mode = "detail";
-		selectedIdx = (idx === selectedIdx ? -1 : idx);
+	const onModeList = async () => {
+		mode = "list";
+		ignoreKeyUp = true;
+		await tick();
+		selectedIdx = rowView.findIndex(v => v === selectedValue);
+	}
+
+	const sortFunc = (sort: SortSpec) => (a: any, b: any) => {
+		if (a[sort.field] < b[sort.field]) return sort.direction === "asc" ? -1 : 1;
+		if (a[sort.field] > b[sort.field]) return sort.direction === "desc" ? -1 : 1;
+		return 0;
+	};
+
+	const headingClass = (idx: number, sort: SortSpec | null) => {
+		const sortClass = listProps[idx] !== sort?.field
+			? ""
+			: sort?.direction;
+		return "heading " + sortClass;
 	}
 
 	$: legendText = schemaLabel(schema, params.path);
@@ -36,6 +118,13 @@
 	$: emptyText = (!value || value.length === 0) && typeof schema.emptyDisplay === 'string' && schema.emptyDisplay;
 	$: readOnly = params.containerReadOnly || schema.readOnly || false;
 	$: controls = schema.controls === undefined ? (readOnly ? '' : 'add, reorder, delete, duplicate') : schema.controls;
+	$: gridTemplateColumns = mode === "list" ? `repeat(${listFields.length}, auto) 50px` : null;
+	$: {
+		rowView = [...value];
+		if (sort) {
+			rowView.sort(sortFunc(sort));
+		}
+	}
 </script>
 
 {#if showWrapper}
@@ -54,17 +143,17 @@
 
 	{#if collapserOpenState === "open"}
 		{#if !emptyText}
-			<div class="table-container" style:grid-template-columns={mode === "list" ? "repeat(2, auto) 50px" : null}>
+			<div class="table-container" tabindex="0" style:grid-template-columns={gridTemplateColumns} on:keyup={onKey} on:click={onClick}>
 			{#if mode === "list"}
-				{#each listFields as fieldName}
-					<div class="heading">{fieldName}</div>
+				{#each listFields as fieldName, idx}
+					<div class={headingClass(idx, sort)} on:click|stopPropagation={onSort(listProps[idx])} on:keyup|stopPropagation={onSortKey(listProps[idx])} tabIndex="0">{fieldName}</div>
 				{/each}
 				{#if !readOnly}
 					<div class="buttons-header">&nbsp;</div>
 				{/if}
-				{#each value || [] as item, idx (idx)}
+				{#each rowView as item, idx (idx)}
 					<div class="row-wrapper" class:selected={idx === selectedIdx} on:click={onSelect(idx)}>
-					{#each Object.keys(itemSchema.properties) as propName}
+					{#each listProps as propName}
 						<div class="item">{item[propName] === undefined ? '\u00A0' : item[propName]}</div>
 					{/each}
 					</div>
@@ -72,23 +161,23 @@
 					<div class="array-buttons">
 						<div class="row-buttons">
 							{#if controls.includes('delete')}
-							<button type="button" class="list-control delete" title="delete" on:click={arrayDelete(idx, params, value)}></button>
+							<button type="button" class="list-control delete" title="delete" on:click|stopPropagation={arrayDelete(idx, params, value)} on:keyup|stopPropagation></button>
 							{/if}
 							{#if controls.includes('duplicate')}
-							<button type="button" class="list-control duplicate" title="duplicate" on:click={arrayDuplicate(idx, params, value)}></button>
+							<button type="button" class="list-control duplicate" title="duplicate" on:click|stopPropagation={arrayDuplicate(idx, params, value)} on:keyup|stopPropagation></button>
 							{/if}
-							{#if controls.includes('reorder') && idx > 0}
-								<button type="button" class="list-control up" title="move up" on:click={arrayUp(idx, params, value)}></button>
+							{#if controls.includes('reorder') && sort === null &&  idx > 0}
+								<button type="button" class="list-control up" title="move up" on:click|stopPropagation={arrayUp(idx, params, value)} on:keyup|stopPropagation></button>
 							{/if}
-							{#if controls.includes('reorder') && idx < (value || []).length - 1}
-								<button type="button" class="list-control down" title="move down" on:click={arrayDown(idx, params, value)}></button>
+							{#if controls.includes('reorder') && sort === null && idx < (value || []).length - 1}
+								<button type="button" class="list-control down" title="move down" on:click|stopPropagation={arrayDown(idx, params, value)} on:keyup|stopPropagation></button>
 							{/if}
 						</div>
 					</div>
 					{/if}
 				{/each}
 			{:else}
-				<button class="to-list" type="button" on:click={() => mode = "list"}>List</button>
+				<button class="to-list" type="button" on:click={onModeList} bind:this={toListButton}>List</button>
 				<div class="element">
 					<SubSchemaForm
 						params={{
@@ -97,7 +186,7 @@
 							containerParent: "array",
 							containerReadOnly: params.containerReadOnly || schema.readOnly || false
 						}}
-						value={value[selectedIdx]}
+						value={selectedValue}
 						bind:schema={schema.items}
 					/>
 				</div>

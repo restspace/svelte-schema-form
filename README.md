@@ -138,6 +138,15 @@ or
 
 In the latter case, the `id` field is returned as the value of the editor, the `text` field determines the text shown in the field, and the optional `image` url gives an image to display alongside the text.
 
+### List Detail
+
+Setting `editor="list-detail"` on a `type="array"` subschema whose items are `type="object"` shows the list of objects in a listing grid which when a row is selected, switches to the normal editor for the object selected. It also provides heading-click view ordering (without mutating the order of the underlying data list). It responds to the `emptyDisplay` and
+`controls` custom properties defined for an array.
+
+The `type="object"` subschema can have two optional custom schema properties:
+- `headings`: an array of property names which are included as columns in the list. Defaults to all columns.
+- `defaultSort`: an object with properties `field` which specifies the default heading field to sort on, and `direction` which can be `"asc"` or `"desc"` to specify the direction of the default sort.
+
 ## Custom rendering components
 
 Svelte Schema Form can override or add rendering components at any level by supplying a map of component type names and component classes.

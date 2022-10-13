@@ -221,6 +221,19 @@ form.svelte-schema-form {
 		.heading + .buttons-header {
 			border-bottom: 1px solid #777;
 		}
+		.heading.asc:after,
+		.heading.desc:after {
+			content: " ";
+			display: inline-block;
+			height: 14px;
+			width: 14px;
+		}
+		.heading.asc:after {
+			background-image: url(../img/down.svg);
+		}
+		.heading.desc:after {
+			background-image: url(../img/up.svg);
+		}
 		
 		.row-wrapper {
 			display: contents;
