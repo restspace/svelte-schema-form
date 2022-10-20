@@ -120,9 +120,9 @@
 
 	const getUrl = (item: any, idx: number) => {
 		let pathEl = '';
-		if (schema.pathPattern) {
-			let pathPattern = schema.pathPattern as string;
-			pathEl = pathPattern.replace(/\$\{([^}]*)\}/gi, (_substring, p1) => (p1 === '' ? item :  _.get(item, p1.split('.'))) || '');
+		if (schema.itemPathPattern) {
+			let itemPathPattern = schema.itemPathPattern as string;
+			pathEl = itemPathPattern.replace(/\$\{([^}]*)\}/gi, (_substring, p1) => (p1 === '' ? item :  _.get(item, p1.split('.'))) || '');
 		}
 		if (!pathEl) {
 			pathEl = item.name || item.title;

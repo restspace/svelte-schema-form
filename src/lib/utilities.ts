@@ -183,5 +183,5 @@ export function pathCombine(...args: string[]): string {
 }
 
 export function stringToHtml(s: string) {
-    return s.replace("\n", "<br/>");
+    return (s || '').replace("\n", "<br/>");
 }
