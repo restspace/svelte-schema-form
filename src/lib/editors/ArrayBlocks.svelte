@@ -2,7 +2,7 @@
 	import type { CommonComponentParameters } from "../types/CommonComponentParameters";
 	import { emptyValue } from "../types/schema";
 	import SubSchemaForm from "../SubSchemaForm.svelte";
-	import _ from "lodash-es";
+	import _, { max } from "lodash-es";
     import { pathCombine } from "../utilities";
 
 	export let params: CommonComponentParameters;
@@ -28,17 +28,17 @@
 		adding = true;
 	};
 
-	const onAddUpdate = () => {
+	const onAddUpdate = async () => {
 		const idx = value.length - 1;
 		const newPath = [ ...params.path, idx.toString() ];
-		params.pathChanged(newPath, value[idx]);
-		adding = false;
-
 		// upload any files on the add form
 		const doUploads = params.componentContext?.['doUploads'] as (pathPrefix: string) => Promise<void>;
 		if (doUploads) {
-			doUploads(newPath.join('.'));
+			await doUploads(newPath.join('.'));
 		}
+
+		params.pathChanged(newPath, value[idx]);
+		adding = false;
 	};
 
 	const onDelete = (idx: number) => () => {
@@ -127,7 +127,26 @@
 		if (!pathEl) {
 			pathEl = item.name || item.title;
 		}
+		pathEl = encodeURIComponent(pathEl); // in case it contains /, &, ?, =
 		return pathCombine(currentUrl, pathEl);
+	}
+
+	const getName = (item: any) => (item.name || item.title || '') as string;
+	const getArrayBlockClasses = (item: any) => {
+		const name = getName(item);
+		const nameParts = name.split(' ');
+		const maxWidth = nameParts.reduce((currMax, word) => word.length > currMax ? word.length : currMax, 0);
+		const maxHeight = nameParts.length;
+		if (maxWidth > 18 || maxHeight > 13) {
+			return "array-block xlarge";
+		}
+		if (maxWidth > 14 || maxHeight > 9) {
+			return "array-block large";
+		}
+		if (maxWidth > 10 || maxHeight > 6) {
+			return "array-block medium";
+		}
+		return 'array-block small';
 	}
 
 	let addItemSchema: any;
@@ -147,7 +166,7 @@
 <div name={params.path.join('.')} class="subset array-blocks depth-{params.path.length}">
 	<ol>
 		{#each value || [] as item, idx (item)}
-		<li class="array-block"
+		<li class={getArrayBlockClasses(item)}
 			style:background-image={item.thumbnail ? `url('${item.thumbnail}')`: ''}
 			draggable={true} 
 			on:dragstart={onDragstart(idx)}
@@ -158,7 +177,7 @@
 			class:drag-over={hovering === idx}>
 			<a href={getUrl(item, idx)}>
 				<h2>
-					{item.name || item.title || ''}
+					{getName(item)}
 				</h2>
 			</a>
 			<div class="actions">

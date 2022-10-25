@@ -1,3 +1,5 @@
+<svelte:options accessors />
+
 <script lang="ts">
 	import SchemaForm from "./SchemaForm.svelte";
 	import { createEventDispatcher, setContext } from "svelte";

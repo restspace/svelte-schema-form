@@ -1,3 +1,5 @@
+<svelte:options accessors />
+
 <script lang="ts">
 	import { createEventDispatcher, onMount } from "svelte";
 	import SubSchemaForm from "./SubSchemaForm.svelte";
@@ -34,9 +36,9 @@
 
 	let validationErrors = {} as ValidationErrors;
 
-	const revalidate = () => {
+	const revalidate = (newValue?: any) => {
 		const validate = validator(nullOptionalsAllowed(schema), { includeErrors: true, allErrors: true, allowUnusedKeywords: true });
-		const validatorResult = validate(value);
+		const validatorResult = validate(newValue || value);
 		validationErrors = Object.fromEntries(
 			(validate.errors || []).map(ve => errorMapper(schema, value, ve.keywordLocation, ve.instanceLocation))
 		);
@@ -87,7 +89,9 @@
 		idx: incr()
 	} as CommonComponentParameters;
 
-	const pathChanged = (path: string[], val: any) => {
+	const pathChanged = (path: string[], val: any, op?: string) => {
+		let changed = false;
+
 		if (val instanceof FileList) {
 			uploadFiles[path.join('.')] = val;
 			dirty = true;
@@ -101,8 +105,6 @@
 		const curr = path.length === 0 ? params.value : get(params.value, path);
 		if (val === curr) return;
 
-		dirty = true;
-
 		if (val === undefined && path.length > 0) {
 			const pathFront = path.slice(0, -1);
 			const parent = pathFront.length ? get(params.value, path.slice(0, -1)) : params.value;
@@ -115,14 +117,21 @@
 			}
 		}
 
-		revalidate();
+		revalidate(params.value);
 
-		dispatch('value', {
-			path, pathValue: val, value: params.value, errors: validationErrors
-		});
+		const succeeded = dispatch('value', {
+			path, pathValue: val, value: params.value, errors: validationErrors, op
+		}, { cancelable: true });
 
-		console.log(`dispatch value path: ${path.join('.')} val: ${JSON.stringify(val)}, errors: ${JSON.stringify(validationErrors)}`);
-		value = params.value;
+		console.log(`dispatch value path: ${path.join('.')} val: ${JSON.stringify(val)}, errors: ${JSON.stringify(validationErrors)}, succeeded: ${succeeded}`);
+
+		// update if value event not cancelled.
+		if (succeeded) {
+			value = params.value;
+			dirty = true;
+		} else {
+			revalidate(value);
+		}
 		return val;
 	};
 </script>
