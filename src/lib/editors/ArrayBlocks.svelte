@@ -122,12 +122,12 @@
 		let pathEl = '';
 		if (schema.itemPathPattern) {
 			let itemPathPattern = schema.itemPathPattern as string;
-			pathEl = itemPathPattern.replace(/\$\{([^}]*)\}/gi, (_substring, p1) => (p1 === '' ? item :  _.get(item, p1.split('.'))) || '');
+			pathEl = itemPathPattern.replace(/\$\{([^}]*)\}/gi,
+				(_substring, p1) => encodeURIComponent((p1 === '' ? item :  _.get(item, p1.split('.'))) || ''));
 		}
 		if (!pathEl) {
-			pathEl = item.name || item.title;
+			pathEl = encodeURIComponent(item.name || item.title || '');
 		}
-		pathEl = encodeURIComponent(pathEl); // in case it contains /, &, ?, =
 		return pathCombine(currentUrl, pathEl);
 	}
 
