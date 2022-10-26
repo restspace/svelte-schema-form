@@ -22,6 +22,7 @@
     import Autocomplete from "./editors/Autocomplete.svelte";
 	import Hidden from "./editors/Hidden.svelte";
     import ListDetail from "./editors/ListDetail.svelte";
+    import Currency from "./editors/Currency.svelte";
 
 	export let schema: any;
 	export let value: any;
@@ -77,7 +78,8 @@
 			hidden: Hidden,
 			blocks: ArrayBlocks,
 			autocomplete: Autocomplete,
-			"list-detail": ListDetail
+			"list-detail": ListDetail,
+			currency: Currency
 		}, components),
 		componentContext,
 		pathChanged,

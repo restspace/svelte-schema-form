@@ -19,6 +19,7 @@
 	export let collapsible: boolean = false;
 	export let submitText = "Submit";
 	export let submitRequiresDirty = true;
+	export let componentContext = {} as Record<string, unknown>;
 
 	const dispatch = createEventDispatcher();
 	let pathProgress = writable({} as Record<string, Record<string, number>>);
@@ -108,7 +109,7 @@
 		showErrors = true;
 	};
 
-	const componentContext = { doUploads };
+	componentContext.doUploads = doUploads;
 </script>
 
 <form class='svelte-schema-form' {action} class:dirty>

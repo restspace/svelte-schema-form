@@ -75,6 +75,7 @@ A group of based on a schema, no submit functionality
 	  showErrors // Whether the form should show errors
 	  components // Map with keys as editor names (value of editor property in schema), values as constructors of editor components
 	  collapsible // Whether objects and arrays are shown with collapsers which can hide them (default = false)
+	  componentContext // Data for custom editors
 	/>
 
 ### SubmitForm
@@ -93,9 +94,14 @@ An HTML form with a submit button and a submit flow
 	  collapsible // Whether objects and arrays are shown with collapsers which can hide them (default = false)
 	  submitText // Text shown in the submit button (defaults to 'Submit')
 	  submitRequiresDirty // Whether the submit button requires the form to be dirty to submit (default = true)
+	  componentContext // Data for custom editors
 	/>
 
 ## Custom editors
+
+### Currency
+
+Setting `editor="currency"` on a `type="number"` subschema renders it as a currency field. This automatically inserts a currency symbol in the input field, by default this is a `$` but can be changed to another symbol via setting the `currencySymbol` property on the object passed in to the `componentContext` prop, to e.g. '£'. You can also specify a custom formatting function which takes a value of type number and returns a string and set the `formatCurrency` property on `componentContext` to this function.
 
 ### Upload
 

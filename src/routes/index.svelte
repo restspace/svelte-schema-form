@@ -71,6 +71,8 @@
 	const submit = (e: CustomEvent) => {
 		valueJson = JSON.stringify(e.detail.value, undefined, 2).trim();
 	};
+
+	const componentContext = { currencySymbol: '£' };
 </script>
 
 <div class="container">
@@ -82,7 +84,7 @@
 		<textarea id="schema" on:keyup={schemaUpdate}>{JSON.stringify(schema, undefined, 2)}</textarea>
 	</div>
 	<div class="form">
-		<SubmitForm {schema} {value} on:submit={submit} uploadBaseUrl="https://restspace.local:3131/files" {collapsible} />
+		<SubmitForm {schema} {value} on:submit={submit} uploadBaseUrl="https://restspace.local:3131/files" {collapsible} {componentContext} />
 	</div>
 	<div class="output">
 		<pre>
