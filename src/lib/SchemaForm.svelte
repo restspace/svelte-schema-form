@@ -23,6 +23,7 @@
 	import Hidden from "./editors/Hidden.svelte";
     import ListDetail from "./editors/ListDetail.svelte";
     import Currency from "./editors/Currency.svelte";
+    import Radio from "./editors/Radio.svelte";
 
 	export let schema: any;
 	export let value: any;
@@ -79,7 +80,8 @@
 			blocks: ArrayBlocks,
 			autocomplete: Autocomplete,
 			"list-detail": ListDetail,
-			currency: Currency
+			currency: Currency,
+			radio: Radio
 		}, components),
 		componentContext,
 		pathChanged,

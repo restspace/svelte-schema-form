@@ -103,6 +103,10 @@ An HTML form with a submit button and a submit flow
 
 Setting `editor="currency"` on a `type="number"` subschema renders it as a currency field. This automatically inserts a currency symbol in the input field, by default this is a `$` but can be changed to another symbol via setting the `currencySymbol` property on the object passed in to the `componentContext` prop, to e.g. '£'. You can also specify a custom formatting function which takes a value of type number and returns a string and set the `formatCurrency` property on `componentContext` to this function.
 
+### Radio
+
+Setting `editor="radio"` on a subschema with `enum` set renders the enum as radio buttons instead of a select.
+
 ### Upload
 
 Setting `editor="upload"` on a `type="string"` subschema means that this property will be rendered as a file uploader. This component requies a `SubmitForm`. The file uploader allows files to be dragged onto it, or to be clicked to open a file dialog. Files are sent on submit via a PUT request to a path composed:

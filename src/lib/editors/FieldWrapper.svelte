@@ -7,11 +7,12 @@
 	export let schema: any;
 
 	const title = schemaLabel(schema, params.path);
+	const id = params.path.join('.');
 	$: error = params.validationErrors[params.path.join('.')];
 </script>
 
 {#if params.containerParent !== "array"}
-	<label for={params.path.join('.')} class:required={params.required} class:readonly={schema.readOnly || params.containerReadOnly}>
+	<label id={`label-${id}`} for={id} class:required={params.required} class:readonly={schema.readOnly || params.containerReadOnly}>
 		{@html stringToHtml(title)}
 		{#if schema.description}
 			<span class="info" title={schema.description}></span>
