@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { CommonComponentParameters } from "../types/CommonComponentParameters";
+	import type { CommonComponentParameters } from "../types/CommonComponentParameters.js";
 	export let params: CommonComponentParameters;
 	export let schema: any;
 	export let value: any;

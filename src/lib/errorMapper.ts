@@ -1,6 +1,6 @@
-import { get } from "@exodus/schemasafe/src/pointer";
-import { jsonPointerToPath } from "./types/schema";
-import { afterLast } from "./utilities";
+import { get } from "@exodus/schemasafe/src/pointer.js";
+import { jsonPointerToPath } from "./types/schema.js";
+import { afterLast } from "./utilities.js";
 
 export function errorMapper(schema: any, value: any, keywordLocation: string, instanceLocation: string): [ string, string ] {
 	const location = jsonPointerToPath(instanceLocation);

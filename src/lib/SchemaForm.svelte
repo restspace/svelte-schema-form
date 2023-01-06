@@ -6,10 +6,9 @@
 	import String from "./editors/String.svelte";
 	import FieldWrapper from './editors/FieldWrapper.svelte';
 	import ObjectEditor from "./editors/Object.svelte";
-	import set from "lodash-es/set";
-	import get from "lodash-es/get";
+	import { set, get } from "lodash-es";
 	import { validator } from "@exodus/schemasafe";
-	import { FileNone, type CommonComponentParameters, type ValidationErrors } from './types/CommonComponentParameters';
+	import { FileNone, type CommonComponentParameters, type ValidationErrors } from './types/CommonComponentParameters.js';
 	import Enum from './editors/Enum.svelte';
 	import Array from './editors/Array.svelte';
 	import { incr, nullOptionalsAllowed } from './utilities';
