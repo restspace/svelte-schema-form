@@ -1,10 +1,10 @@
 <script lang="ts">
-import { after, afterLast } from "../utilities";
+import { after, afterLast } from "../utilities.js";
 
 	import { entries, keys } from "lodash-es";
 	import { getContext } from "svelte";
 	import type { Writable } from "svelte/store";
-	import { FileNone, ProgressContext, type CommonComponentParameters } from "../types/CommonComponentParameters";
+	import { FileNone, ProgressContext, type CommonComponentParameters } from "../types/CommonComponentParameters.js";
 	import Number from "./Number.svelte";
 	import String from "./String.svelte";
 

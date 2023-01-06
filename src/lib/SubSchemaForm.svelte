@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { CommonComponentParameters } from "./types/CommonComponentParameters";
-	import { editorForSchema } from "./types/schema";
+	import type { CommonComponentParameters } from "./types/CommonComponentParameters.js";
+	import { editorForSchema } from "./types/schema.js";
 	export let params: CommonComponentParameters;
 	export let schema: any;
 	export let value: any;

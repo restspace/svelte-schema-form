@@ -3,10 +3,10 @@
 <script lang="ts">
 	import SchemaForm from "./SchemaForm.svelte";
 	import { createEventDispatcher, setContext } from "svelte";
-	import { ProgressContext, type ValidationErrors } from "./types/CommonComponentParameters";
-	import { substituteProperties } from "./utilities";
+	import { ProgressContext, type ValidationErrors } from "./types/CommonComponentParameters.js";
+	import { substituteProperties } from "./utilities.js";
 	import { writable } from "svelte/store";
-	import set from "lodash-es/set";
+	import { set } from "lodash-es";
 
 	export let schema: any;
 	export let value: any;

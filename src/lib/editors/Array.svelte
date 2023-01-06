@@ -1,9 +1,9 @@
 <script lang="ts">
-	import type { CommonComponentParameters } from "../types/CommonComponentParameters";
-	import { emptyValue, schemaLabel } from "../types/schema";
+	import type { CommonComponentParameters } from "../types/CommonComponentParameters.js";
+	import { emptyValue, schemaLabel } from "../types/schema.js";
 	import SubSchemaForm from "../SubSchemaForm.svelte";
-    import { stringToHtml } from "../utilities";
-    import { arrayDelete, arrayAdd, arrayUp, arrayDown, arrayDuplicate } from "../arrayOps";
+    import { stringToHtml } from "../utilities.js";
+    import { arrayDelete, arrayAdd, arrayUp, arrayDown, arrayDuplicate } from "../arrayOps.js";
 	export let params: CommonComponentParameters;
 	export let schema: any;
 	export let value: any[];

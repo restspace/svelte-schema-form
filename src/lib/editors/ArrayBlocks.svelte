@@ -1,9 +1,9 @@
 <script lang="ts">
-	import type { CommonComponentParameters } from "../types/CommonComponentParameters";
-	import { emptyValue } from "../types/schema";
+	import type { CommonComponentParameters } from "../types/CommonComponentParameters.js";
+	import { emptyValue } from "../types/schema.js";
 	import SubSchemaForm from "../SubSchemaForm.svelte";
 	import _, { max } from "lodash-es";
-    import { pathCombine } from "../utilities";
+    import { pathCombine } from "../utilities.js";
 
 	export let params: CommonComponentParameters;
 	export let schema: any;

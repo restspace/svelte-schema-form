@@ -1,4 +1,4 @@
-import { camelToTitle } from "../utilities";
+import { camelToTitle } from "../utilities.js";
 
 export function editorForSchema(schema: any): string {
 	let type = schema['type'];

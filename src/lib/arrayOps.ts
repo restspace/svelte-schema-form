@@ -1,5 +1,5 @@
-import type { CommonComponentParameters } from "./types/CommonComponentParameters";
-import { emptyValue } from "./types/schema";
+import type { CommonComponentParameters } from "./types/CommonComponentParameters.js";
+import { emptyValue } from "./types/schema.js";
 
 export const arrayAdd = (schema: any, params: CommonComponentParameters, value: any[]) => () => {
 	params.pathChanged(params.path,
