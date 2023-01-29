@@ -3,7 +3,7 @@
 	import { emptyValue } from "../types/schema";
 	import SubSchemaForm from "../SubSchemaForm.svelte";
 	import _, { max } from "lodash-es";
-    import { pathCombine } from "../utilities";
+    import { pathCombine } from "../utilities.js";
 
 	export let params: CommonComponentParameters;
 	export let schema: any;

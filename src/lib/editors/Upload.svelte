@@ -1,5 +1,5 @@
 <script lang="ts">
-import { after, afterLast } from "../utilities";
+import { after, afterLast } from "../utilities.js";
 
 	import { entries, keys } from "lodash-es";
 	import { getContext } from "svelte";
