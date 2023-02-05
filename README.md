@@ -14,8 +14,8 @@ Use in a component
 
 	<script>
 	  import { SubmitForm } from '@restspace/svelte-schema-form';
-	  import '@restspace/svelte-schema-form/css/layout.css';
-	  import '@restspace/svelte-schema-form/css/basic-skin.css';
+	  import '@restspace/svelte-schema-form/css/layout.scss';
+	  import '@restspace/svelte-schema-form/css/basic-skin.scss';
 
 	  let schema = {
 		  type: "object",
