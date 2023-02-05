@@ -2,7 +2,7 @@
 	import type { CommonComponentParameters } from "../types/CommonComponentParameters";
 	import { emptyValue, schemaLabel } from "../types/schema";
 	import SubSchemaForm from "../SubSchemaForm.svelte";
-    import { stringToHtml } from "../utilities";
+    import { stringToHtml } from "../utilities.js";
     import { arrayDelete, arrayAdd, arrayUp, arrayDown, arrayDuplicate } from "../arrayOps";
     import { values } from "lodash-es";
     import { tick } from "svelte";
