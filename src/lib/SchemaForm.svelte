@@ -69,6 +69,7 @@
 			"date-time": String,
 			date: String,
 			number: Number,
+			integer: Number,
 			boolean: Boolean,
 			fieldWrapper: FieldWrapper,
 			object: ObjectEditor,
