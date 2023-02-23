@@ -28,10 +28,12 @@
 		"copyout": "xcopy /s /y src\\lib ..\\svelte-schema-form-script\\svelte-schema-form\\src\\lib"
 	},
 	"devDependencies": {
+		"@rollup/plugin-inject": "^5.0.3",
 		"@sveltejs/adapter-auto": "^1.0.0",
 		"@sveltejs/kit": "^1.0.0",
 		"@sveltejs/package": "^1.0.0",
 		"@types/lodash-es": "^4.17.6",
+		"node-stdlib-browser": "^1.2.0",
 		"sass": "^1.57.1",
 		"svelte": "^3.54.0",
 		"svelte-check": "^3.0.1",
@@ -42,6 +44,7 @@
 	"type": "module",
 	"dependencies": {
 		"@exodus/schemasafe": "^1.0.0-rc.9",
+		"json-refs": "^3.0.15",
 		"lodash-es": "^4.17.21"
 	}
 }
