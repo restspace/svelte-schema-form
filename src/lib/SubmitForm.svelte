@@ -3,7 +3,7 @@
 <script lang="ts">
 	import SchemaForm from "./SchemaForm.svelte";
 	import { createEventDispatcher, setContext } from "svelte";
-	import { ProgressContext, type ValidationErrors } from "./types/CommonComponentParameters";
+	import { ProgressContext, type SchemaFormEvent, type ValidationErrors } from "./types/CommonComponentParameters";
 	import { substituteProperties } from "./utilities.js";
 	import { writable } from "svelte/store";
 	import set from "lodash-es/set";
@@ -21,14 +21,14 @@
 	export let submitRequiresDirty = true;
 	export let componentContext = {} as Record<string, unknown>;
 
-	const dispatch = createEventDispatcher();
+	const dispatch = createEventDispatcher<{value: SchemaFormEvent, submit: {value: any}}>();
 	let pathProgress = writable({} as Record<string, Record<string, number>>);
 	setContext(ProgressContext, pathProgress);
 
 	let currentErrors = {} as ValidationErrors;
 	let showErrors = false;
 
-	const change = (e: CustomEvent) => {
+	const change = (e: CustomEvent<SchemaFormEvent>) => {
 		currentErrors = e.detail.errors;
 		dispatch('value', e.detail);
 		value = e.detail.value;
