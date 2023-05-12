@@ -3,7 +3,7 @@
 	import { emptyValue } from "../types/schema";
 	import SubSchemaForm from "../SubSchemaForm.svelte";
 	import _, { max } from "lodash-es";
-    import { pathCombine } from "../utilities";
+    import { pathCombine } from "../utilities.js";
 
 	export let params: CommonComponentParameters;
 	export let schema: any;
@@ -163,7 +163,7 @@
 	$: lastIdx = (value || []).length;
 </script>
 
-<div name={params.path.join('.')} class="subset array-blocks depth-{params.path.length}">
+<div id="{params.path.join('.')}" class="subset array-blocks depth-{params.path.length}">
 	<ol>
 		{#each value || [] as item, idx (item)}
 		<li class={getArrayBlockClasses(item)}

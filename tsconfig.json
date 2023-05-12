@@ -8,12 +8,6 @@
 		"resolveJsonModule": true,
 		"skipLibCheck": true,
 		"sourceMap": true,
-		"strict": true,
-		"paths": {
-			"$lib":["src/lib"],
-  			"$lib/*":["src/lib/*"],
-			"svelte-schema-form": [ "src/lib/index.ts" ],
-			"svelte-schema-form/*": [ "src/lib/*" ]
-		}
+		"strict": true
 	}
 }

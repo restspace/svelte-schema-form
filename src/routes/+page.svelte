@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { SubmitForm } from "svelte-schema-form";
+	import SubmitForm from "$lib/SubmitForm.svelte";
 	import "svelte-schema-form/css/layout.scss";
 	import "svelte-schema-form/css/basic-skin.scss";
 

@@ -3,7 +3,7 @@
 	import type { CommonComponentParameters } from "../types/CommonComponentParameters";
 	import SubSchemaForm from "../SubSchemaForm.svelte";
 	import { schemaLabel } from "../types/schema";
-    import { stringToHtml } from "../utilities";
+    import { stringToHtml } from "../utilities.js";
 	export let params: CommonComponentParameters;
 	export let schema: any;
 	export let value: any;
