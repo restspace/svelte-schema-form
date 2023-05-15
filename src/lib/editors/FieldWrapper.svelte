@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { schemaLabel } from "../types/schema";
 	import type { CommonComponentParameters } from "../types/CommonComponentParameters";
-	import { stringToHtml } from "../utilities";
+	import { stringToHtml } from "../utilities.js";
 
 	export let params: CommonComponentParameters;
 	export let schema: any;

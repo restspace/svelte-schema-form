@@ -12,7 +12,7 @@
 	import { FileNone, type CommonComponentParameters, type ValidationErrors } from './types/CommonComponentParameters';
 	import Enum from './editors/Enum.svelte';
 	import Array from './editors/Array.svelte';
-	import { incr, nullOptionalsAllowed } from './utilities';
+	import { incr, nullOptionalsAllowed } from './utilities.js';
 	import Boolean from './editors/Boolean.svelte';
 	import Number from './editors/Number.svelte';
 	import { errorMapper } from "./errorMapper";

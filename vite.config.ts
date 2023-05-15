@@ -1,11 +1,9 @@
 import { sveltekit } from '@sveltejs/kit/vite';
+import type { UserConfig } from 'vite';
 import path from 'path';
 
-/** @type {import('vite').UserConfig} */
-const config = {
-	plugins: [sveltekit(
-
-	)],
+const config: UserConfig = {
+	plugins: [sveltekit()],
 	resolve: {
 		alias: {
 			'svelte-schema-form': path.resolve('src/lib')

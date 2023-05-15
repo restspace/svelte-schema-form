@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { CommonComponentParameters } from "../types/CommonComponentParameters";
 	export let params: CommonComponentParameters;
-	export let schema: any;
 	export let value: any;
 </script>
 
