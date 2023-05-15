@@ -93,6 +93,14 @@
 		}
 	}
 
+	const onSubmit = () => {
+		params.pathChanged(
+			[ ...params.path, selectedIdx.toString()],
+			selectedValue,
+			"innerSubmit"
+		)
+	}
+
 	const onModeList = async () => {
 		mode = "list";
 		ignoreKeyUp = true;
@@ -189,6 +197,9 @@
 						value={selectedValue}
 						bind:schema={schema.items}
 					/>
+					{#if schema.submit}
+					<button type="button" class="submit-button" on:click={onSubmit}>{schema.submit}</button>
+					{/if}
 				</div>
 			{/if}
 			</div>

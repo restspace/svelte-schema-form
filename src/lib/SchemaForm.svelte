@@ -107,7 +107,7 @@
 		}
 
 		const curr = path.length === 0 ? params.value : get(params.value, path);
-		if (val === curr) return;
+		if (val === curr && op !== "innerSubmit") return;
 
 		if (val === undefined && path.length > 0) {
 			const pathFront = path.slice(0, -1);
@@ -127,7 +127,7 @@
 			path, pathValue: val, value: params.value, errors: validationErrors, op
 		}, { cancelable: true });
 
-		console.log(`dispatch value path: ${path.join('.')} val: ${JSON.stringify(val)}, errors: ${JSON.stringify(validationErrors)}, succeeded: ${succeeded}`);
+		console.log(`dispatch value path: ${path.join('.')} val: ${JSON.stringify(val)},${op ? " op: " + op : ''} errors: ${JSON.stringify(validationErrors)}, succeeded: ${succeeded}`);
 
 		// update if value event not cancelled.
 		if (succeeded) {
