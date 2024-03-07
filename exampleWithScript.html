@@ -1,0 +1,35 @@
+<html>
+    <body>
+        <div id="container" class="admin-list"></div>
+
+        <script type="module">
+            import { SubmitForm } from "/cat/schema-form/js/svelte-schema-form";
+            
+            const value = Array.from({{ data | dump | safe }});
+            const props = {
+                schema: {{ schema | dump | safe }},
+                value,
+                uploadBaseUrl: "/file/image",
+                submitText: "Save"
+            };
+            const frm = new SubmitForm({
+                target: document.getElementById("container"),
+                props
+            });
+            frm.$on('value', (ev) => console.log('V=' + JSON.stringify(ev.detail)));
+            frm.$on('submit', async (ev) => {
+                const data = ev.detail;
+                const resp = await fetch("{{ writeUrl }}", {
+                    method: "POST",
+                    credentials: "include",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(data.value)
+                });
+                const json = await resp.json();
+                alert(JSON.stringify(json, 2));
+            });
+        </script>
+    </body>
+</html>

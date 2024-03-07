@@ -9,6 +9,18 @@ export const arrayAdd = (schema: any, params: CommonComponentParameters, value: 
 	]);
 }
 
+export const arrayFill = (schema: any, params: CommonComponentParameters, value: any[]) => () => {
+	const val = value || [];
+	if (typeof schema.minItems !== 'number' || val.length >= schema.minItems) return;
+	const addValues = new Array(schema.minItems - val.length).fill(emptyValue(schema.items));
+
+	params.pathChanged(params.path,
+	[
+		...val,
+		...addValues
+	]);
+}
+
 export const arrayDelete = (idx: number, params: CommonComponentParameters, value: any[]) => () => {
 	params.pathChanged(params.path,
 	[

@@ -3,7 +3,7 @@
 	import { emptyValue, schemaLabel } from "../types/schema.js";
 	import SubSchemaForm from "../SubSchemaForm.svelte";
     import { stringToHtml } from "../utilities.js";
-    import { arrayDelete, arrayAdd, arrayUp, arrayDown, arrayDuplicate } from "../arrayOps.js";
+    import { arrayDelete, arrayAdd, arrayUp, arrayDown, arrayDuplicate, arrayFill } from "../arrayOps.js";
 	export let params: CommonComponentParameters;
 	export let schema: any;
 	export let value: any[];
@@ -14,11 +14,16 @@
 		collapserOpenState = collapserOpenState === "open" ? "closed" : "open";
 	}
 
+	// If schema specifies minItems, pad out the array if necessary
+	$: arrayFill(schema, params, value)();
+
 	$: legendText = schemaLabel(schema, params.path);
 	$: showWrapper = (value && value.length > 0) || schema.emptyDisplay !== false;
 	$: emptyText = (!value || value.length === 0) && typeof schema.emptyDisplay === 'string' && schema.emptyDisplay;
 	$: readOnly = params.containerReadOnly || schema.readOnly || false;
 	$: controls = schema.controls === undefined ? (readOnly ? '' : 'add, reorder, delete, duplicate') : schema.controls;
+	$: atMaxItems = typeof schema.maxItems === 'number' && value.length >= schema.maxItems;
+	$: atMinItems = typeof schema.minItems === 'number' && value.length <= schema.minItems;
 </script>
 
 {#if showWrapper}
@@ -49,10 +54,10 @@
 				bind:schema={schema.items}
 			/>
 			<div class="list-controls">
-				{#if controls.includes('delete')}
+				{#if controls.includes('delete') && !atMinItems}
 				<button type="button" class="list-control delete" title="delete" on:click={arrayDelete(idx, params, value)}></button>
 				{/if}
-				{#if controls.includes('duplicate')}
+				{#if controls.includes('duplicate') && !atMaxItems}
 				<button type="button" class="list-control duplicate" title="duplicate" on:click={arrayDuplicate(idx, params, value)}></button>
 				{/if}
 				{#if controls.includes('reorder') && idx > 0}
@@ -67,7 +72,7 @@
 		{:else}
 			<div class="emptyText">{emptyText}</div>
 		{/if}
-		{#if controls.includes('add')}
+		{#if controls.includes('add') && !atMaxItems}
 		<button type="button" class="list-control add" title="add item" on:click={arrayAdd(schema, params, value)}></button>
 		{/if}
 	{/if}

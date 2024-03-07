@@ -1,6 +1,6 @@
 {
 	"name": "@restspace/svelte-schema-form",
-	"version": "0.1.5",
+	"version": "0.1.6",
 	"description": "JSON Schema based form generator in Svelte",
 	"author": "James Ellis-Jones",
 	"license": "MIT",
@@ -28,8 +28,8 @@
 	"scripts": {
 		"dev": "vite dev",
 		"build": "svelte-kit sync && svelte-package && sass dist/css:dist/css",
+		"buildToScript": "vite -c vite-script.config.js build",
 		"package": "svelte-kit sync && svelte-package && sass dist/css:dist/css",
-		"prepublishOnly": "echo 'Did you mean to publish `./package/`, instead of `./`?' && exit 1",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"copyout": "xcopy /s /y src\\lib ..\\svelte-schema-form-script\\svelte-schema-form\\src\\lib"
