@@ -68,6 +68,7 @@
 			time: String,
 			"date-time": String,
 			date: String,
+			"string-ipv4": String,
 			number: Number,
 			integer: Number,
 			boolean: Boolean,
