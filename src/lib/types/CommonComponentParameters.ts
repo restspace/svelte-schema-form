@@ -18,6 +18,14 @@ export interface CommonComponentParameters {
 	idx: number
 }
 
+export interface SchemaFormEvent {
+	path: string[],
+	value: any,
+	errors: ValidationErrors,
+	pathValue?: any,
+	op?: string
+}
+
 export const childComponentParameters = (params: CommonComponentParameters, propName: string) => {
 	return {
 		...params,
