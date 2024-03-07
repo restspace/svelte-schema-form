@@ -22,8 +22,8 @@
 	$: emptyText = (!value || value.length === 0) && typeof schema.emptyDisplay === 'string' && schema.emptyDisplay;
 	$: readOnly = params.containerReadOnly || schema.readOnly || false;
 	$: controls = schema.controls === undefined ? (readOnly ? '' : 'add, reorder, delete, duplicate') : schema.controls;
-	$: atMaxItems = typeof schema.maxItems === 'number' && value.length >= schema.maxItems;
-	$: atMinItems = typeof schema.minItems === 'number' && value.length <= schema.minItems;
+	$: atMaxItems = typeof schema.maxItems === 'number' && (value?.length || 0) >= schema.maxItems;
+	$: atMinItems = typeof schema.minItems === 'number' && (value?.length || 0) <= schema.minItems;
 </script>
 
 {#if showWrapper}

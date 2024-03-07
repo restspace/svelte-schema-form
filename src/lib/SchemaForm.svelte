@@ -94,7 +94,7 @@
 		idx: incr()
 	} as CommonComponentParameters;
 
-	const pathChanged = (path: string[], val: any, op?: string) => {
+	const pathChanged = (path: string[], val: any, op?: string, subpath?: string) => {
 		let changed = false;
 
 		if (val instanceof FileList) {
@@ -110,28 +110,30 @@
 		const curr = path.length === 0 ? params.value : get(params.value, path);
 		if (val === curr && op !== "innerSubmit") return;
 
+		let copyParamsVal = structuredClone(params.value);
 		if (val === undefined && path.length > 0) {
 			const pathFront = path.slice(0, -1);
-			const parent = pathFront.length ? get(params.value, path.slice(0, -1)) : params.value;
+			const parent = pathFront.length ? get(copyParamsVal, path.slice(0, -1)) : params.value;
 			delete parent[path[path.length - 1]];
 		} else {
 			if (path.length === 0) {
-				params.value = val;
+				copyParamsVal = val;
 			} else {
-				set(params.value, path, val);
+				set(copyParamsVal, path, val);
 			}
 		}
 
-		revalidate(params.value);
+		revalidate(copyParamsVal);
 
 		const succeeded = dispatch('value', {
-			path, pathValue: val, value: params.value, errors: validationErrors, op
+			path, pathValue: val, value: copyParamsVal, errors: validationErrors, op, subpath
 		}, { cancelable: true });
 
 		console.log(`dispatch value path: ${path.join('.')} val: ${JSON.stringify(val)},${op ? " op: " + op : ''} errors: ${JSON.stringify(validationErrors)}, succeeded: ${succeeded}`);
 
 		// update if value event not cancelled.
 		if (succeeded) {
+			params.value = copyParamsVal;
 			value = params.value;
 			dirty = true;
 		} else {

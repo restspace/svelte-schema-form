@@ -9,7 +9,7 @@
 	export let value: any;
 
 	let propnames: string[];
-	$: propNames = Object.keys(schema.properties);
+	$: propNames = Object.keys(schema?.properties || {});
 	let collapserOpenState: "open" | "closed" =
 		params.path.length === 0 || params.containerParent === "array" || !params.collapsible
 		? "open"

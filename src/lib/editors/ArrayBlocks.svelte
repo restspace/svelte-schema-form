@@ -46,7 +46,7 @@
 		[
 			...value.slice(0, idx),
 			...value.slice(idx + 1)
-		]);
+		], "delete", idx.toString());
 	};
 
 	const onDuplicate = (idx: number) => () => {
@@ -56,7 +56,7 @@
 			value[idx],
 			JSON.parse(JSON.stringify(value[idx])),
 			...value.slice(idx + 1)
-		]);
+		], "duplicate", (idx + 1).toString());
 	};
 
 	const onUp = (idx: number) => () => {

@@ -26,7 +26,7 @@ export const arrayDelete = (idx: number, params: CommonComponentParameters, valu
 	[
 		...value.slice(0, idx),
 		...value.slice(idx + 1)
-	], "delete");
+	], "delete", idx.toString());
 };
 
 export const arrayDuplicate = (idx: number, params: CommonComponentParameters, value: any[]) => () => {
@@ -36,7 +36,7 @@ export const arrayDuplicate = (idx: number, params: CommonComponentParameters, v
 		value[idx],
 		JSON.parse(JSON.stringify(value[idx])),
 		...value.slice(idx + 1)
-	], "duplicate");
+	], "duplicate", (idx + 1).toString());
 };
 
 export const arrayUp = (idx: number, params: CommonComponentParameters, value: any[]) => () => {
@@ -47,7 +47,7 @@ export const arrayUp = (idx: number, params: CommonComponentParameters, value: a
 			value[idx],
 			value[idx-1],
 			...value.slice(idx + 1)
-		], "up");
+		], "up", (idx - 1).toString());
 	}
 };
 
@@ -59,6 +59,6 @@ export const arrayDown = (idx: number, params: CommonComponentParameters, value:
 			value[idx+1],
 			value[idx],
 			...value.slice(idx + 2)
-		], "down");
+		], "down", (idx + 1).toString());
 	}
 };

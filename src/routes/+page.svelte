@@ -29,12 +29,7 @@
 				}
 			},
 			"obj": {
-				"type": "object",
-				"properties": {
-					"xyz": {
-						"type": "string"
-					}
-				}
+				"type": "object"
 			},
 			"aFile": {
 				"type": "string",
@@ -63,6 +58,7 @@
 			if (typeof window !== 'undefined') {
 				window.localStorage.setItem('schema', newSchema);
 			}
+			console.log('schema updated', schema);
 		} catch {
 			jsonInvalid = true;
 		}
@@ -75,6 +71,9 @@
 	const change = (e: CustomEvent) => {
 		if (e.detail.op === "innerSubmit") {
 			valueJson = JSON.stringify(e.detail.value, undefined, 2).trim();
+		} else if (e.detail.op === "delete") {
+			const conf = confirm('Are you sure you want to delete this item?');
+			if (!conf) e.preventDefault();
 		}
 	}
 

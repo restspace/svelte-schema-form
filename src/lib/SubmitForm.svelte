@@ -30,8 +30,12 @@
 
 	const change = (e: CustomEvent) => {
 		currentErrors = e.detail.errors;
-		dispatch('value', e.detail);
-		value = e.detail.value;
+		const succeeded = dispatch('value', e.detail, { cancelable: true});
+		if (succeeded) {
+			value = e.detail.value;
+		} else {
+			e.preventDefault();
+		}
 	};
 
 	const progress = (path: string, name: string, percent: number) => {
