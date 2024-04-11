@@ -9,7 +9,7 @@
 	import set from "lodash-es/set";
 	import get from "lodash-es/get";
 	import { validator } from "@exodus/schemasafe";
-	import { FileNone, type CommonComponentParameters, type ValidationErrors } from './types/CommonComponentParameters';
+	import { FileNone, type CommonComponentParameters, type ValidationErrors, type SchemaFormEvent } from './types/CommonComponentParameters';
 	import Enum from './editors/Enum.svelte';
 	import Array from './editors/Array.svelte';
 	import { incr, nullOptionalsAllowed } from './utilities.js';
@@ -34,7 +34,9 @@
 	export let components: Record<string, new (...args: any[]) => any> = {};
 	export let componentContext: Record<string, unknown> = {};
 
-	const dispatch = createEventDispatcher();
+	const dispatch = createEventDispatcher<{
+		value: SchemaFormEvent
+	}>();
 
 	let validationErrors = {} as ValidationErrors;
 
