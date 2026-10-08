@@ -8,7 +8,7 @@
 
 	let typeComponent: any;
 	
-	let component: new (...args: any[]) => any;
+	let component: any;
 	$: component = components[editorForSchema(schema)];
 </script>
 

@@ -31,7 +31,7 @@
 	export let dirty: boolean = false;
 	export let showErrors: boolean = true;
 	export let collapsible: boolean = false;
-	export let components: Record<string, new (...args: any[]) => any> = {};
+	export let components: Record<string, any> = {};
 	export let componentContext: Record<string, unknown> = {};
 
 	const dispatch = createEventDispatcher();

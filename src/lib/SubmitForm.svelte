@@ -15,7 +15,7 @@
 	export let uploadNamePattern: string = '';
 	export let dirty: boolean = false;
 	export let action: string = '';
-	export let components: Record<string, new (...args: any[]) => any> = {};
+	export let components: Record<string, any> = {};
 	export let collapsible: boolean = false;
 	export let submitText = "Submit";
 	export let submitRequiresDirty = true;

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { select_options, tick } from "svelte/internal";
+	import { tick } from "svelte";
 	import type { CommonComponentParameters } from "../types/CommonComponentParameters";
 
 	interface OptionVal {

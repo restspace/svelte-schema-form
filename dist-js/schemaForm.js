@@ -282,7 +282,7 @@ function Fe() {
 function We() {
   Ut.r || Ve(Ut.c), Ut = Ut.p;
 }
-function J(e, n) {
+function X(e, n) {
   e && e.i && (wi.delete(e), e.i(n));
 }
 function x(e, n, t, r) {
@@ -316,7 +316,7 @@ function Jr(e, n, t, r, i, s, o, a, l, f, u, c) {
   }
   const W = /* @__PURE__ */ new Set(), I = /* @__PURE__ */ new Set();
   function F(C) {
-    J(C, 1), C.m(a, u), o.set(C.key, C), u = C.first, m--;
+    X(C, 1), C.m(a, u), o.set(C.key, C), u = C.first, m--;
   }
   for (; d && m; ) {
     const C = v[m - 1], D = e[d - 1], j = C.key, ee = D.key;
@@ -414,7 +414,7 @@ function Ke(e, n, t, r, i, s, o, a = [-1]) {
       f.fragment && f.fragment.l(c), c.forEach(T);
     } else
       f.fragment && f.fragment.c();
-    n.intro && J(e.$$.fragment), be(e, n.target, n.anchor, n.customElement), Me();
+    n.intro && X(e.$$.fragment), be(e, n.target, n.anchor, n.customElement), Me();
   }
   Lr(l);
 }
@@ -5305,12 +5305,12 @@ function JT(e) {
             we(c, 1);
           }), We();
         }
-        o ? (n = Le(o, a(l)), Ze.push(() => Ln(n, "schema", s)), Oe(n.$$.fragment), J(n.$$.fragment, 1), be(n, r.parentNode, r)) : n = null;
+        o ? (n = Le(o, a(l)), Ze.push(() => Ln(n, "schema", s)), Oe(n.$$.fragment), X(n.$$.fragment, 1), be(n, r.parentNode, r)) : n = null;
       } else
         o && n.$set(u);
     },
     i(l) {
-      i || (n && J(n.$$.fragment, l), i = !0);
+      i || (n && X(n.$$.fragment, l), i = !0);
     },
     o(l) {
       n && x(n.$$.fragment, l), i = !1;
@@ -5430,12 +5430,12 @@ function VT(e) {
             we(f, 1);
           }), We();
         }
-        i ? (n = Le(i, s(o)), Oe(n.$$.fragment), J(n.$$.fragment, 1), be(n, t.parentNode, t)) : n = null;
+        i ? (n = Le(i, s(o)), Oe(n.$$.fragment), X(n.$$.fragment, 1), be(n, t.parentNode, t)) : n = null;
       } else
         i && n.$set(l);
     },
     i(o) {
-      r || (n && J(n.$$.fragment, o), r = !0);
+      r || (n && X(n.$$.fragment, o), r = !0);
     },
     o(o) {
       n && x(n.$$.fragment, o), r = !1;
@@ -5614,7 +5614,7 @@ function xT(e) {
       f[0].showErrors ? l ? l.p(f, u) : (l = Bl(f), l.c(), l.m(r.parentNode, r)) : l && (l.d(1), l = null);
     },
     i(f) {
-      i || (J(a, f), i = !0);
+      i || (X(a, f), i = !0);
     },
     o(f) {
       x(a, f), i = !1;
@@ -5783,7 +5783,7 @@ function Yl(e) {
     i(a) {
       if (!i) {
         for (let l = 0; l < s.length; l += 1)
-          J(n[l]);
+          X(n[l]);
         i = !0;
       }
     },
@@ -5899,7 +5899,7 @@ function Jl(e, n) {
         ], tt(() => i = !1)), r.$set(d);
       },
       i(u) {
-        s || (J(r.$$.fragment, u), s = !0);
+        s || (X(r.$$.fragment, u), s = !0);
       },
       o(u) {
         x(r.$$.fragment, u), s = !1;
@@ -5931,7 +5931,7 @@ function tk(e) {
       /*showLegend*/
       l[4] ? o ? o.p(l, f) : (o = Gl(l), o.c(), o.m(n, t)) : o && (o.d(1), o = null), /*collapserOpenState*/
       l[3] === "open" ? a ? (a.p(l, f), f & /*collapserOpenState*/
-      8 && J(a, 1)) : (a = Yl(l), a.c(), J(a, 1), a.m(n, null)) : a && (Fe(), x(a, 1, 1, () => {
+      8 && X(a, 1)) : (a = Yl(l), a.c(), X(a, 1), a.m(n, null)) : a && (Fe(), x(a, 1, 1, () => {
         a = null;
       }), We()), (!s || f & /*params*/
       2 && r !== (r = /*params*/
@@ -5940,7 +5940,7 @@ function tk(e) {
       l[1].path.length)) && y(n, "class", i);
     },
     i(l) {
-      s || (J(a), s = !0);
+      s || (X(a), s = !0);
     },
     o(l) {
       x(a), s = !1;
@@ -6883,7 +6883,7 @@ const { format: K, safe: ef, safeand: _i, safenot: Mt, safenotor: yi } = as, xk 
       if (S)
         throw new Error(`Strong mode forbids ${V}`);
   }
-  const { gensym: X, getref: tn, genref: Xe, genformat: G } = rp(r), pe = (rn) => {
+  const { gensym: J, getref: tn, genref: Xe, genformat: G } = rp(r), pe = (rn) => {
     const cn = [];
     let V = rn;
     for (; V; )
@@ -6975,9 +6975,9 @@ const { format: K, safe: ef, safeand: _i, safenot: Mt, safenotor: yi } = as, xk 
       }
     }
     const ps = (_) => t[yt] && (S[_] || S[_] === !1 || S === e), vn = Object.freeze({
-      item: ps("unevaluatedItems") ? X("evaluatedItem") : null,
-      items: ps("unevaluatedItems") ? X("evaluatedItems") : null,
-      props: ps("unevaluatedProperties") ? X("evaluatedProps") : null
+      item: ps("unevaluatedItems") ? J("evaluatedItem") : null,
+      items: ps("unevaluatedItems") ? J("evaluatedItems") : null,
+      props: ps("unevaluatedProperties") ? J("evaluatedProps") : null
     }), Re = Object.freeze({
       item: vn.item || qn.item,
       items: vn.items || qn.items,
@@ -6999,14 +6999,14 @@ const { format: K, safe: ef, safeand: _i, safenot: Mt, safenotor: yi } = as, xk 
       const P = K("%s(%s%s%s)", _, ce, up(), Bn);
       if (!l && ha())
         return K("!%s", P);
-      const b = X("res"), L = X("err"), U = X("suberr");
+      const b = J("res"), L = J("err"), U = J("suberr");
       return l && R.write("const %s = validate.errors", L), R.write("const %s = %s", b, P), l && R.write("const %s = %s.errors", U, _), l && R.write("validate.errors = %s", L), yn(Mt(b), { ...$, source: U }), R.if(b, () => {
         const se = Kn(O).items ? K("%s.evaluatedDynamic[0]", _) : null, he = Kn(O).items ? K("%s.evaluatedDynamic[1]", _) : null, de = Kn(O).properties ? K("%s.evaluatedDynamic[2]", _) : null;
         ma(Re, se, he, de);
       }), null;
     }, ga = (_, $) => _ && _.every((O) => $.includes(O)), _a = (_, $) => $.some((O) => _ === null || _.includes(O)), ya = (..._) => Pt().some(($) => ga($.stat.type, _)), cp = (..._) => ga(ae.type, _) || ya(..._), Qt = (..._) => _a(ae.type, _) && Pt().every(($) => _a($.stat.type, _)), hs = (_, $ = S) => {
       ie(typeof _ == "string", "Invalid pattern:", _), (g || v) && ie(/^\^.*\$$/.test(_), "Should start with ^ and end with $:", _), /([{+*].*[{+*]|\)[{+*]|^[^^].*[{+*].)/.test(_) && $.maxLength === void 0 && la("maxLength should be specified for pattern:", _);
-    }, dp = S.pattern && !Cs.has(S.pattern), pp = S.uniqueItems || dp || S.patternProperties || S.format, li = f && pp ? X("prev") : null, fi = (_, $) => R.if(_ && li !== null ? K("errorCount === %s", li) : !0, $), va = () => [...cn, { stat: ae, prop: V }], dn = (..._) => cs(rn, va(), ..._).stat, Ct = (_, ...$) => {
+    }, dp = S.pattern && !Cs.has(S.pattern), pp = S.uniqueItems || dp || S.patternProperties || S.format, li = f && pp ? J("prev") : null, fi = (_, $) => R.if(_ && li !== null ? K("errorCount === %s", li) : !0, $), va = () => [...cn, { stat: ae, prop: V }], dn = (..._) => cs(rn, va(), ..._).stat, Ct = (_, ...$) => {
       if ($[0] === V) {
         const b = uS($[1]);
         if (b === !0)
@@ -7014,12 +7014,12 @@ const { format: K, safe: ef, safeand: _i, safenot: Mt, safenotor: yi } = as, xk 
         if (b === !1)
           return { sub: K("false"), delta: { type: [] } };
       }
-      const O = X("sub");
+      const O = J("sub");
       R.write("const %s = (() => {", O), f && R.write("let errorCount = 0");
       const { stat: P } = cs(_, va(), ...$);
       return f ? R.write("return errorCount === 0") : R.write("return true"), R.write("})()"), { sub: O, delta: P };
     }, ms = () => {
-      const _ = l && f ? X("suberr") : null;
+      const _ = l && f ? J("suberr") : null;
       return _ && R.write("let %s = null", _), _;
     }, ba = (_) => {
       rn === null || _ === null || R.if(_, () => R.write("%s.push(...%s)", rn, _));
@@ -7070,7 +7070,7 @@ const { format: K, safe: ef, safeand: _i, safenot: Mt, safenotor: yi } = as, xk 
         Y("format", ["string"], (b) => (ge({ fullstring: !0 }), _(b, ce))), Y("pattern", ["string"], (b) => (hs(b), ge({ fullstring: !0 }), Cs.has(b) ? null : Mt(fs(b, ce)))), ie(S.contentSchema !== !1, "contentSchema cannot be set to false");
         const $ = u === void 0 ? un().contentValidation : u, O = S.contentEncoding || S.contentMediaType || S.contentSchema;
         if (ie(!O || $ || d, '"content*" keywords are disabled by default per spec, enable with { contentValidation = true } option (see doc/Options.md for more info)'), O && $) {
-          const b = X("dec");
+          const b = J("dec");
           S.contentMediaType && R.write("let %s = %s", b, ce), S.contentEncoding === "base64" ? (yn(_("base64", ce, vi.extra), { path: ["contentEncoding"] }), S.contentMediaType && (r.deBase64 = ke.deBase64, R.write("try {"), R.write("%s = deBase64(%s)", b, b)), mt("contentEncoding", "string")) : ie(!S.contentEncoding, "Unknown contentEncoding:", S.contentEncoding);
           let L = !1;
           if (S.contentMediaType === "application/json" ? (R.write("try {"), R.write("%s = JSON.parse(%s)", b, b), L = !0, mt("contentMediaType", "string")) : ie(!S.contentMediaType, "Unknown contentMediaType:", S.contentMediaType), S.contentSchema) {
@@ -7188,7 +7188,7 @@ const { format: K, safe: ef, safeand: _i, safenot: Mt, safenotor: yi } = as, xk 
     }, Ra = (_) => {
       Y("contains", ["object", "boolean"], () => {
         Vt("contains"), un().objectContains && Qt("array") && Qt("object") && pt("possible type confusion in 'contains',", "forbid 'object' or 'array'");
-        const $ = X("passes");
+        const $ = J("passes");
         R.write("let %s = 0", $);
         const O = ms();
         return _((P, b) => {
@@ -7306,7 +7306,7 @@ const { format: K, safe: ef, safeand: _i, safenot: Mt, safenotor: yi } = as, xk 
         if (O)
           return O(b, "oneOf");
         P("oneOf", b);
-        const L = X("passes");
+        const L = J("passes");
         R.write("let %s = 0", L);
         const U = ms();
         let se, he = 0;
@@ -7650,12 +7650,12 @@ function AS(e) {
             we(f, 1);
           }), We();
         }
-        i ? (n = Le(i, s(o)), Oe(n.$$.fragment), J(n.$$.fragment, 1), be(n, t.parentNode, t)) : n = null;
+        i ? (n = Le(i, s(o)), Oe(n.$$.fragment), X(n.$$.fragment, 1), be(n, t.parentNode, t)) : n = null;
       } else
         i && n.$set(l);
     },
     i(o) {
-      r || (n && J(n.$$.fragment, o), r = !0);
+      r || (n && X(n.$$.fragment, o), r = !0);
     },
     o(o) {
       n && x(n.$$.fragment, o), r = !1;
@@ -7749,7 +7749,7 @@ function uf(e) {
       l[1].collapsible || /*legendText*/
       l[9] ? o ? o.p(l, f) : (o = cf(l), o.c(), o.m(n, t)) : o && (o.d(1), o = null), /*collapserOpenState*/
       l[3] === "open" ? a ? (a.p(l, f), f & /*collapserOpenState*/
-      8 && J(a, 1)) : (a = hf(l), a.c(), J(a, 1), a.m(n, null)) : a && (Fe(), x(a, 1, 1, () => {
+      8 && X(a, 1)) : (a = hf(l), a.c(), X(a, 1), a.m(n, null)) : a && (Fe(), x(a, 1, 1, () => {
         a = null;
       }), We()), (!s || f & /*params*/
       2 && r !== (r = /*params*/
@@ -7758,7 +7758,7 @@ function uf(e) {
       l[1].path.length)) && y(n, "class", i);
     },
     i(l) {
-      s || (J(a), s = !0);
+      s || (X(a), s = !0);
     },
     o(l) {
       x(a), s = !1;
@@ -7875,13 +7875,13 @@ function hf(e) {
       let m = n;
       n = f(c), n === m ? l[n].p(c, d) : (Fe(), x(l[m], 1, 1, () => {
         l[m] = null;
-      }), We(), t = l[n], t ? t.p(c, d) : (t = l[n] = a[n](c), t.c()), J(t, 1), t.m(r.parentNode, r)), d & /*controls, atMaxItems*/
+      }), We(), t = l[n], t ? t.p(c, d) : (t = l[n] = a[n](c), t.c()), X(t, 1), t.m(r.parentNode, r)), d & /*controls, atMaxItems*/
       96 && (i = /*controls*/
       c[6].includes("add") && !/*atMaxItems*/
       c[5]), i ? u ? u.p(c, d) : (u = bf(c), u.c(), u.m(s.parentNode, s)) : u && (u.d(1), u = null);
     },
     i(c) {
-      o || (J(t), o = !0);
+      o || (X(t), o = !0);
     },
     o(c) {
       x(t), o = !1;
@@ -7950,7 +7950,7 @@ function kS(e) {
     i(a) {
       if (!i) {
         for (let l = 0; l < s.length; l += 1)
-          J(n[l]);
+          X(n[l]);
         i = !0;
       }
     },
@@ -8192,7 +8192,7 @@ function vf(e, n) {
             we(ee, 1);
           }), We();
         }
-        w ? (r = Le(w, A(n)), Ze.push(() => Ln(r, "schema", v)), Oe(r.$$.fragment), J(r.$$.fragment, 1), be(r, s.parentNode, s)) : r = null;
+        w ? (r = Le(w, A(n)), Ze.push(() => Ln(r, "schema", v)), Oe(r.$$.fragment), X(r.$$.fragment, 1), be(r, s.parentNode, s)) : r = null;
       } else
         w && r.$set(j);
       D & /*controls, atMinItems*/
@@ -8211,7 +8211,7 @@ function vf(e, n) {
       (n[2] || []).length - 1), m ? F ? F.p(n, D) : (F = yf(n), F.c(), F.m(o, h)) : F && (F.d(1), F = null);
     },
     i(C) {
-      g || (r && J(r.$$.fragment, C), g = !0);
+      g || (r && X(r.$$.fragment, C), g = !0);
     },
     o(C) {
       r && x(r.$$.fragment, C), g = !1;
@@ -8269,12 +8269,12 @@ function SS(e) {
     p(i, [s]) {
       /*showWrapper*/
       i[8] ? r ? (r.p(i, s), s & /*showWrapper*/
-      256 && J(r, 1)) : (r = uf(i), r.c(), J(r, 1), r.m(n.parentNode, n)) : r && (Fe(), x(r, 1, 1, () => {
+      256 && X(r, 1)) : (r = uf(i), r.c(), X(r, 1), r.m(n.parentNode, n)) : r && (Fe(), x(r, 1, 1, () => {
         r = null;
       }), We());
     },
     i(i) {
-      t || (J(r), t = !0);
+      t || (X(r), t = !0);
     },
     o(i) {
       x(r), t = !1;
@@ -8407,12 +8407,12 @@ function CS(e) {
             we(f, 1);
           }), We();
         }
-        i ? (n = Le(i, s(o)), Oe(n.$$.fragment), J(n.$$.fragment, 1), be(n, t.parentNode, t)) : n = null;
+        i ? (n = Le(i, s(o)), Oe(n.$$.fragment), X(n.$$.fragment, 1), be(n, t.parentNode, t)) : n = null;
       } else
         i && n.$set(l);
     },
     i(o) {
-      r || (n && J(n.$$.fragment, o), r = !0);
+      r || (n && X(n.$$.fragment, o), r = !0);
     },
     o(o) {
       n && x(n.$$.fragment, o), r = !1;
@@ -8516,12 +8516,12 @@ function FS(e) {
             we(f, 1);
           }), We();
         }
-        i ? (n = Le(i, s(o)), Oe(n.$$.fragment), J(n.$$.fragment, 1), be(n, t.parentNode, t)) : n = null;
+        i ? (n = Le(i, s(o)), Oe(n.$$.fragment), X(n.$$.fragment, 1), be(n, t.parentNode, t)) : n = null;
       } else
         i && n.$set(l);
     },
     i(o) {
-      r || (n && J(n.$$.fragment, o), r = !0);
+      r || (n && X(n.$$.fragment, o), r = !0);
     },
     o(o) {
       n && x(n.$$.fragment, o), r = !1;
@@ -8829,8 +8829,8 @@ function US(e) {
         e[1]
       );
     },
-    m(E, X) {
-      k(E, n, X), e[21](n), k(E, i, X), k(E, s, X), I && I.m(s, null), B(s, o), F && F.m(s, null), B(s, l), C && C.m(s, null), B(s, u), D && D.m(s, null), B(s, c), B(s, d), j && j.m(d, null), B(d, m), B(d, h), e[23](s), k(E, v, X), ee && ee.m(E, X), k(E, A, X), M || (W = [
+    m(E, J) {
+      k(E, n, J), e[21](n), k(E, i, J), k(E, s, J), I && I.m(s, null), B(s, o), F && F.m(s, null), B(s, l), C && C.m(s, null), B(s, u), D && D.m(s, null), B(s, c), B(s, d), j && j.m(d, null), B(d, m), B(d, h), e[23](s), k(E, v, J), ee && ee.m(E, J), k(E, A, J), M || (W = [
         H(
           n,
           "input",
@@ -8875,56 +8875,56 @@ function US(e) {
         )
       ], M = !0);
     },
-    p(E, X) {
-      X[0] & /*params*/
+    p(E, J) {
+      J[0] & /*params*/
       4 && t !== (t = /*params*/
-      E[2].path.join(".")) && y(n, "id", t), X[0] & /*params*/
+      E[2].path.join(".")) && y(n, "id", t), J[0] & /*params*/
       4 && r !== (r = /*params*/
-      E[2].path.join(".")) && y(n, "name", r), X[0] & /*readOnly*/
+      E[2].path.join(".")) && y(n, "name", r), J[0] & /*readOnly*/
       256 && (n.readOnly = /*readOnly*/
       E[8]), /*mode*/
       E[7] === "uploader" && !/*readOnly*/
-      E[8] ? I || (I = Af(), I.c(), I.m(s, o)) : I && (I.d(1), I = null), X[0] & /*value, mode*/
+      E[8] ? I || (I = Af(), I.c(), I.m(s, o)) : I && (I.d(1), I = null), J[0] & /*value, mode*/
       129 && (a = /*value*/
       E[0] && /*isImage*/
       E[18](
         /*value*/
         E[0]
       ) && /*mode*/
-      E[7] === "uploader"), a ? F ? F.p(E, X) : (F = Of(E), F.c(), F.m(s, l)) : F && (F.d(1), F = null), X[0] & /*value, mode*/
+      E[7] === "uploader"), a ? F ? F.p(E, J) : (F = Of(E), F.c(), F.m(s, l)) : F && (F.d(1), F = null), J[0] & /*value, mode*/
       129 && (f = /*value*/
       E[0] && !/*isImage*/
       E[18](
         /*value*/
         E[0]
       ) && /*mode*/
-      E[7] === "uploader"), f ? C ? C.p(E, X) : (C = Rf(E), C.c(), C.m(s, u)) : C && (C.d(1), C = null), /*mode*/
-      E[7] === "link" ? D ? D.p(E, X) : (D = Ef(E), D.c(), D.m(s, c)) : D && (D.d(1), D = null), /*readOnly*/
-      E[8] ? j && (j.d(1), j = null) : j ? j.p(E, X) : (j = Tf(E), j.c(), j.m(d, m)), X[0] & /*mode*/
+      E[7] === "uploader"), f ? C ? C.p(E, J) : (C = Rf(E), C.c(), C.m(s, u)) : C && (C.d(1), C = null), /*mode*/
+      E[7] === "link" ? D ? D.p(E, J) : (D = Ef(E), D.c(), D.m(s, c)) : D && (D.d(1), D = null), /*readOnly*/
+      E[8] ? j && (j.d(1), j = null) : j ? j.p(E, J) : (j = Tf(E), j.c(), j.m(d, m)), J[0] & /*mode*/
       128 && Se(
         h,
         "sf-upload-to-link",
         /*mode*/
         E[7] === "uploader"
-      ), X[0] & /*mode*/
+      ), J[0] & /*mode*/
       128 && Se(
         h,
         "sf-upload-to-uploader",
         /*mode*/
         E[7] === "link"
-      ), X[0] & /*mode*/
+      ), J[0] & /*mode*/
       128 && g !== (g = "sf-drop-area " + /*mode*/
-      E[7]) && y(s, "class", g), X[0] & /*mode, highlight*/
+      E[7]) && y(s, "class", g), J[0] & /*mode, highlight*/
       130 && Se(
         s,
         "highlight",
         /*highlight*/
         E[1]
-      ), X[0] & /*progress*/
+      ), J[0] & /*progress*/
       64 && (w = Object.keys(
         /*progress*/
         E[6]
-      ).length > 0), w ? ee ? ee.p(E, X) : (ee = kf(E), ee.c(), ee.m(A.parentNode, A)) : ee && (ee.d(1), ee = null);
+      ).length > 0), w ? ee ? ee.p(E, J) : (ee = kf(E), ee.c(), ee.m(A.parentNode, A)) : ee && (ee.d(1), ee = null);
     },
     d(E) {
       E && T(n), e[21](null), E && T(i), E && T(s), I && I.d(), F && F.d(), C && C.d(), D && D.d(), j && j.d(), e[23](null), E && T(v), ee && ee.d(E), E && T(A), M = !1, Ve(W);
@@ -8978,12 +8978,12 @@ function BS(e) {
             we(f, 1);
           }), We();
         }
-        i ? (n = Le(i, s(o)), Oe(n.$$.fragment), J(n.$$.fragment, 1), be(n, t.parentNode, t)) : n = null;
+        i ? (n = Le(i, s(o)), Oe(n.$$.fragment), X(n.$$.fragment, 1), be(n, t.parentNode, t)) : n = null;
       } else
         i && n.$set(l);
     },
     i(o) {
-      r || (n && J(n.$$.fragment, o), r = !0);
+      r || (n && X(n.$$.fragment, o), r = !0);
     },
     o(o) {
       n && x(n.$$.fragment, o), r = !1;
@@ -9051,7 +9051,7 @@ function GS(e, n, t) {
   }, ee = () => {
     r || u.click();
   }, E = (G) => ["jpg", "jpeg", "png", "gif", "svg", "ico"].includes(zr(G, ".").toLowerCase());
-  function X(G) {
+  function J(G) {
     Ze[G ? "unshift" : "push"](() => {
       u = G, t(4, u);
     });
@@ -9091,7 +9091,7 @@ function GS(e, n, t) {
     E,
     h,
     i,
-    X,
+    J,
     tn,
     Xe
   ];
@@ -9197,12 +9197,12 @@ function KS(e) {
             we(f, 1);
           }), We();
         }
-        i ? (n = Le(i, s(o)), Oe(n.$$.fragment), J(n.$$.fragment, 1), be(n, t.parentNode, t)) : n = null;
+        i ? (n = Le(i, s(o)), Oe(n.$$.fragment), X(n.$$.fragment, 1), be(n, t.parentNode, t)) : n = null;
       } else
         i && n.$set(l);
     },
     i(o) {
-      r || (n && J(n.$$.fragment, o), r = !0);
+      r || (n && X(n.$$.fragment, o), r = !0);
     },
     o(o) {
       n && x(n.$$.fragment, o), r = !1;
@@ -9495,7 +9495,7 @@ function Cf(e) {
         u[4], tt(() => t = !1)), n.$set(d);
       },
       i(u) {
-        s || (J(n.$$.fragment, u), s = !0);
+        s || (X(n.$$.fragment, u), s = !0);
       },
       o(u) {
         x(n.$$.fragment, u), s = !1;
@@ -9545,7 +9545,7 @@ function XS(e) {
       h[0] || [], r = Jr(r, g, c, 1, h, u, i, t, oo, If, s, Pf)), /*adding*/
       h[2] ? d && (d.d(1), d = null) : d ? d.p(h, g) : (d = jf(h), d.c(), d.m(t, null)), /*adding*/
       h[2] ? m ? (m.p(h, g), g & /*adding*/
-      4 && J(m, 1)) : (m = Cf(h), m.c(), J(m, 1), m.m(n, null)) : m && (Fe(), x(m, 1, 1, () => {
+      4 && X(m, 1)) : (m = Cf(h), m.c(), X(m, 1), m.m(n, null)) : m && (Fe(), x(m, 1, 1, () => {
         m = null;
       }), We()), (!f || g & /*params*/
       2 && a !== (a = /*params*/
@@ -9554,7 +9554,7 @@ function XS(e) {
       h[1].path.length)) && y(n, "class", l);
     },
     i(h) {
-      f || (J(m), f = !0);
+      f || (X(m), f = !0);
     },
     o(h) {
       x(m), f = !1;
@@ -9576,8 +9576,8 @@ function QS(e, n, t) {
   const f = () => {
     i.pathChanged(i.path, [...o || [], ia(s.items)]), t(2, a = !0);
   }, u = async () => {
-    var X;
-    const j = o.length - 1, ee = [...i.path, j.toString()], E = (X = i.componentContext) == null ? void 0 : X.doUploads;
+    var J;
+    const j = o.length - 1, ee = [...i.path, j.toString()], E = (J = i.componentContext) == null ? void 0 : J.doUploads;
     E && await E(ee.join(".")), i.pathChanged(ee, o[j]), t(2, a = !1);
   }, c = (j) => () => {
     i.pathChanged(i.path, [...o.slice(0, j), ...o.slice(j + 1)], "delete", j.toString());
@@ -9616,8 +9616,8 @@ function QS(e, n, t) {
     let E = "";
     return s.itemPathPattern && (E = s.itemPathPattern.replace(/\$\{([^}]*)\}/gi, (tn, Xe) => encodeURIComponent((Xe === "" ? j : p.get(j, Xe.split("."))) || ""))), E || (E = encodeURIComponent(j.name || j.title || "")), YT(g, E);
   }, w = (j) => j.name || j.title || "", A = (j) => {
-    const E = w(j).split(" "), X = E.reduce((Xe, G) => G.length > Xe ? G.length : Xe, 0), tn = E.length;
-    return X > 18 || tn > 13 ? "array-block xlarge" : X > 14 || tn > 9 ? "array-block large" : X > 10 || tn > 6 ? "array-block medium" : "array-block small";
+    const E = w(j).split(" "), J = E.reduce((Xe, G) => G.length > Xe ? G.length : Xe, 0), tn = E.length;
+    return J > 18 || tn > 13 ? "array-block xlarge" : J > 14 || tn > 9 ? "array-block large" : J > 10 || tn > 6 ? "array-block medium" : "array-block small";
   };
   let M;
   const W = (j) => t(3, l = j), I = () => t(3, l = !1), F = () => t(3, l = r), C = () => t(3, l = !1);
@@ -9631,7 +9631,7 @@ function QS(e, n, t) {
     if (e.$$.dirty & /*value*/
     1 && t(0, o = o || []), e.$$.dirty & /*schema*/
     32768) {
-      const ee = Object.fromEntries(Object.entries(s.items.properties).filter(([E, X]) => X.type !== "array"));
+      const ee = Object.fromEntries(Object.entries(s.items.properties).filter(([E, J]) => J.type !== "array"));
       t(4, M = {
         ...s.items,
         type: "object",
@@ -9674,7 +9674,7 @@ function Mf(e, n, t) {
   const r = e.slice();
   return r[18] = n[t], r;
 }
-function e3(e) {
+function eP(e) {
   var s, o;
   let n, t = (
     /*selected*/
@@ -9702,7 +9702,7 @@ function e3(e) {
     }
   };
 }
-function n3(e) {
+function nP(e) {
   let n, t, r;
   return {
     c() {
@@ -9840,12 +9840,12 @@ function Ff(e, n) {
     }
   };
 }
-function t3(e) {
+function tP(e) {
   let n, t, r, i, s = [], o = /* @__PURE__ */ new Map(), a, l;
   function f(h, g) {
     return (
       /*inputState*/
-      h[3] === "searching" ? n3 : e3
+      h[3] === "searching" ? nP : eP
     );
   }
   let u = f(e), c = u(e), d = (
@@ -9913,7 +9913,7 @@ function t3(e) {
     }
   };
 }
-function r3(e) {
+function rP(e) {
   let n, t, r;
   var i = (
     /*params*/
@@ -9930,7 +9930,7 @@ function r3(e) {
           /*schema*/
           o[2]
         ),
-        $$slots: { default: [t3] },
+        $$slots: { default: [tP] },
         $$scope: { ctx: o }
       }
     };
@@ -9959,12 +9959,12 @@ function r3(e) {
             we(f, 1);
           }), We();
         }
-        i ? (n = Le(i, s(o)), Oe(n.$$.fragment), J(n.$$.fragment, 1), be(n, t.parentNode, t)) : n = null;
+        i ? (n = Le(i, s(o)), Oe(n.$$.fragment), X(n.$$.fragment, 1), be(n, t.parentNode, t)) : n = null;
       } else
         i && n.$set(l);
     },
     i(o) {
-      r || (n && J(n.$$.fragment, o), r = !0);
+      r || (n && X(n.$$.fragment, o), r = !0);
     },
     o(o) {
       n && x(n.$$.fragment, o), r = !1;
@@ -9974,7 +9974,7 @@ function r3(e) {
     }
   };
 }
-function i3(e, n, t) {
+function iP(e, n, t) {
   let r, { params: i } = n, { schema: s } = n, { value: o } = n, a = "showing-value", l = "", f = "closed", u, c = [], d, m = null, h;
   const g = (I) => {
     if (d) {
@@ -10029,12 +10029,12 @@ function i3(e, n, t) {
     W
   ];
 }
-class s3 extends Ye {
+class sP extends Ye {
   constructor(n) {
-    super(), Ke(this, n, i3, r3, ze, { params: 1, schema: 2, value: 0 });
+    super(), Ke(this, n, iP, rP, ze, { params: 1, schema: 2, value: 0 });
   }
 }
-function o3(e) {
+function oP(e) {
   let n, t, r, i;
   return {
     c() {
@@ -10062,15 +10062,15 @@ function o3(e) {
     }
   };
 }
-function a3(e, n, t) {
+function aP(e, n, t) {
   let { params: r } = n, { value: i } = n;
   return e.$$set = (s) => {
     "params" in s && t(0, r = s.params), "value" in s && t(1, i = s.value);
   }, [r, i];
 }
-class l3 extends Ye {
+class lP extends Ye {
   constructor(n) {
-    super(), Ke(this, n, a3, o3, ze, { params: 0, value: 1 });
+    super(), Ke(this, n, aP, oP, ze, { params: 0, value: 1 });
   }
 }
 function Wf(e, n, t) {
@@ -10108,7 +10108,7 @@ function Bf(e) {
       l[2].collapsible || /*legendText*/
       l[17] ? o ? o.p(l, f) : (o = qf(l), o.c(), o.m(n, t)) : o && (o.d(1), o = null), /*collapserOpenState*/
       l[9] === "open" ? a ? (a.p(l, f), f[0] & /*collapserOpenState*/
-      512 && J(a, 1)) : (a = Hf(l), a.c(), J(a, 1), a.m(n, null)) : a && (Fe(), x(a, 1, 1, () => {
+      512 && X(a, 1)) : (a = Hf(l), a.c(), X(a, 1), a.m(n, null)) : a && (Fe(), x(a, 1, 1, () => {
         a = null;
       }), We()), (!s || f[0] & /*params*/
       4 && r !== (r = /*params*/
@@ -10117,7 +10117,7 @@ function Bf(e) {
       l[2].path.length)) && y(n, "class", i);
     },
     i(l) {
-      s || (J(a), s = !0);
+      s || (X(a), s = !0);
     },
     o(l) {
       x(a), s = !1;
@@ -10213,7 +10213,7 @@ function Hf(e) {
     /*controls*/
     e[14].includes("add")
   ), s, o;
-  const a = [u3, f3], l = [];
+  const a = [uP, fP], l = [];
   function f(c, d) {
     return (
       /*emptyText*/
@@ -10233,12 +10233,12 @@ function Hf(e) {
       let m = n;
       n = f(c), n === m ? l[n].p(c, d) : (Fe(), x(l[m], 1, 1, () => {
         l[m] = null;
-      }), We(), t = l[n], t ? t.p(c, d) : (t = l[n] = a[n](c), t.c()), J(t, 1), t.m(r.parentNode, r)), d[0] & /*controls*/
+      }), We(), t = l[n], t ? t.p(c, d) : (t = l[n] = a[n](c), t.c()), X(t, 1), t.m(r.parentNode, r)), d[0] & /*controls*/
       16384 && (i = /*controls*/
       c[14].includes("add")), i ? u ? u.p(c, d) : (u = tu(c), u.c(), u.m(s.parentNode, s)) : u && (u.d(1), u = null);
     },
     i(c) {
-      o || (J(t), o = !0);
+      o || (X(t), o = !0);
     },
     o(c) {
       x(t), o = !1;
@@ -10248,7 +10248,7 @@ function Hf(e) {
     }
   };
 }
-function f3(e) {
+function fP(e) {
   let n, t;
   return {
     c() {
@@ -10275,9 +10275,9 @@ function f3(e) {
     }
   };
 }
-function u3(e) {
+function uP(e) {
   let n, t, r, i, s, o;
-  const a = [d3, c3], l = [];
+  const a = [dP, cP], l = [];
   function f(u, c) {
     return (
       /*mode*/
@@ -10313,7 +10313,7 @@ function u3(e) {
       let d = t;
       t = f(u), t === d ? l[t].p(u, c) : (Fe(), x(l[d], 1, 1, () => {
         l[d] = null;
-      }), We(), r = l[t], r ? r.p(u, c) : (r = l[t] = a[t](u), r.c()), J(r, 1), r.m(n, null)), c[0] & /*gridTemplateColumns*/
+      }), We(), r = l[t], r ? r.p(u, c) : (r = l[t] = a[t](u), r.c()), X(r, 1), r.m(n, null)), c[0] & /*gridTemplateColumns*/
       8192 && Wn(
         n,
         "grid-template-columns",
@@ -10322,7 +10322,7 @@ function u3(e) {
       );
     },
     i(u) {
-      i || (J(r), i = !0);
+      i || (X(r), i = !0);
     },
     o(u) {
       x(r), i = !1;
@@ -10332,7 +10332,7 @@ function u3(e) {
     }
   };
 }
-function c3(e) {
+function cP(e) {
   let n, t, r, i, s, o, a, l, f;
   function u(m) {
     e[33](m);
@@ -10404,7 +10404,7 @@ function c3(e) {
       m[0].submit ? d ? d.p(m, h) : (d = Kf(m), d.c(), d.m(r, null)) : d && (d.d(1), d = null);
     },
     i(m) {
-      a || (J(i.$$.fragment, m), a = !0);
+      a || (X(i.$$.fragment, m), a = !0);
     },
     o(m) {
       x(i.$$.fragment, m), a = !1;
@@ -10414,7 +10414,7 @@ function c3(e) {
     }
   };
 }
-function d3(e) {
+function dP(e) {
   let n, t, r = [], i = /* @__PURE__ */ new Map(), s, o = (
     /*listFields*/
     e[6]
@@ -10939,7 +10939,7 @@ function tu(e) {
     }
   };
 }
-function p3(e) {
+function pP(e) {
   let n, t, r = (
     /*showWrapper*/
     e[16] && Bf(e)
@@ -10954,12 +10954,12 @@ function p3(e) {
     p(i, s) {
       /*showWrapper*/
       i[16] ? r ? (r.p(i, s), s[0] & /*showWrapper*/
-      65536 && J(r, 1)) : (r = Bf(i), r.c(), J(r, 1), r.m(n.parentNode, n)) : r && (Fe(), x(r, 1, 1, () => {
+      65536 && X(r, 1)) : (r = Bf(i), r.c(), X(r, 1), r.m(n.parentNode, n)) : r && (Fe(), x(r, 1, 1, () => {
         r = null;
       }), We());
     },
     i(i) {
-      t || (J(r), t = !0);
+      t || (X(r), t = !0);
     },
     o(i) {
       x(r), t = !1;
@@ -10969,7 +10969,7 @@ function p3(e) {
     }
   };
 }
-function h3(e, n, t) {
+function hP(e, n, t) {
   let r, i, s, o, a, l, f, u, c, d, { params: m } = n, { schema: h } = n, { value: g } = n, v = m.path.length === 0 || !m.collapsible ? "open" : "closed", w = -1, A = "list", M = [], W, I = !1, F = null;
   if (h.type !== "array" || h.items.type !== "object")
     throw new Error("ListDetail editor can only be used on an array with items of type=object");
@@ -10989,7 +10989,7 @@ function h3(e, n, t) {
     }));
   }, E = async (z) => {
     A === "list" && !I && (z.target, console.log(`key ${z.key} selectedIdx ${w} len ${g.length}`), z.key === "ArrowDown" && w + 1 < g.length ? (t(10, w += 1), await bi()) : z.key === "ArrowUp" && w > 0 ? t(10, w -= 1) : z.key === "Enter" && D(w)()), I = !1;
-  }, X = (z) => {
+  }, J = (z) => {
     A === "list" && z.currentTarget.focus();
   }, tn = () => {
     m.pathChanged([...m.path, w.toString()], F, "innerSubmit");
@@ -11056,7 +11056,7 @@ function h3(e, n, t) {
     j,
     ee,
     E,
-    X,
+    J,
     tn,
     Xe,
     pe,
@@ -11069,18 +11069,18 @@ function h3(e, n, t) {
     et
   ];
 }
-class m3 extends Ye {
+class mP extends Ye {
   constructor(n) {
-    super(), Ke(this, n, h3, p3, ze, { params: 2, schema: 0, value: 1 }, null, [-1, -1]);
+    super(), Ke(this, n, hP, pP, ze, { params: 2, schema: 0, value: 1 }, null, [-1, -1]);
   }
 }
-function g3(e) {
+function gP(e) {
   let n, t, r, i, s, o;
   return {
     c() {
       n = N("input"), y(n, "id", t = /*params*/
       e[0].path.join(".")), y(n, "name", r = /*params*/
-      e[0].path.join(".")), y(n, "class", "currency"), y(n, "type", y3), n.value = /*formattedString*/
+      e[0].path.join(".")), y(n, "class", "currency"), y(n, "type", yP), n.value = /*formattedString*/
       e[2], n.disabled = i = /*schema*/
       e[1].readOnly || /*params*/
       e[0].containerReadOnly;
@@ -11111,7 +11111,7 @@ function g3(e) {
     }
   };
 }
-function _3(e) {
+function _P(e) {
   let n, t, r;
   var i = (
     /*params*/
@@ -11128,7 +11128,7 @@ function _3(e) {
           /*schema*/
           o[1]
         ),
-        $$slots: { default: [g3] },
+        $$slots: { default: [gP] },
         $$scope: { ctx: o }
       }
     };
@@ -11157,12 +11157,12 @@ function _3(e) {
             we(f, 1);
           }), We();
         }
-        i ? (n = Le(i, s(o)), Oe(n.$$.fragment), J(n.$$.fragment, 1), be(n, t.parentNode, t)) : n = null;
+        i ? (n = Le(i, s(o)), Oe(n.$$.fragment), X(n.$$.fragment, 1), be(n, t.parentNode, t)) : n = null;
       } else
         i && n.$set(l);
     },
     i(o) {
-      r || (n && J(n.$$.fragment, o), r = !0);
+      r || (n && X(n.$$.fragment, o), r = !0);
     },
     o(o) {
       n && x(n.$$.fragment, o), r = !1;
@@ -11172,8 +11172,8 @@ function _3(e) {
     }
   };
 }
-let y3 = "text";
-function v3(e, n, t) {
+let yP = "text";
+function vP(e, n, t) {
   let r, { params: i } = n, { schema: s } = n, { value: o } = n, a = i.componentContext;
   const l = a && a.currencySymbol || "$";
   let f;
@@ -11195,9 +11195,9 @@ function v3(e, n, t) {
     112 && t(2, r = u || f(o || ""));
   }, [i, s, r, c, o, f, u];
 }
-class b3 extends Ye {
+class bP extends Ye {
   constructor(n) {
-    super(), Ke(this, n, v3, _3, ze, { params: 0, schema: 1, value: 4 });
+    super(), Ke(this, n, vP, _P, ze, { params: 0, schema: 1, value: 4 });
   }
 }
 function ru(e, n, t) {
@@ -11254,7 +11254,7 @@ function iu(e) {
     }
   };
 }
-function w3(e) {
+function wP(e) {
   let n, t = (
     /*enumVals*/
     e[3]
@@ -11307,7 +11307,7 @@ function w3(e) {
     }
   };
 }
-function $3(e) {
+function $P(e) {
   let n, t, r;
   var i = (
     /*params*/
@@ -11324,7 +11324,7 @@ function $3(e) {
           /*schema*/
           o[1]
         ),
-        $$slots: { default: [w3] },
+        $$slots: { default: [wP] },
         $$scope: { ctx: o }
       }
     };
@@ -11353,12 +11353,12 @@ function $3(e) {
             we(f, 1);
           }), We();
         }
-        i ? (n = Le(i, s(o)), Oe(n.$$.fragment), J(n.$$.fragment, 1), be(n, t.parentNode, t)) : n = null;
+        i ? (n = Le(i, s(o)), Oe(n.$$.fragment), X(n.$$.fragment, 1), be(n, t.parentNode, t)) : n = null;
       } else
         i && n.$set(l);
     },
     i(o) {
-      r || (n && J(n.$$.fragment, o), r = !0);
+      r || (n && X(n.$$.fragment, o), r = !0);
     },
     o(o) {
       n && x(n.$$.fragment, o), r = !1;
@@ -11368,7 +11368,7 @@ function $3(e) {
     }
   };
 }
-function A3(e, n, t) {
+function AP(e, n, t) {
   let r, { params: i } = n, { schema: s } = n, { value: o } = n, a, l, f = i.path.join(".");
   const u = (c) => i.pathChanged(i.path, c.currentTarget.value || void 0);
   return e.$$set = (c) => {
@@ -11380,12 +11380,12 @@ function A3(e, n, t) {
     2 && t(5, r = s.direction || "row");
   }, [i, s, o, a, l, r, f, u];
 }
-class O3 extends Ye {
+class OP extends Ye {
   constructor(n) {
-    super(), Ke(this, n, A3, $3, ze, { params: 0, schema: 1, value: 2 });
+    super(), Ke(this, n, AP, $P, ze, { params: 0, schema: 1, value: 2 });
   }
 }
-function R3(e) {
+function RP(e) {
   let n, t, r;
   function i(o) {
     e[10](o);
@@ -11421,7 +11421,7 @@ function R3(e) {
         o[0], tt(() => t = !1)), n.$set(l);
       },
       i(o) {
-        r || (J(n.$$.fragment, o), r = !0);
+        r || (X(n.$$.fragment, o), r = !0);
       },
       o(o) {
         x(n.$$.fragment, o), r = !1;
@@ -11432,7 +11432,7 @@ function R3(e) {
     }
   );
 }
-function E3(e, n, t) {
+function EP(e, n, t) {
   let { schema: r } = n, { value: i } = n, { uploadFiles: s = {} } = n, { dirty: o = !1 } = n, { showErrors: a = !0 } = n, { collapsible: l = !1 } = n, { components: f = {} } = n, { componentContext: u = {} } = n;
   const c = lu();
   let d = {};
@@ -11509,12 +11509,12 @@ function E3(e, n, t) {
           enum: RS,
           upload: zS,
           textarea: JS,
-          hidden: l3,
+          hidden: lP,
           blocks: xS,
-          autocomplete: s3,
-          "list-detail": m3,
-          currency: b3,
-          radio: O3
+          autocomplete: sP,
+          "list-detail": mP,
+          currency: bP,
+          radio: OP
         },
         f
       ),
@@ -11541,9 +11541,9 @@ function E3(e, n, t) {
     v
   ];
 }
-class T3 extends Ye {
+class TP extends Ye {
   constructor(n) {
-    super(), Ke(this, n, E3, R3, ze, {
+    super(), Ke(this, n, EP, RP, ze, {
       schema: 0,
       value: 1,
       uploadFiles: 3,
@@ -11604,7 +11604,7 @@ class T3 extends Ye {
   }
 }
 const lr = [];
-function k3(e, n = xe) {
+function kP(e, n = xe) {
   let t;
   const r = /* @__PURE__ */ new Set();
   function i(a) {
@@ -11630,7 +11630,7 @@ function k3(e, n = xe) {
   }
   return { set: i, update: s, subscribe: o };
 }
-function S3(e) {
+function SP(e) {
   let n, t, r, i, s, o, a, l, f, u, c, d, m;
   function h(A) {
     e[16](A);
@@ -11670,7 +11670,7 @@ function S3(e) {
     e[3] !== void 0 && (w.dirty = /*dirty*/
     e[3]), /*uploadFiles*/
     e[2] !== void 0 && (w.uploadFiles = /*uploadFiles*/
-    e[2]), t = new T3({ props: w }), Ze.push(() => Ln(t, "schema", h)), Ze.push(() => Ln(t, "dirty", g)), Ze.push(() => Ln(t, "uploadFiles", v)), t.$on(
+    e[2]), t = new TP({ props: w }), Ze.push(() => Ln(t, "schema", h)), Ze.push(() => Ln(t, "dirty", g)), Ze.push(() => Ln(t, "uploadFiles", v)), t.$on(
       "value",
       /*change*/
       e[11]
@@ -11751,7 +11751,7 @@ function S3(e) {
         );
       },
       i(A) {
-        c || (J(t.$$.fragment, A), c = !0);
+        c || (X(t.$$.fragment, A), c = !0);
       },
       o(A) {
         x(t.$$.fragment, A), c = !1;
@@ -11762,28 +11762,28 @@ function S3(e) {
     }
   );
 }
-function P3(e, n, t) {
+function PP(e, n, t) {
   let r, { schema: i } = n, { value: s } = n, { uploadFiles: o = {} } = n, { uploadBaseUrl: a = "" } = n, { uploadNamePattern: l = "" } = n, { dirty: f = !1 } = n, { action: u = "" } = n, { components: c = {} } = n, { collapsible: d = !1 } = n, { submitText: m = "Submit" } = n, { submitRequiresDirty: h = !0 } = n, { componentContext: g = {} } = n;
   const v = lu();
-  let w = k3({});
+  let w = kP({});
   ou(e, w, (E) => t(20, r = E)), Bp(ap, w);
   let A = {}, M = !1;
   const W = (E) => {
-    A = E.detail.errors, v("value", E.detail), t(1, s = E.detail.value);
-  }, I = (E, X, tn) => {
+    A = E.detail.errors, v("value", E.detail, { cancelable: !0 }) ? t(1, s = E.detail.value) : E.preventDefault();
+  }, I = (E, J, tn) => {
     let Xe;
-    tn === -1 ? (delete (r[E] || {})[X], Xe = { ...r[E] }) : Xe = {
+    tn === -1 ? (delete (r[E] || {})[J], Xe = { ...r[E] }) : Xe = {
       ...r[E] || {},
-      [X]: tn
+      [J]: tn
     }, Mp(w, r = { ...r, [E]: Xe }, r);
   }, F = async (E = "") => {
     if (Object.keys(o).length > 0 && a) {
-      const X = l || i.pathPattern;
-      if (!X) {
+      const J = l || i.pathPattern;
+      if (!J) {
         alert("No uploadNamePattern given or pathPattern property on schema to determine file save url base");
         return;
       }
-      const tn = HT(X, s), Xe = Object.entries(o).filter(([G]) => G.startsWith(E)).flatMap(([G, pe]) => {
+      const tn = HT(J, s), Xe = Object.entries(o).filter(([G]) => G.startsWith(E)).flatMap(([G, pe]) => {
         const Ge = [];
         for (let _n = 0; _n < pe.length; _n++) {
           const xn = pe[_n], Tt = a + (a.endsWith("/") ? "" : "/") + tn + "/" + G + "/" + xn.name;
@@ -11843,9 +11843,9 @@ function P3(e, n, t) {
     ee
   ];
 }
-class L3 extends Ye {
+class LP extends Ye {
   constructor(n) {
-    super(), Ke(this, n, P3, S3, ze, {
+    super(), Ke(this, n, PP, SP, ze, {
       schema: 0,
       value: 1,
       uploadFiles: 2,
@@ -11934,6 +11934,6 @@ class L3 extends Ye {
   }
 }
 export {
-  T3 as SchemaForm,
-  L3 as SubmitForm
+  TP as SchemaForm,
+  LP as SubmitForm
 };

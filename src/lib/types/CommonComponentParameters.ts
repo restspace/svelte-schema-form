@@ -6,7 +6,7 @@ export const ProgressContext = Symbol();
 export interface CommonComponentParameters {
 	path: string[];
 	pathChanged: (path: string[], val: any, op?: string, subPath?: string) => boolean,
-	components: Record<string, new (...args: any[]) => any>,
+	components: Record<string, any>,
 	componentContext?: Record<string, unknown>,
 	value: any,
 	validationErrors: ValidationErrors,
